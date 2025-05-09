@@ -5,28 +5,60 @@ import java.io.Serializable;
 
 public class GatoVO implements Serializable{
     
-    private String nombreRaza;
+    private transient int id;
+    private transient String nombre;
+    private transient double peso;
+    private transient int edad;
     private String codigoEMS;
+    private String nombreRaza;
     private transient String colorCuerpo;
     private transient String patron;
     private transient String colorOjos;
     private transient String cola;
 
-    public GatoVO(String nombreRaza, String codigoEMS, String colorCuerpo, String patron, String colorOjos, String cola) {
-        this.nombreRaza = nombreRaza;
+    public GatoVO(int id, String nombre, double peso, int edad, String codigoEMS, String nombreRaza, String colorCuerpo, String patron, String colorOjos, String cola) {
+        this.id = id;
+        this.nombre = nombre;
+        this.peso = peso;
+        this.edad = edad;
         this.codigoEMS = codigoEMS;
+        this.nombreRaza = nombreRaza;
         this.colorCuerpo = colorCuerpo;
         this.patron = patron;
         this.colorOjos = colorOjos;
         this.cola = cola;
     }
 
-    public String getNombreRaza() {
-        return nombreRaza;
+    public int getId() {
+        return id;
     }
 
-    public void setNombreRaza(String nombreRaza) {
-        this.nombreRaza = nombreRaza;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public double getPeso() {
+        return peso;
+    }
+
+    public void setPeso(double peso) {
+        this.peso = peso;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
     }
 
     public String getCodigoEMS() {
@@ -35,6 +67,14 @@ public class GatoVO implements Serializable{
 
     public void setCodigoEMS(String codigoEMS) {
         this.codigoEMS = codigoEMS;
+    }
+
+    public String getNombreRaza() {
+        return nombreRaza;
+    }
+
+    public void setNombreRaza(String nombreRaza) {
+        this.nombreRaza = nombreRaza;
     }
 
     public String getColorCuerpo() {
@@ -68,5 +108,7 @@ public class GatoVO implements Serializable{
     public void setCola(String cola) {
         this.cola = cola;
     }
+
+    
     
 }

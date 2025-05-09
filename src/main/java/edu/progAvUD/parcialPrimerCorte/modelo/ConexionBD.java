@@ -24,4 +24,16 @@ public class ConexionBD {
         connection = null;
     }
 
+    public static void setURLBD(String URLBD) {
+        ConexionBD.URLBD = URLBD;
+    }
+
+    public static void setUsuario(String usuario) {
+        ConexionBD.usuario = usuario;
+    }
+
+    public static void setContrasena(String contrasena) {
+        ConexionBD.contrasena = contrasena;
+    }
+
 }

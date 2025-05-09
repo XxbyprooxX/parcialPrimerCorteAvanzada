@@ -26,15 +26,24 @@ public class GatoDAO {
         connection = (Connection) ConexionBD.getConnection();
         statement = connection.createStatement();
         resultSet = statement.executeQuery(consulta);
+        gato.setId(resultSet.getInt("id"));
+        gato.setNombre(resultSet.getString("nombre"));
+        gato.setPeso(resultSet.getDouble("peso"));
+        gato.setEdad(resultSet.getInt("edad"));
         gato.setNombreRaza(resultSet.getString("nombreRaza"));
         gato.setCodigoEMS(resultSet.getString("codigoEMS"));
-        gato.setColorCuerpo(resultSet.getString("colorCuerpo"));
-        gato.setPatron(resultSet.getString("patron"));
-        gato.setColorOjos(resultSet.getString("colorOjos"));
-        gato.setCola(resultSet.getString("cola"));
         statement.close();
         ConexionBD.desconectar();
         return gato;
     }
 
+    public void insertarGato(GatoVO gato) throws SQLException{
+        connection = ConexionBD.getConnection();
+        statement = connection.createStatement();
+        String insercion = "INSERT INTO `gatos`(`id`, `nombre`, `peso`, `edad`, `nombreRaza`, `codigoEMS`) VALUES ("+gato.getId()+",'"+gato.getNombre()+"',"+gato.getPeso()+","+gato.getEdad()+",'"+gato.getNombreRaza()+"','"+gato.getCodigoEMS()+"');";
+        statement.executeUpdate(insercion);
+        statement.close();
+        ConexionBD.desconectar();
+    }
+    
 }
