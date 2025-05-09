@@ -1,19 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package edu.progAvUD.parcialPrimerCorte.modelo;
 
-import com.mysql.cj.xdevapi.Statement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
  * @author Andres Felipe
  */
 public class GatoDAO {
-    
+
     private Connection connection;
     private Statement statement;
     private ResultSet resultSet;
@@ -21,12 +18,23 @@ public class GatoDAO {
     public GatoDAO() {
         this.connection = null;
         this.statement = null;
-        this.resultSet =null;
+        this.resultSet = null;
     }
-    
-    public void consultarGato(){
-    
-}
-    
-    
+
+    public GatoVO consultarGato(String temaConsulta, GatoVO gato) throws SQLException {
+        String consulta = "SELECT * FROM datosGatos where codigo='" + temaConsulta + "'";
+        connection = (Connection) ConexionBD.getConnection();
+        statement = connection.createStatement();
+        resultSet = statement.executeQuery(consulta);
+        gato.setNombreRaza(resultSet.getString("nombreRaza"));
+        gato.setCodigoEMS(resultSet.getString("codigoEMS"));
+        gato.setColorCuerpo(resultSet.getString("colorCuerpo"));
+        gato.setPatron(resultSet.getString("patron"));
+        gato.setColorOjos(resultSet.getString("colorOjos"));
+        gato.setCola(resultSet.getString("cola"));
+        statement.close();
+        ConexionBD.desconectar();
+        return gato;
+    }
+
 }

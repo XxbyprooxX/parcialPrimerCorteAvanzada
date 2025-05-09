@@ -1,15 +1,16 @@
 
 package edu.progAvUD.parcialPrimerCorte.modelo;
 
+import java.io.Serializable;
 
-public class GatoVO {
+public class GatoVO implements Serializable{
     
     private String nombreRaza;
     private String codigoEMS;
-    private String colorCuerpo;
-    private String patron;
-    private String colorOjos;
-    private String cola;
+    private transient String colorCuerpo;
+    private transient String patron;
+    private transient String colorOjos;
+    private transient String cola;
 
     public GatoVO(String nombreRaza, String codigoEMS, String colorCuerpo, String patron, String colorOjos, String cola) {
         this.nombreRaza = nombreRaza;
@@ -67,7 +68,5 @@ public class GatoVO {
     public void setCola(String cola) {
         this.cola = cola;
     }
-    
-    
     
 }
