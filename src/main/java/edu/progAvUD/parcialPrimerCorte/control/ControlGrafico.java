@@ -1,10 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package edu.progAvUD.parcialPrimerCorte.control;
 
 import edu.progAvUD.parcialPrimerCorte.vista.VentanaPrincipal;
+import java.io.File;
 
 /**
  *
@@ -20,5 +17,15 @@ public class ControlGrafico {
         this.ventanaPrincipal = new VentanaPrincipal(this);
     }
     
+    public File pedirArchivoPropiedades() {
+        return ventanaPrincipal.pedirArchivoPropiedades();
+    }
     
+    public void mostrarMensajeError(String mensaje) {
+        ventanaPrincipal.mostrarMensajeError(mensaje);
+    }
+
+    public void mostrarMensajeExito(String mensaje) {
+        ventanaPrincipal.mostrarMensajeExito(mensaje);
+    }
 }

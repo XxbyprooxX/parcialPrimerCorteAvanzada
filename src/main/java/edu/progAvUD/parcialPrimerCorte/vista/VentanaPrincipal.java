@@ -1,10 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package edu.progAvUD.parcialPrimerCorte.vista;
 
 import edu.progAvUD.parcialPrimerCorte.control.ControlGrafico;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -21,6 +21,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public VentanaPrincipal(ControlGrafico controlGrafico) {
         this.controlGrafico= controlGrafico;
         initComponents();
+    }
+    
+     public void mostrarMensajeExito(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Éxito", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public void mostrarMensajeError(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    public File pedirArchivoPropiedades() {
+        JFileChooser fileChooser = new JFileChooser(System.getProperty("user.dir") + "/src/main/java/edu/progAvUD/parcialPrimerCorte/data");
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Archivos .properties", "properties"));
+        fileChooser.showOpenDialog(null);
+        return fileChooser.getSelectedFile();
     }
 
     /**

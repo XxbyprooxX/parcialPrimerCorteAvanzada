@@ -28,8 +28,8 @@ public class GatoDAO {
         resultSet = statement.executeQuery(consulta);
         gato.setId(resultSet.getInt("id"));
         gato.setNombre(resultSet.getString("nombre"));
-        gato.setPeso(resultSet.getDouble("peso"));
-        gato.setEdad(resultSet.getInt("edad"));
+        gato.setPeso(resultSet.getString("peso"));
+        gato.setEdad(resultSet.getString("edad"));
         gato.setNombreRaza(resultSet.getString("nombreRaza"));
         gato.setCodigoEMS(resultSet.getString("codigoEMS"));
         statement.close();

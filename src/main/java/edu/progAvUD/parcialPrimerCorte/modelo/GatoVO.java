@@ -1,4 +1,3 @@
-
 package edu.progAvUD.parcialPrimerCorte.modelo;
 
 import java.io.Serializable;
@@ -7,8 +6,8 @@ public class GatoVO implements Serializable{
     
     private transient int id;
     private transient String nombre;
-    private transient double peso;
-    private transient int edad;
+    private transient String peso;
+    private transient String edad;
     private String codigoEMS;
     private String nombreRaza;
     private transient String colorCuerpo;
@@ -16,7 +15,7 @@ public class GatoVO implements Serializable{
     private transient String colorOjos;
     private transient String cola;
 
-    public GatoVO(int id, String nombre, double peso, int edad, String codigoEMS, String nombreRaza, String colorCuerpo, String patron, String colorOjos, String cola) {
+    public GatoVO(int id, String nombre, String peso, String edad, String codigoEMS, String nombreRaza, String colorCuerpo, String patron, String colorOjos, String cola) {
         this.id = id;
         this.nombre = nombre;
         this.peso = peso;
@@ -45,19 +44,19 @@ public class GatoVO implements Serializable{
         this.nombre = nombre;
     }
 
-    public double getPeso() {
+    public String getPeso() {
         return peso;
     }
 
-    public void setPeso(double peso) {
+    public void setPeso(String peso) {
         this.peso = peso;
     }
 
-    public int getEdad() {
+    public String getEdad() {
         return edad;
     }
 
-    public void setEdad(int edad) {
+    public void setEdad(String edad) {
         this.edad = edad;
     }
 
@@ -109,6 +108,4 @@ public class GatoVO implements Serializable{
         this.cola = cola;
     }
 
-    
-    
 }
