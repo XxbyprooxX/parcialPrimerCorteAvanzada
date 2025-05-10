@@ -158,14 +158,34 @@ public class ControlGato {
             "54-longie"
         };
 
-        nombre = obtenerDatoFaltante("nombre del gato " + id, nombre, null);
-        peso = String.valueOf(obtenerNumero("peso del gato " + id, peso));
-        edad = String.valueOf(obtenerNumero("edad del gato " + id, edad));
-        raza = obtenerDatoFaltante("raza del gato " + id, raza, opcionesRaza);
-        color = obtenerDatoFaltante("color del gato " + id, color, opcionesColor);
-        patron = obtenerDatoFaltante("patron del gato " + id, patron, opcionesPatron);
-        colorOjos = obtenerDatoFaltante("color de ojos del gato " + id, colorOjos, opcionesColorOjos);
-        cola = obtenerDatoFaltante("cola del gato " + id, cola, opcionesCola);
+        if (nombre.isBlank()) {
+            nombre = obtenerDatoFaltante("nombre del gato " + id, "nombre");
+        }
+        if (peso.isBlank()) {
+            peso = obtenerDatoFaltante("peso del gato " + id, "peso");
+        }
+        if (edad.isBlank()) {
+            edad = obtenerDatoFaltante("edad del gato " + id, "edad");
+        }
+        if (raza.isBlank()) {
+            raza = seleccionarOpcionFaltante("raza del gato " + id, opcionesRaza);
+        }
+        if (color.isBlank()) {
+            Object[] colores = { /* Lista de colores */};
+            color = seleccionarOpcionFaltante("color del gato " + id, opcionesColor);
+        }
+        if (patron.isBlank()) {
+            Object[] patrones = { /* Lista de patrones */};
+            patron = seleccionarOpcionFaltante("patrón del gato " + id, opcionesPatron);
+        }
+        if (colorOjos.isBlank()) {
+            Object[] coloresOjos = { /* Lista de colores de ojos */};
+            colorOjos = seleccionarOpcionFaltante("color de ojos del gato " + id, opcionesColorOjos);
+        }
+        if (cola.isBlank()) {
+            Object[] colas = { /* Lista de tipos de cola */};
+            cola = seleccionarOpcionFaltante("cola del gato " + id, opcionesCola);
+        }
 
         GatoVO gato = null;
         String[] divisionRaza = raza.split("-");
@@ -226,28 +246,26 @@ public class ControlGato {
         }
     }
 
-    private String obtenerDatoFaltante(String mensaje, String dato, Object[] opciones) {
-        if (dato.isBlank()) {
-            if (opciones != null) {
-                Object opcionSeleccionada = controlPrincipal.mostrarJOptionSeleccionarDatoFaltante(mensaje, opciones);
-                return opcionSeleccionada.toString();
-            } else {
-                return controlPrincipal.mostrarJOptionEscribirDatoFaltante(mensaje);
+    private String obtenerDatoFaltante(String mensaje, String tipo) {
+        String dato = controlPrincipal.mostrarJOptionEscribirDatoFaltante(mensaje);
+        if (tipo.equals("peso") || tipo.equals("edad")) {
+            try {
+                if (tipo.equals("peso")) {
+                    Double.parseDouble(dato);
+                } else {
+                    Integer.parseInt(dato);
+                }
+            } catch (NumberFormatException e) {
+                controlPrincipal.mostrarMensajeError("Se ha escrito algo incorrecto en el " + tipo);
+                return obtenerDatoFaltante(mensaje, tipo); // Volver a pedir el dato
             }
         }
         return dato;
     }
 
-    private String obtenerNumero(String mensaje, String dato) {
-        if (dato.isBlank()) {
-            String entrada = controlPrincipal.mostrarJOptionEscribirDatoFaltante(mensaje);
-            try {
-                int parseInt = Integer.parseInt(entrada);
-            } catch (NumberFormatException e) {
-                controlPrincipal.mostrarMensajeError("Se ha escrito algo incorrecto en " + mensaje);
-            }
-        }
-        return dato; // Asumiendo que tipo no es vacío aquí
+    private String seleccionarOpcionFaltante(String mensaje, Object[] opciones) {
+        Object seleccion = controlPrincipal.mostrarJOptionSeleccionarDatoFaltante(mensaje, opciones);
+        return seleccion != null ? seleccion.toString() : "";
     }
 
     public void crearSerializacion(String accion) {
