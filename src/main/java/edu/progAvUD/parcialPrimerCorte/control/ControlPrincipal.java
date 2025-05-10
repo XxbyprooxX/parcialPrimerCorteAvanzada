@@ -63,8 +63,12 @@ public class ControlPrincipal {
                 double peso2 = Double.parseDouble(peso);
                 String edad = propiedadesGatos.getProperty("gato"+i+".edad");
                 int edad2 = Integer.parseInt(edad);
-                String codigoEMS = propiedadesGatos.getProperty("gato"+i+".codigoEMS");
-                controlGato.crearGato(i, nombre, peso, edad, codigoEMS);
+                String raza = propiedadesGatos.getProperty("gato"+i+".raza");
+                String color = propiedadesGatos.getProperty("gato"+i+".color");
+                String patron = propiedadesGatos.getProperty("gato"+i+".patron");
+                String colorOjos = propiedadesGatos.getProperty("gato"+i+".colorOjos");
+                String cola = propiedadesGatos.getProperty("gato"+i+".edad");
+                controlGato.crearGato(i, nombre, peso, edad, raza, color, patron, colorOjos, cola);
             }
             controlGrafico.mostrarMensajeExito("Se han creado correctamente los gatos");
         } catch (IOException ex) {
@@ -74,6 +78,14 @@ public class ControlPrincipal {
         } catch (Exception ex) {
             controlGrafico.mostrarMensajeError("Algun dato del gato no corresponde");
         }
+    }
+    
+    public void mostrarMensajeError(String mensaje){
+        controlGrafico.mostrarMensajeError(mensaje);
+    }
+    
+    public void mostrarMensajeExito(String mensaje){
+        controlGrafico.mostrarMensajeExito(mensaje);
     }
 
 }

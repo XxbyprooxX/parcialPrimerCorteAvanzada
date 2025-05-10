@@ -26,18 +26,6 @@ public class ControlGrafico implements ActionListener {
         ventanaPrincipal.panelPrincipal.jButtonPropiedadesGatos.addActionListener(this);
     }
 
-    public File pedirArchivoPropiedades() {
-        return ventanaPrincipal.pedirArchivoPropiedades();
-    }
-
-    public void mostrarMensajeError(String mensaje) {
-        ventanaPrincipal.mostrarMensajeError(mensaje);
-    }
-
-    public void mostrarMensajeExito(String mensaje) {
-        ventanaPrincipal.mostrarMensajeExito(mensaje);
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == ventanaPrincipal.panelPrincipal.jButtonPropiedadesBD) {
@@ -48,7 +36,7 @@ public class ControlGrafico implements ActionListener {
         }
         if (e.getSource() == ventanaPrincipal.panelPrincipal.jButtonPropiedadesGatos) {
             controlPrincipal.cargarDatosGatosPropiedades();
-            ventanaPrincipal.panelPrincipal.jButtonPropiedadesBD.setEnabled(false);
+            ventanaPrincipal.panelPrincipal.jButtonPropiedadesGatos.setEnabled(false);
             verificarBotonesInctivos();
         }
         if (e.getSource() == ventanaPrincipal.panelPrincipal.jButtonContinuar) {
@@ -58,8 +46,20 @@ public class ControlGrafico implements ActionListener {
     }
 
     public void verificarBotonesInctivos() {
-        if(!ventanaPrincipal.panelPrincipal.jButtonPropiedadesGatos.isEnabled() && !ventanaPrincipal.panelPrincipal.jButtonPropiedadesBD.isEnabled()){
+        if (!ventanaPrincipal.panelPrincipal.jButtonPropiedadesGatos.isEnabled() && !ventanaPrincipal.panelPrincipal.jButtonPropiedadesBD.isEnabled()) {
             ventanaPrincipal.panelPrincipal.jButtonContinuar.setEnabled(true);
         }
+    }
+
+    public File pedirArchivoPropiedades() {
+        return ventanaPrincipal.pedirArchivoPropiedades();
+    }
+
+    public void mostrarMensajeError(String mensaje) {
+        ventanaPrincipal.mostrarMensajeError(mensaje);
+    }
+
+    public void mostrarMensajeExito(String mensaje) {
+        ventanaPrincipal.mostrarMensajeExito(mensaje);
     }
 }
