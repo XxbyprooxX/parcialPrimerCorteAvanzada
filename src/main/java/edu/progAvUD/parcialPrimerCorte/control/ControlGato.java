@@ -22,7 +22,7 @@ public class ControlGato {
         String nombreRaza = identificarRaza(codigoEMS);
         GatoVO gato = new GatoVO(id, nombre, peso, edad, codigoEMS, nombreRaza, colorCuerpo, patron, colorOjos, cola);
         gatos.add(gato);
-        gatos.sort(Comparator.comparingInt(GatoVO::getId).reversed());
+        gatos.sort(Comparator.comparingInt(GatoVO::getId));
     }
     
     public String identificarRaza(String codigoEMS){

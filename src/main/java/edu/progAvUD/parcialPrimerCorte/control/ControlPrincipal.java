@@ -1,5 +1,6 @@
 package edu.progAvUD.parcialPrimerCorte.control;
 
+import edu.progAvUD.parcialPrimerCorte.modelo.ConexionBD;
 import edu.progAvUD.parcialPrimerCorte.modelo.ConexionPropiedades;
 import java.io.IOException;
 import java.util.Properties;
@@ -18,7 +19,7 @@ public class ControlPrincipal {
         this.controlGrafico = new ControlGrafico(this);
     }
 
-    public void crearConexionPropiedades() {
+    public ConexionPropiedades crearConexionPropiedades() {
         ConexionPropiedades conexionPropiedades = null;
         boolean flag = true;
         do {
@@ -31,10 +32,28 @@ public class ControlPrincipal {
                 controlGrafico.mostrarMensajeError("No se pudo crear la conexion correctamente");
             }
         } while (flag);
-        pedirDatosGatosPropiedades(conexionPropiedades);
+        
+        return conexionPropiedades;
     }
 
-    public void pedirDatosGatosPropiedades(ConexionPropiedades conexionPropiedades) {
+    public void cargarDatosBD(){
+        ConexionPropiedades conexionPropiedades = crearConexionPropiedades();
+        try{
+            Properties propiedadesBD = conexionPropiedades.cargarPropiedades();
+            String URLBD = propiedadesBD.getProperty("URLBD");
+            String usuario = propiedadesBD.getProperty("usuario");
+            String contrasena = propiedadesBD.getProperty("contrasena");
+            ConexionBD.setURLBD(URLBD);
+            ConexionBD.setUsuario(usuario);
+            ConexionBD.setContrasena(contrasena);
+            
+        }catch (IOException ex) {
+            controlGrafico.mostrarMensajeError("No se pudo cargar el archivo propiedades de la Base de Datos");
+        }
+    }
+    
+    public void cargarDatosGatosPropiedades() {
+        ConexionPropiedades conexionPropiedades = crearConexionPropiedades();
         try {
             Properties propiedadesGatos = conexionPropiedades.cargarPropiedades();
             int cantidadDeGatosRegistrar = Integer.parseInt(propiedadesGatos.getProperty("numeroRegistrosGatos"));
@@ -50,7 +69,7 @@ public class ControlPrincipal {
                 String colorOjos = propiedadesGatos.getProperty("colorOjos");
                 String cola = propiedadesGatos.getProperty("cola");
                 String codigoEMS = propiedadesGatos.getProperty("codigoEMS");
-                
+                controlGato.crearGato(id, nombre, peso, edad, codigoEMS, colorCuerpo, patron, colorOjos, cola);
             }
             controlGrafico.mostrarMensajeExito("Se han creado correctamente los gatos");
         } catch (IOException ex) {
