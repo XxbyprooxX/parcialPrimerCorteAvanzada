@@ -69,7 +69,7 @@ public class ControlPrincipal {
                 String colorOjos = propiedadesGatos.getProperty("colorOjos");
                 String cola = propiedadesGatos.getProperty("cola");
                 String codigoEMS = propiedadesGatos.getProperty("codigoEMS");
-                controlGato.crearGato(id, nombre, peso, edad, codigoEMS, colorCuerpo, patron, colorOjos, cola);
+                controlGato.crearGato(id, nombre, peso, edad, codigoEMS);
             }
             controlGrafico.mostrarMensajeExito("Se han creado correctamente los gatos");
         } catch (IOException ex) {
