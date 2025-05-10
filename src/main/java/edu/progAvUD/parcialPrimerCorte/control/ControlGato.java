@@ -22,6 +22,36 @@ public class ControlGato {
     }
 
     public void crearGato(int id, String nombre, String peso, String edad, String raza, String color, String patron, String colorOjos, String cola) {
+        if("".equals(nombre)){
+            
+        }
+        if("".equals(peso)){
+            
+        }
+        if("".equals(edad)){
+            
+        }
+        if(raza.isBlank()){
+            
+            controlPrincipal.mostrarJOptionDatoFaltante("raza del gato"+id, opciones);
+        }
+        if(color.isBlank()){
+            Object[] opciones = new Object[]{"hola",};
+            controlPrincipal.mostrarJOptionDatoFaltante("color del gato"+id, opciones);
+        }
+        if(patron.isBlank()){
+            Object[] opciones = new Object[]{"hola",};
+            controlPrincipal.mostrarJOptionDatoFaltante("patron del gato"+id, opciones);
+        }
+        if(colorOjos.isBlank()){
+            Object[] opciones = new Object[]{"hola",};
+            controlPrincipal.mostrarJOptionDatoFaltante("color de ojos del gato"+id, opciones);
+        }
+        if("".equals(cola)){
+            Object[] opciones = new Object[]{"hola",};
+            controlPrincipal.mostrarJOptionDatoFaltante("cola del gato"+id, opciones);
+        }
+        
         String[] divisionRaza = raza.split("-");
         String[] divisionColor = color.split("-");
         String[] divisionPatron = patron.split("-");

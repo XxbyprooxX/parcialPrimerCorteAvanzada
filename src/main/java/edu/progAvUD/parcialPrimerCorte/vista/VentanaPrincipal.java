@@ -2,9 +2,7 @@ package edu.progAvUD.parcialPrimerCorte.vista;
 
 import edu.progAvUD.parcialPrimerCorte.control.ControlGrafico;
 import java.io.File;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -12,36 +10,37 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Andres Felipe
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
-    
+
     private ControlGrafico controlGrafico;
     public PanelPrincipal panelPrincipal;
-    
+
     /**
      * Creates new form VentanaPrincipal
+     *
      * @param controlGrafico
      */
     public VentanaPrincipal(ControlGrafico controlGrafico) {
-        this.controlGrafico= controlGrafico;
+        this.controlGrafico = controlGrafico;
         initComponents();
         setVisible(true);
         this.panelPrincipal = new PanelPrincipal();
     }
-    
-     public void mostrarMensajeExito(String mensaje) {
+
+    public void mostrarMensajeExito(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje, "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void mostrarMensajeError(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
     }
-    
+
     public File pedirArchivoPropiedades() {
         JFileChooser fileChooser = new JFileChooser(System.getProperty("user.dir") + "/src/main/java/edu/progAvUD/parcialPrimerCorte/data");
         fileChooser.setFileFilter(new FileNameExtensionFilter("Archivos .properties", "properties"));
         fileChooser.showOpenDialog(null);
         return fileChooser.getSelectedFile();
     }
-    
+
     /**
      * Se encarga de mostrar cada panel
      *
@@ -54,7 +53,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         revalidate();
         repaint();
     }
-    
+
+    public Object mostrarJOptionDatoFaltante(String datoFaltante, Object[] opciones) {
+        String mensaje = "Hace falta el dato de '" + datoFaltante + "'.\nSeleccione una opcion:";
+        Object seleccion = JOptionPane.showInputDialog(null,
+                mensaje, "Dato Faltante",
+                JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+        return seleccion;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,8 +98,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -62,4 +62,8 @@ public class ControlGrafico implements ActionListener {
     public void mostrarMensajeExito(String mensaje) {
         ventanaPrincipal.mostrarMensajeExito(mensaje);
     }
+    
+    public Object mostrarJOptionDatoFaltante(String datoFaltante, Object[] opciones){
+        return ventanaPrincipal.mostrarJOptionDatoFaltante(datoFaltante, opciones);
+    }
 }

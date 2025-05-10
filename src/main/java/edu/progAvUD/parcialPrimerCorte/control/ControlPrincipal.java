@@ -32,13 +32,13 @@ public class ControlPrincipal {
                 controlGrafico.mostrarMensajeError("No se pudo crear la conexion correctamente");
             }
         } while (flag);
-        
+
         return conexionPropiedades;
     }
 
-    public void cargarDatosBD(){
+    public void cargarDatosBD() {
         ConexionPropiedades conexionPropiedades = crearConexionPropiedades();
-        try{
+        try {
             Properties propiedadesBD = conexionPropiedades.cargarPropiedades();
             String URLBD = propiedadesBD.getProperty("URLBD");
             String usuario = propiedadesBD.getProperty("usuario");
@@ -46,28 +46,28 @@ public class ControlPrincipal {
             ConexionBD.setURLBD(URLBD);
             ConexionBD.setUsuario(usuario);
             ConexionBD.setContrasena(contrasena);
-            
-        }catch (IOException ex) {
+
+        } catch (IOException ex) {
             controlGrafico.mostrarMensajeError("No se pudo cargar el archivo propiedades de la Base de Datos");
         }
     }
-    
+
     public void cargarDatosGatosPropiedades() {
         ConexionPropiedades conexionPropiedades = crearConexionPropiedades();
         try {
             Properties propiedadesGatos = conexionPropiedades.cargarPropiedades();
             int cantidadDeGatosRegistrar = Integer.parseInt(propiedadesGatos.getProperty("cantidadGatosARegistrar"));
-            for (int i=1; i <= cantidadDeGatosRegistrar; i++){
-                String nombre = propiedadesGatos.getProperty("gato"+i+".nombre");
-                String peso = propiedadesGatos.getProperty("gato"+i+".peso");
+            for (int i = 1; i <= cantidadDeGatosRegistrar; i++) {
+                String nombre = propiedadesGatos.getProperty("gato" + i + ".nombre");
+                String peso = propiedadesGatos.getProperty("gato" + i + ".peso");
                 double peso2 = Double.parseDouble(peso);
-                String edad = propiedadesGatos.getProperty("gato"+i+".edad");
+                String edad = propiedadesGatos.getProperty("gato" + i + ".edad");
                 int edad2 = Integer.parseInt(edad);
-                String raza = propiedadesGatos.getProperty("gato"+i+".raza");
-                String color = propiedadesGatos.getProperty("gato"+i+".color");
-                String patron = propiedadesGatos.getProperty("gato"+i+".patron");
-                String colorOjos = propiedadesGatos.getProperty("gato"+i+".colorOjos");
-                String cola = propiedadesGatos.getProperty("gato"+i+".cola");
+                String raza = propiedadesGatos.getProperty("gato" + i + ".raza");
+                String color = propiedadesGatos.getProperty("gato" + i + ".color");
+                String patron = propiedadesGatos.getProperty("gato" + i + ".patron");
+                String colorOjos = propiedadesGatos.getProperty("gato" + i + ".colorOjos");
+                String cola = propiedadesGatos.getProperty("gato" + i + ".cola");
                 controlGato.crearGato(i, nombre, peso, edad, raza, color, patron, colorOjos, cola);
             }
             controlGrafico.mostrarMensajeExito("Se han creado correctamente los gatos");
@@ -79,18 +79,21 @@ public class ControlPrincipal {
             controlGrafico.mostrarMensajeError("Algun dato del gato no corresponde");
         }
     }
-    
-    public void mostrarMensajeError(String mensaje){
+
+    public void mostrarMensajeError(String mensaje) {
         controlGrafico.mostrarMensajeError(mensaje);
     }
-    
-    public void mostrarMensajeExito(String mensaje){
+
+    public void mostrarMensajeExito(String mensaje) {
         controlGrafico.mostrarMensajeExito(mensaje);
     }
-    
-    public String pedirAtributoNoExistente(String atributoFaltante){
-        
+
+    public String[] pedirAtributoNoExistente(String atributoFaltante) {
         return null;
+    }
+
+    public Object mostrarJOptionDatoFaltante(String datoFaltante, Object[] opciones) {
+        return controlGrafico.mostrarJOptionDatoFaltante(datoFaltante, opciones);
     }
 
 }
