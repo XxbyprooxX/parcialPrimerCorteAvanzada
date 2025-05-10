@@ -57,30 +57,42 @@ public class ControlPrincipal {
 
     public void cargarDatosGatosPropiedades() {
         ConexionPropiedades conexionPropiedades = crearConexionPropiedades();
-        try {
-            Properties propiedadesGatos = conexionPropiedades.cargarPropiedades();
-            int cantidadDeGatosRegistrar = Integer.parseInt(propiedadesGatos.getProperty("cantidadGatosARegistrar"));
-            for (int i = 1; i <= cantidadDeGatosRegistrar; i++) {
-                String nombre = propiedadesGatos.getProperty("gato" + i + ".nombre");
-                String peso = propiedadesGatos.getProperty("gato" + i + ".peso");
-                double peso2 = Double.parseDouble(peso);
-                String edad = propiedadesGatos.getProperty("gato" + i + ".edad");
-                int edad2 = Integer.parseInt(edad);
-                String raza = propiedadesGatos.getProperty("gato" + i + ".raza");
-                String color = propiedadesGatos.getProperty("gato" + i + ".color");
-                String patron = propiedadesGatos.getProperty("gato" + i + ".patron");
-                String colorOjos = propiedadesGatos.getProperty("gato" + i + ".colorOjos");
-                String cola = propiedadesGatos.getProperty("gato" + i + ".cola");
-                controlGato.crearGato(i, nombre, peso, edad, raza, color, patron, colorOjos, cola);
+        boolean flag =  true;
+        do{
+            try {
+                Properties propiedadesGatos = conexionPropiedades.cargarPropiedades();
+                int cantidadDeGatosRegistrar = Integer.parseInt(propiedadesGatos.getProperty("cantidadGatosARegistrar"));
+                for (int i = 1; i <= cantidadDeGatosRegistrar; i++) {
+                    String nombre = propiedadesGatos.getProperty("gato" + i + ".nombre");
+                    String peso = propiedadesGatos.getProperty("gato" + i + ".peso");
+                    if (!peso.isBlank()) {
+                        double peso2 = Double.parseDouble(peso);
+                    }
+                    String edad = propiedadesGatos.getProperty("gato" + i + ".edad");
+                    if (!edad.isBlank()) {
+                        int edad2 = Integer.parseInt(edad);
+                    }
+                    String raza = propiedadesGatos.getProperty("gato" + i + ".raza");
+                    String color = propiedadesGatos.getProperty("gato" + i + ".color");
+                    String patron = propiedadesGatos.getProperty("gato" + i + ".patron");
+                    String colorOjos = propiedadesGatos.getProperty("gato" + i + ".colorOjos");
+                    String cola = propiedadesGatos.getProperty("gato" + i + ".cola");
+                    controlGato.crearGato(i, nombre, peso, edad, raza, color, patron, colorOjos, cola);
+                }
+                flag = false;
+                controlGrafico.mostrarMensajeExito("Se han creado correctamente los gatos");
+            } catch (IOException ex) {
+                controlGrafico.mostrarMensajeError("No se pudo cargar el archivo propiedades de los gatos");
+                flag = true;
+            } catch (NumberFormatException ex) {
+                controlGrafico.mostrarMensajeError("El texto no es un valor valido");
+                flag = true;
+            } catch (Exception ex) {
+                controlGrafico.mostrarMensajeError("Algun dato del gato no corresponde");
+                flag = true;
             }
-            controlGrafico.mostrarMensajeExito("Se han creado correctamente los gatos");
-        } catch (IOException ex) {
-            controlGrafico.mostrarMensajeError("No se pudo cargar el archivo propiedades de los gatos");
-        } catch (NumberFormatException ex) {
-            controlGrafico.mostrarMensajeError("El texto no es un valor valido");
-        } catch (Exception ex) {
-            controlGrafico.mostrarMensajeError("Algun dato del gato no corresponde");
-        }
+        }while(flag);
+        
     }
 
     public void crearArchivoAleatorio() {
@@ -114,7 +126,6 @@ public class ControlPrincipal {
             controlGrafico.mostrarMensajeError("Hay un error al momento de escribir el archivo");
         }
     }
-    
 
     public void mostrarMensajeError(String mensaje) {
         controlGrafico.mostrarMensajeError(mensaje);
@@ -124,15 +135,15 @@ public class ControlPrincipal {
         controlGrafico.mostrarMensajeExito(mensaje);
     }
 
-   public File crearArchivoSerializado() throws NullPointerException, IOException{
-       return controlGrafico.pedirArchivoAleatorio();
-   }
+    public File crearArchivoSerializado() throws NullPointerException, IOException {
+        return controlGrafico.pedirArchivoAleatorio();
+    }
 
     public Object mostrarJOptionSeleccionarDatoFaltante(String datoFaltante, Object[] opciones) {
         return controlGrafico.mostrarJOptionSeleccionarDatoFaltante(datoFaltante, opciones);
     }
-    
-    public String mostrarJOptionEscribirDatoFaltante(String datoFaltante){
+
+    public String mostrarJOptionEscribirDatoFaltante(String datoFaltante) {
         return controlGrafico.mostrarJOptionEscribirDatoFaltante(datoFaltante);
     }
 }
