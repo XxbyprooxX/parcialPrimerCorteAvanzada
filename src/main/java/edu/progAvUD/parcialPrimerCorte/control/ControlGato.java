@@ -24,16 +24,53 @@ public class ControlGato {
         this.gatoDao = new GatoDAO();
     }
 
-    public void crearGato(int id, String nombre, String peso, String edad,String raza, String color, String patron, String colorOjos, String cola) {
+    public void crearGato(int id, String nombre, String peso, String edad, String raza, String color, String patron, String colorOjos, String cola) {
+        
         String[] divisionRaza = raza.split("-");
         String[] divisionColor = color.split("-");
         String[] divisionPatron = patron.split("-");
         String[] divisionColorOjos = colorOjos.split("-");
         String[] divisionCola = cola.split("-");
-        String codigoEMS = divisionRaza[0]+"/"+divisionColor[0]+"/"+divisionPatron[0]+"/"+divisionColorOjos[0]+"/"+divisionCola[0] ;
-        GatoVO gato = new GatoVO(id, nombre, peso, edad,codigoEMS, raza, color, patron, colorOjos, cola);
+        String codigoEMS = divisionRaza[0] + "/" + divisionColor[0] + "/" + divisionPatron[0] + "/" + divisionColorOjos[0] + "/" + divisionCola[0];
+        GatoVO gato = new GatoVO(id, nombre, peso, edad, codigoEMS, raza, color, patron, colorOjos, cola);
         gatos.add(gato);
         insertarGato(gato);
+    }
+
+    public void pedirListaGatos() {
+        try {
+            while (gatoDao.getResultSet().next()) {
+                GatoVO gato = new GatoVO();
+                gatoDao.darListaGatos(gato);
+            }
+        } catch (SQLException ex) {
+            controlPrincipal.mostrarMensajeError("SQLException");
+        }
+    }
+
+    public void pedirConsultaGato(int id) {
+        GatoVO gato = new GatoVO();
+        try {
+            gatoDao.consultarGato(id, gato);
+        } catch (SQLException ex) {
+            controlPrincipal.mostrarMensajeError("SQLException");
+        }
+    }
+
+    public void insertarGato(GatoVO gato) {
+        try {
+            gatoDao.insertarGato(gato);
+        } catch (SQLException ex) {
+            controlPrincipal.mostrarMensajeError("SQLException");
+        }
+    }
+
+    public void eliminarGato(int id) {
+        try {
+            gatoDao.eliminarGato(id);
+        } catch (SQLException ex) {
+            controlPrincipal.mostrarMensajeError("SQLExceptio_ex :PPPPPPPPPPPPPPPPPPPPPPPPPPPPpp");
+        }
     }
 
     public String identificarRazaSegunEMS() {
@@ -429,39 +466,4 @@ public class ControlGato {
         return null;
     }
 
-    public void pedirListaGatos() {
-        try {
-            while (gatoDao.getResultSet().next()) {
-                GatoVO gato = new GatoVO();
-                gatoDao.darListaGatos(gato);
-            }
-        } catch (SQLException ex) {
-            controlPrincipal.mostrarMensajeError("SQLExceptio_ex :PPPPPPPPPPPPPPPPPPPPPPPPPPPPpp");
-        }
-    }
-
-    public void pedirConsultaGato(int id) {
-        GatoVO gato = new GatoVO();
-        try {
-            gatoDao.consultarGato(id, gato);
-        } catch (SQLException ex) {
-            controlPrincipal.mostrarMensajeError("SQLExceptio_ex :PPPPPPPPPPPPPPPPPPPPPPPPPPPPpp");
-        }
-    }
-
-    public void insertarGato(GatoVO gato) {
-        try {
-            gatoDao.insertarGato(gato);
-        } catch (SQLException ex) {
-            controlPrincipal.mostrarMensajeError("SQLExceptio_ex :PPPPPPPPPPPPPPPPPPPPPPPPPPPPpp");
-        }
-    }
-
-    public void eliminarGato(int id) {
-        try {
-            gatoDao.eliminarGato(id);
-        } catch (SQLException ex) {
-            controlPrincipal.mostrarMensajeError("SQLExceptio_ex :PPPPPPPPPPPPPPPPPPPPPPPPPPPPpp");
-        }
-    }
 }

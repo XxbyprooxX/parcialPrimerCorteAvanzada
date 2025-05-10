@@ -67,7 +67,7 @@ public class ControlPrincipal {
                 String color = propiedadesGatos.getProperty("gato"+i+".color");
                 String patron = propiedadesGatos.getProperty("gato"+i+".patron");
                 String colorOjos = propiedadesGatos.getProperty("gato"+i+".colorOjos");
-                String cola = propiedadesGatos.getProperty("gato"+i+".edad");
+                String cola = propiedadesGatos.getProperty("gato"+i+".cola");
                 controlGato.crearGato(i, nombre, peso, edad, raza, color, patron, colorOjos, cola);
             }
             controlGrafico.mostrarMensajeExito("Se han creado correctamente los gatos");
