@@ -2,6 +2,9 @@ package edu.progAvUD.parcialPrimerCorte.control;
 
 import edu.progAvUD.parcialPrimerCorte.modelo.GatoDAO;
 import edu.progAvUD.parcialPrimerCorte.modelo.GatoVO;
+import edu.progAvUD.parcialPrimerCorte.modelo.Serializacion;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -22,35 +25,147 @@ public class ControlGato {
     }
 
     public void crearGato(int id, String nombre, String peso, String edad, String raza, String color, String patron, String colorOjos, String cola) {
-        if ("".equals(nombre)) {
+        Object[] opcionesRaza = {
+            "ABY-Abyssinian",
+            "AMB-American Burmese",
+            "ACL-American Curl Longhair",
+            "ACS-American Curl Shorthair",
+            "ASH-American Shorthair",
+            "AWH-American Wirehair",
+            "ANA-Anatoli",
+            "APL-Aphrodite’s Giant Longhair",
+            "APS-Aphrodite’s Giant Shorthair",
+            "ARM-Arabian Mau",
+            "ASI-Asian",
+            "AUM-Australian Mist",
+            "BAL-Balinese",
+            "BEN-Bengal",
+            "BOM-Bombay",
+            "BRA-Brazilian Shorthair",
+            "BLH-British Longhair",
+            "BRI-British Shorthair",
+            "BUR-Burmese",
+            "BML-Burmilla Longhair",
+            "BMS-Burmilla Shorthair",
+            "CAM-Cashmere",
+            "KKH-Celtic Shorthair",
+            "CEY-Ceylon",
+            "CHA-Chartreux",
+            "CHS-Chausie",
+            "CRX-Cornish Rex",
+            "CYM-Cymric",
+            "DLH-Deutsch-Langhaar",
+            "DRX-Devon Rex",
+            "DSX-Don Sphynx",
+            "MAU-Egyptian Mau",
+            "EXO-Exotic Shorthair",
+            "GRX-German Rex",
+            "HAV-Havana",
+            "SFL-Highland Fold",
+            "PER-Himalayan / Colourpoint",
+            "HHP-Household Pet",
+            "JBL-Japanese Bobtail Longhair",
+            "JBS-Japanese Bobtail Shorthair",
+            "KAN-Kanaani",
+            "KAL-Karelian Bobtail Longhair",
+            "KAS-Karelian Bobtail Shorthair",
+            "KAM-Khao Manee",
+            "KOR-Korat",
+            "KBL-Kurilian Bobtail Langhaar",
+            "KBS-Kurilian Bobtail Shorthair",
+            "LPL-LaPerm Longhair",
+            "LPS-LaPerm Shorthair",
+            "LYS-Lykoi",
+            "MCO-Maine Coon",
+            "MAN-Manx",
+            "MBT-Mekong Bobtail",
+            "MIL-Minuet Longhair",
+            "MIS-Minuet Shorthair",
+            "MNL-Munchkin Longhair",
+            "MNS-Munchkin Shorthair",
+            "NEB-Nebelung",
+            "NFO-Norwegian Forest",
+            "OCI-Ocicat",
+            "OSL-Oriental Semilonghair",
+            "OSH-Oriental Shorthair",
+            "TLH-Original Longhair",
+            "PER-Persian",
+            "PBD-Peterbald",
+            "RGM-Ragamuffin",
+            "RAG-Ragdoll",
+            "RUS-Russian Blue",
+            "SBI-Sacred Birman",
+            "SFS-Scottish Fold",
+            "SRL-Selkirk Rex Longhair",
+            "SRS-Selkirk Rex Shorthair",
+            "SIA-Siamese",
+            "SIB-Siberian cat / Neva Masquerade",
+            "SIN-Singapura",
+            "SNO-Snowshoe",
+            "SOM-Somali",
+            "SPH-Sphynx",
+            "THA-Thai",
+            "TIF-Tiffanie",
+            "TON-Tonkinese",
+            "TOB-Toy Bob",
+            "TUA-Turkish Angora",
+            "TUV-Turkish Van",
+            "URL-Ural Rex Longhair",
+            "URS-Ural Rex Shorthair",
+            "YOR-York"};
+        Object[] opcionesColor = {
+            "n-black",
+            "f-black tortie",
+            "a-blue",
+            "g-blue tortie",
+            "b-chocolate",
+            "h-chocolate tortie",
+            "c-lilac",
+            "o-cinnamon",
+            "q-cinnamon tortie",
+            "d-red",
+            "e-cream",
+            "p-fawn",
+            "r-fawn tortie",
+            "j-lilac tortie",
+            "w-white",
+            "n-seal",
+            "x-unrecognized"};
+        Object[] opcionesPatron = {
+            "11-shaded",
+            "12-shell",
+            "21-tabby",
+            "21-lynx",
+            "22-classic",
+            "23-mackerel",
+            "24-spotted",
+            "25-ticked",
+            "26-grizzled ticked"
+        };
+        Object[] opcionesColorOjos = {
+            "61-blue",
+            "62-orange",
+            "63-odd",
+            "64-green",
+            "65-golden BUR",
+            "66-aquamarine TON",
+            "67-dark blue SIA"
+        };
+        Object[] opcionesCola = {
+            "51-rumpy",
+            "52-rumpy riser",
+            "53-stumpy",
+            "54-longie"
+        };
 
-        }
-        if ("".equals(peso)) {
-
-        }
-        if ("".equals(edad)) {
-
-        }
-        if (raza.isBlank()) {
-            Object[] opciones = new Object[]{"hola",};
-            controlPrincipal.mostrarJOptionDatoFaltante("raza del gato" + id, opciones);
-        }
-        if (color.isBlank()) {
-            Object[] opciones = new Object[]{"hola",};
-            controlPrincipal.mostrarJOptionDatoFaltante("color del gato" + id, opciones);
-        }
-        if (patron.isBlank()) {
-            Object[] opciones = new Object[]{"hola",};
-            controlPrincipal.mostrarJOptionDatoFaltante("patron del gato" + id, opciones);
-        }
-        if (colorOjos.isBlank()) {
-            Object[] opciones = new Object[]{"hola",};
-            controlPrincipal.mostrarJOptionDatoFaltante("color de ojos del gato" + id, opciones);
-        }
-        if ("".equals(cola)) {
-            Object[] opciones = new Object[]{"hola",};
-            controlPrincipal.mostrarJOptionDatoFaltante("cola del gato" + id, opciones);
-        }
+        nombre = obtenerDatoFaltante("nombre del gato " + id, nombre, null);
+        peso = String.valueOf(obtenerNumero("peso del gato " + id, peso));
+        edad = String.valueOf(obtenerNumero("edad del gato " + id, edad));
+        raza = obtenerDatoFaltante("raza del gato " + id, raza, opcionesRaza);
+        color = obtenerDatoFaltante("color del gato " + id, color, opcionesColor);
+        patron = obtenerDatoFaltante("patron del gato " + id, patron, opcionesPatron);
+        colorOjos = obtenerDatoFaltante("color de ojos del gato " + id, colorOjos, opcionesColorOjos);
+        cola = obtenerDatoFaltante("cola del gato " + id, cola, opcionesCola);
 
         GatoVO gato = null;
         String[] divisionRaza = raza.split("-");
@@ -108,6 +223,72 @@ public class ControlGato {
             gatoDao.eliminarGato(id);
         } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLExceptio_ex :PPPPPPPPPPPPPPPPPPPPPPPPPPPPpp");
+        }
+    }
+
+    private String obtenerDatoFaltante(String mensaje, String dato, Object[] opciones) {
+        if (dato.isBlank()) {
+            if (opciones != null) {
+                Object opcionSeleccionada = controlPrincipal.mostrarJOptionSeleccionarDatoFaltante(mensaje, opciones);
+                return opcionSeleccionada.toString();
+            } else {
+                return controlPrincipal.mostrarJOptionEscribirDatoFaltante(mensaje);
+            }
+        }
+        return dato;
+    }
+
+    private int obtenerNumero(String mensaje, String dato) {
+        if (dato.isBlank()) {
+            String entrada = controlPrincipal.mostrarJOptionEscribirDatoFaltante(mensaje);
+            try {
+                return Integer.parseInt(entrada);
+            } catch (NumberFormatException e) {
+                controlPrincipal.mostrarMensajeError("Se ha escrito algo incorrecto en " + mensaje);
+            }
+        }
+        return Integer.parseInt(dato); // Asumiendo que tipo no es vacío aquí
+    }
+
+    public void crearSerializacion(String accion) {
+        boolean flag = true;
+        Serializacion serializacion = null;
+        do {
+            try {
+                serializacion = new Serializacion(controlPrincipal.crearArchivoSerializado());
+                if (serializacion != null) {
+                    flag = false;
+                }
+            } catch (FileNotFoundException ex) {
+                controlPrincipal.mostrarMensajeError("El archivo no ha sido encontrado");
+            } catch (IOException ex) {
+                controlPrincipal.mostrarMensajeError("No se pudo cargar el archivo serializado");
+            }
+        } while (flag);
+        escribirArchivoSerializado(serializacion);
+        cerrarArchivoSerializadoIn(serializacion);
+    }
+
+    /**
+     *
+     * Cierra el stream de entrada de objetos si está abierto.
+     */
+    public void cerrarArchivoSerializadoIn(Serializacion serializacion) {
+        if (serializacion != null && serializacion.getSalidaSerializacion() != null) {
+            try {
+                serializacion.cerrarArchivoSerializadoOut();
+            } catch (IOException ex) {
+                controlPrincipal.mostrarMensajeError("No se puede cerrar la entrada");
+            }
+        }
+    }
+
+    public void escribirArchivoSerializado(Serializacion serializacion) {
+        GatoVO gato = null;
+        try {
+            serializacion.escribirArchivoSerializado(gato);
+        } catch (IOException ex) {
+            controlPrincipal.mostrarMensajeError("No se puede serializar la persona");
         }
     }
 
@@ -288,7 +469,7 @@ public class ControlGato {
             }
         }
         controlPrincipal.mostrarMensajeError("La raza digitada no existe o el campo se encuentra vacio");
-        return controlPrincipal.pedirAtributoNoExistente("raza");
+        return null;
     }
 
     public String[] identificarColorCuerpoSegunEMS(String[] divisionColor) {
@@ -326,9 +507,8 @@ public class ControlGato {
             } else if (colorCuerpo.equals("x") || colorCuerpo.equalsIgnoreCase("unrecognized")) {
                 return ("x-unrecognized").split("-");
             }
-        }
-        controlPrincipal.mostrarMensajeError("La raza digitada no existe o el campo se encuentra vacio");
-        return controlPrincipal.pedirAtributoNoExistente("colorCuerpo");
+        };
+        return null;
     }
 
     public String[] identificarColaSegunEMS(String[] divisionCola) {
@@ -343,8 +523,8 @@ public class ControlGato {
                 return ("54-longie").split("-");
             }
         }
-        controlPrincipal.mostrarMensajeError("La cola digitada no existe o el campo se encuentra vacio");
-        return controlPrincipal.pedirAtributoNoExistente("cola");
+        ;
+        return null;
     }
 
     public String[] identificarPatronSegunEMS(String[] divisionPatron) {
@@ -367,8 +547,7 @@ public class ControlGato {
                 return ("26-grizzled ticked").split("-");
             }
         }
-        controlPrincipal.mostrarMensajeError("El patron digitado no existe o el campo se encuentra vacio");
-        return controlPrincipal.pedirAtributoNoExistente("patron");
+        return null;
     }
 
     public String[] identificarColorOjosSegunEMS(String[] divisionColorOjos) {
@@ -390,6 +569,7 @@ public class ControlGato {
             }
         }
         controlPrincipal.mostrarMensajeError("El color digitado no existe o el campo se encuentra vacio");
-        return controlPrincipal.pedirAtributoNoExistente("colorOjos");
+        return null;
     }
+
 }

@@ -43,7 +43,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     public File pedirDirectorioArchivoAleatorio() {
         JFileChooser fileChooser = new JFileChooser(System.getProperty("user.dir") + "/src/main/java/edu/progAvUD/parcialPrimerCorte/data");
-        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);  
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         fileChooser.setDialogTitle("Selecciona un directorio");
         fileChooser.showOpenDialog(null);
         return fileChooser.getSelectedFile();
@@ -62,12 +62,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         repaint();
     }
 
-    public Object mostrarJOptionDatoFaltante(String datoFaltante, Object[] opciones) {
+    public Object mostrarJOptionSeleccionarDatoFaltante(String datoFaltante, Object[] opciones) {
         String mensaje = "Hace falta el dato de '" + datoFaltante + "'.\nSeleccione una opcion:";
         Object seleccion = JOptionPane.showInputDialog(null,
                 mensaje, "Dato Faltante",
                 JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
         return seleccion;
+    }
+
+    public String mostrarJOptionEscribirDatoFaltante(String datoFaltante) {
+        String dato = JOptionPane.showInputDialog(null,
+                "Hace falta el dato de '" + datoFaltante + "'.\n Escriba el dato:", "Dato Faltante",
+                JOptionPane.QUESTION_MESSAGE);
+        return dato;
     }
 
     /**

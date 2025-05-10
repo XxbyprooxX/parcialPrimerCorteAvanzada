@@ -114,6 +114,7 @@ public class ControlPrincipal {
             controlGrafico.mostrarMensajeError("Hay un error al momento de escribir el archivo");
         }
     }
+    
 
     public void mostrarMensajeError(String mensaje) {
         controlGrafico.mostrarMensajeError(mensaje);
@@ -123,12 +124,17 @@ public class ControlPrincipal {
         controlGrafico.mostrarMensajeExito(mensaje);
     }
 
-    public String[] pedirAtributoNoExistente(String atributoFaltante) {
+    
+
+    public Object mostrarJOptionSeleccionarDatoFaltante(String datoFaltante, Object[] opciones) {
+        return controlGrafico.mostrarJOptionSeleccionarDatoFaltante(datoFaltante, opciones);
+    }
+    
+    public String mostrarJOptionEscribirDatoFaltante(String datoFaltante){
+        return controlGrafico.mostrarJOptionEscribirDatoFaltante(datoFaltante);
+    }
+    
+    public File crearArchivoSerializado(){
         return null;
     }
-
-    public Object mostrarJOptionDatoFaltante(String datoFaltante, Object[] opciones) {
-        return controlGrafico.mostrarJOptionDatoFaltante(datoFaltante, opciones);
-    }
-
 }

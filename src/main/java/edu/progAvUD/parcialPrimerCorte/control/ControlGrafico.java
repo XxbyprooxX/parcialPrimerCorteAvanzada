@@ -64,8 +64,12 @@ public class ControlGrafico implements ActionListener {
         ventanaPrincipal.mostrarMensajeExito(mensaje);
     }
     
-    public Object mostrarJOptionDatoFaltante(String datoFaltante, Object[] opciones){
-        return ventanaPrincipal.mostrarJOptionDatoFaltante(datoFaltante, opciones);
+    public Object mostrarJOptionSeleccionarDatoFaltante(String datoFaltante, Object[] opciones){
+        return ventanaPrincipal.mostrarJOptionSeleccionarDatoFaltante(datoFaltante, opciones);
+    }
+    
+    public String mostrarJOptionEscribirDatoFaltante(String datoFaltante){
+        return ventanaPrincipal.mostrarJOptionEscribirDatoFaltante(datoFaltante);
     }
     
     public File pedirArchivoAleatorio() throws NullPointerException, IOException {
