@@ -238,16 +238,16 @@ public class ControlGato {
         return dato;
     }
 
-    private int obtenerNumero(String mensaje, String dato) {
+    private String obtenerNumero(String mensaje, String dato) {
         if (dato.isBlank()) {
             String entrada = controlPrincipal.mostrarJOptionEscribirDatoFaltante(mensaje);
             try {
-                return Integer.parseInt(entrada);
+                int parseInt = Integer.parseInt(entrada);
             } catch (NumberFormatException e) {
                 controlPrincipal.mostrarMensajeError("Se ha escrito algo incorrecto en " + mensaje);
             }
         }
-        return Integer.parseInt(dato); // Asumiendo que tipo no es vacío aquí
+        return dato; // Asumiendo que tipo no es vacío aquí
     }
 
     public void crearSerializacion(String accion) {
