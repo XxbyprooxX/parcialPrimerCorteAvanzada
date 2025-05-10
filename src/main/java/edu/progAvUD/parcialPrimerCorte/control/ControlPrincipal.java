@@ -124,7 +124,9 @@ public class ControlPrincipal {
         controlGrafico.mostrarMensajeExito(mensaje);
     }
 
-    
+   public File crearArchivoSerializado() throws NullPointerException, IOException{
+       return controlGrafico.pedirArchivoAleatorio();
+   }
 
     public Object mostrarJOptionSeleccionarDatoFaltante(String datoFaltante, Object[] opciones) {
         return controlGrafico.mostrarJOptionSeleccionarDatoFaltante(datoFaltante, opciones);
@@ -132,9 +134,5 @@ public class ControlPrincipal {
     
     public String mostrarJOptionEscribirDatoFaltante(String datoFaltante){
         return controlGrafico.mostrarJOptionEscribirDatoFaltante(datoFaltante);
-    }
-    
-    public File crearArchivoSerializado(){
-        return null;
     }
 }
