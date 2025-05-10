@@ -28,6 +28,9 @@ public class GatoVO implements Serializable{
         this.cola = cola;
     }
 
+    public GatoVO() {
+    }
+
     public int getId() {
         return id;
     }

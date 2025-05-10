@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,8 +22,8 @@ public class GatoDAO {
         this.resultSet = null;
     }
 
-    public GatoVO consultarGato(String temaConsulta, GatoVO gato) throws SQLException {
-        String consulta = "SELECT * FROM datosGatos where codigo='" + temaConsulta + "'";
+    public GatoVO consultarGato(int id, GatoVO gato) throws SQLException {
+        String consulta = "SELECT * FROM gatos where id='" + id + "'";
         connection = (Connection) ConexionBD.getConnection();
         statement = connection.createStatement();
         resultSet = statement.executeQuery(consulta);
@@ -37,13 +38,54 @@ public class GatoDAO {
         return gato;
     }
 
-    public void insertarGato(GatoVO gato) throws SQLException{
+    public ArrayList<GatoVO> darListaGatos(GatoVO gato) throws SQLException {
+        ArrayList<GatoVO> gatos = new ArrayList<>();
+        String consulta = "SELECT * FROM gatos";
         connection = ConexionBD.getConnection();
         statement = connection.createStatement();
-        String insercion = "INSERT INTO `gatos`(`id`, `nombre`, `peso`, `edad`, `nombreRaza`, `codigoEMS`) VALUES ("+gato.getId()+",'"+gato.getNombre()+"',"+gato.getPeso()+","+gato.getEdad()+",'"+gato.getNombreRaza()+"','"+gato.getCodigoEMS()+"');";
+        resultSet = statement.executeQuery(consulta);
+        gato.setId(resultSet.getInt("id"));
+        gato.setNombre(resultSet.getString("nombre"));
+        gato.setPeso(resultSet.getString("peso"));
+        gato.setEdad(resultSet.getString("edad"));
+        gato.setNombreRaza(resultSet.getString("nombreRaza"));
+        gato.setCodigoEMS(resultSet.getString("codigoEMS"));
+        gatos.add(gato);
+        statement.close();
+        ConexionBD.desconectar();
+        return gatos;
+    }
+
+    public void insertarGato(GatoVO gato) throws SQLException {
+        String insercion = "INSERT INTO `gatos`(`id`, `nombre`, `peso`, `edad`, `nombreRaza`, `codigoEMS`) VALUES (" + gato.getId() + ",'" + gato.getNombre() + "'," + gato.getPeso() + "," + gato.getEdad() + ",'" + gato.getNombreRaza() + "','" + gato.getCodigoEMS() + "')";
+        connection = ConexionBD.getConnection();
+        statement = connection.createStatement();
         statement.executeUpdate(insercion);
         statement.close();
         ConexionBD.desconectar();
     }
-    
+
+    public boolean eliminarGato(int id) throws SQLException {
+        String consulta = "DELETE FROM gatos where codigo='" + id + "'";
+        connection = ConexionBD.getConnection();
+        statement = connection.createStatement();
+        statement.executeUpdate(consulta);
+        statement.close();
+        ConexionBD.desconectar();
+        return true;
+    }
+
+    public boolean modificarGato(int id, String atributoModificado, String valorModificado) throws SQLException {
+        String consulta = "UPDATE gatos set " + atributoModificado + " = " + valorModificado + "WHERE id = '" + id + "'";
+        connection = ConexionBD.getConnection();
+        statement = connection.createStatement();
+        statement.executeUpdate(consulta);
+        statement.close();
+        ConexionBD.desconectar();
+        return true;
+    }
+
+    public ResultSet getResultSet() {
+        return resultSet;
+    }
 }

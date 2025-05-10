@@ -1,8 +1,11 @@
 package edu.progAvUD.parcialPrimerCorte.control;
 
+import edu.progAvUD.parcialPrimerCorte.modelo.GatoDAO;
 import edu.progAvUD.parcialPrimerCorte.modelo.GatoVO;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -12,18 +15,20 @@ public class ControlGato {
 
     private ControlPrincipal controlPrincipal;
     private ArrayList<GatoVO> gatos;
+    private GatoDAO gatoDao;
     private String[] divisionEMS;
 
     public ControlGato(ControlPrincipal controlPrincipal) {
         this.controlPrincipal = controlPrincipal;
         this.gatos = new ArrayList<>();
+        this.gatoDao = new GatoDAO();
     }
 
     public void crearGato(int id, String nombre, String peso, String edad, String codigoEMS) {
         divisionEMS = codigoEMS.split("/");
         GatoVO gato = new GatoVO(id, nombre, peso, edad, identificarRazaSegunEMS() + identificarColorCuerpoSegunEMS() + identificarPatronSegunEMS() + identificarColorOjosSegunEMS() + identificarColaSegunEMS(), identificarRazaSegunEMS(), identificarColorCuerpoSegunEMS(), identificarPatronSegunEMS(), identificarColorOjosSegunEMS(), identificarColaSegunEMS());
         gatos.add(gato);
-        gatos.sort(Comparator.comparingInt(GatoVO::getId));
+        insertarGato(gato);
     }
 
     public String identificarRazaSegunEMS() {
@@ -301,5 +306,41 @@ public class ControlGato {
             }
         }
         return null;
+    }
+
+    public void pedirListaGatos() {
+        try {
+            while (gatoDao.getResultSet().next()) {
+                GatoVO gato = new GatoVO();
+                gatoDao.darListaGatos(gato);
+            }
+        } catch (SQLException ex) {
+
+        }
+    }
+
+    public void pedirConsultaGato(int id) {
+        GatoVO gato = new GatoVO();
+        try {
+            gatoDao.consultarGato(id, gato);
+        } catch (SQLException ex) {
+            
+        }
+    }
+    
+    public void insertarGato(GatoVO gato){
+        try {
+            gatoDao.insertarGato(gato);
+        } catch (SQLException ex) {
+            
+        }
+    }
+    
+    public void eliminarGato(int id){
+        try {
+            gatoDao.eliminarGato(id);
+        } catch (SQLException ex) {
+            
+        }
     }
 }
