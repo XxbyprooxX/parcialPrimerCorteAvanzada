@@ -4,6 +4,7 @@ import edu.progAvUD.parcialPrimerCorte.vista.VentanaPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 /**
  *
@@ -65,5 +66,9 @@ public class ControlGrafico implements ActionListener {
     
     public Object mostrarJOptionDatoFaltante(String datoFaltante, Object[] opciones){
         return ventanaPrincipal.mostrarJOptionDatoFaltante(datoFaltante, opciones);
+    }
+    
+    public File pedirArchivoAleatorio() throws NullPointerException, IOException {
+        return ventanaPrincipal.pedirDirectorioArchivoAleatorio();
     }
 }

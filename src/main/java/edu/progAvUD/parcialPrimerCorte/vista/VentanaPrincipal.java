@@ -41,6 +41,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         return fileChooser.getSelectedFile();
     }
 
+    public File pedirDirectorioArchivoAleatorio() {
+        JFileChooser fileChooser = new JFileChooser(System.getProperty("user.dir") + "/src/main/java/edu/progAvUD/parcialPrimerCorte/data");
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);  
+        fileChooser.setDialogTitle("Selecciona un directorio");
+        fileChooser.showOpenDialog(null);
+        return fileChooser.getSelectedFile();
+    }
+
     /**
      * Se encarga de mostrar cada panel
      *

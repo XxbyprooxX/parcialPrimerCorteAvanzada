@@ -1,7 +1,10 @@
 package edu.progAvUD.parcialPrimerCorte.control;
 
+import edu.progAvUD.parcialPrimerCorte.modelo.ConexionArchivoAleatorio;
 import edu.progAvUD.parcialPrimerCorte.modelo.ConexionBD;
 import edu.progAvUD.parcialPrimerCorte.modelo.ConexionPropiedades;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -77,6 +80,38 @@ public class ControlPrincipal {
             controlGrafico.mostrarMensajeError("El texto no es un valor valido");
         } catch (Exception ex) {
             controlGrafico.mostrarMensajeError("Algun dato del gato no corresponde");
+        }
+    }
+
+    public void crearArchivoAleatorio() {
+        try {
+            File carpetaSeleccionada = controlGrafico.pedirArchivoAleatorio();
+            if (carpetaSeleccionada == null || !carpetaSeleccionada.isDirectory()) {
+                controlGrafico.mostrarMensajeError("Debe seleccionar una carpeta válida.");
+                return;
+            }
+            File archivo = new File(carpetaSeleccionada, "ArchivoAleatorio.dat");
+            if (!archivo.exists()) {
+                boolean creado = archivo.createNewFile();
+                if (!creado) {
+                    controlGrafico.mostrarMensajeError("No se pudo crear el archivo.");
+                    return;
+                }
+            }
+            ConexionArchivoAleatorio archivoAleatorio = new ConexionArchivoAleatorio(archivo);
+            escrituraArchivoAleatorio(2, "", archivoAleatorio);
+        } catch (IOException ioe) {
+            controlGrafico.mostrarMensajeError("Error al crear o abrir el archivo: " + ioe.getMessage());
+        }
+    }
+
+    public void escrituraArchivoAleatorio(int id, String datosGato, ConexionArchivoAleatorio archivoAleatorio) {
+        try {
+            archivoAleatorio.escribirArchivoAleatorio(id, datosGato);
+        } catch (FileNotFoundException fnfe) {
+            controlGrafico.mostrarMensajeError("El archivo no ha sido encontrado");
+        } catch (IOException ioe) {
+            controlGrafico.mostrarMensajeError("Hay un error al momento de escribir el archivo");
         }
     }
 

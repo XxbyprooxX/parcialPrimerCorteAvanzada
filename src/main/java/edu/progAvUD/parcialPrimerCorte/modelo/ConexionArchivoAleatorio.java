@@ -11,23 +11,15 @@ import java.io.RandomAccessFile;
  */
 public class ConexionArchivoAleatorio {
     
-    private String informacionGato;
     private RandomAccessFile archivo;
 
     public ConexionArchivoAleatorio(File rutaGuardadoArchivo) throws FileNotFoundException{
         this.archivo = new RandomAccessFile(rutaGuardadoArchivo, "rw");
     }
     
-    public void escribirArchivoAleatorio() throws IOException {
+    public void escribirArchivoAleatorio(int id, String informacionGato) throws IOException {
+        archivo.writeInt(id);
         archivo.writeUTF(informacionGato);
-    }
-
-    public String getInformacionGato() {
-        return informacionGato;
-    }
-
-    public void setInformacionGato(String informacionGato) {
-        this.informacionGato = informacionGato;
     }
 
     public RandomAccessFile getArchivo() {
