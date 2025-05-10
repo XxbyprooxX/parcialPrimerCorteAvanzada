@@ -15,8 +15,7 @@ public class GatoVO implements Serializable{
     private transient String colorOjos;
     private transient String cola;
 
-    public GatoVO(int id, String nombre, String peso, String edad, String codigoEMS, String nombreRaza, String colorCuerpo, String patron, String colorOjos, String cola) {
-        this.id = id;
+    public GatoVO(String nombre, String peso, String edad, String codigoEMS, String nombreRaza, String colorCuerpo, String patron, String colorOjos, String cola) {
         this.nombre = nombre;
         this.peso = peso;
         this.edad = edad;

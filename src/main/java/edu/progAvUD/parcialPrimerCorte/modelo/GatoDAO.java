@@ -57,7 +57,7 @@ public class GatoDAO {
     }
 
     public void insertarGato(GatoVO gato) throws SQLException {
-        String insercion = "INSERT INTO `gatos`(`id`, `nombre`, `peso`, `edad`, `nombreRaza`, `codigoEMS`) VALUES (" + gato.getId() + ",'" + gato.getNombre() + "'," + gato.getPeso() + "," + gato.getEdad() + ",'" + gato.getNombreRaza() + "','" + gato.getCodigoEMS() + "')";
+        String insercion = "INSERT INTO `gatos`(`nombre`, `peso`, `edad`, `nombreRaza`, `codigoEMS`) VALUES ('" + gato.getNombre() + "'," + gato.getPeso() + "," + gato.getEdad() + ",'" + gato.getNombreRaza() + "','" + gato.getCodigoEMS() + "')";
         connection = ConexionBD.getConnection();
         statement = connection.createStatement();
         statement.executeUpdate(insercion);
