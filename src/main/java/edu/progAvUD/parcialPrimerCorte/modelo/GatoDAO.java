@@ -38,8 +38,7 @@ public class GatoDAO {
         return gato;
     }
 
-    public ArrayList<GatoVO> darListaGatos(GatoVO gato) throws SQLException {
-        ArrayList<GatoVO> gatos = new ArrayList<>();
+    public GatoVO darListaGatos(GatoVO gato) throws SQLException {
         String consulta = "SELECT * FROM gatos";
         connection = ConexionBD.getConnection();
         statement = connection.createStatement();
@@ -50,10 +49,9 @@ public class GatoDAO {
         gato.setEdad(resultSet.getString("edad"));
         gato.setNombreRaza(resultSet.getString("nombreRaza"));
         gato.setCodigoEMS(resultSet.getString("codigoEMS"));
-        gatos.add(gato);
         statement.close();
         ConexionBD.desconectar();
-        return gatos;
+        return gato;
     }
 
     public void insertarGato(GatoVO gato) throws SQLException {

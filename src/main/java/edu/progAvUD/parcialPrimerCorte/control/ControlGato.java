@@ -204,15 +204,19 @@ public class ControlGato {
         insertarGato(gato);
     }
 
-    public void pedirListaGatos() {
+    public ArrayList<GatoVO> pedirListaGatos() {
+        ArrayList<GatoVO> gatosDabtaBase = new ArrayList<>();
         try {
             while (gatoDao.getResultSet().next()) {
                 GatoVO gato = new GatoVO();
-                gatoDao.darListaGatos(gato);
+                gato = gatoDao.darListaGatos(gato);
+                gatosDabtaBase.add(gato);
             }
+            return gatosDabtaBase;
         } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLException");
         }
+        return null;
     }
 
     public void pedirConsultaGato(int id) {
