@@ -4,8 +4,6 @@ import edu.progAvUD.parcialPrimerCorte.modelo.GatoDAO;
 import edu.progAvUD.parcialPrimerCorte.modelo.GatoVO;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -16,7 +14,6 @@ public class ControlGato {
     private ControlPrincipal controlPrincipal;
     private ArrayList<GatoVO> gatos;
     private GatoDAO gatoDao;
-    private String[] divisionEMS;
 
     public ControlGato(ControlPrincipal controlPrincipal) {
         this.controlPrincipal = controlPrincipal;
@@ -25,7 +22,6 @@ public class ControlGato {
     }
 
     public void crearGato(int id, String nombre, String peso, String edad, String raza, String color, String patron, String colorOjos, String cola) {
-        
         String[] divisionRaza = raza.split("-");
         String[] divisionColor = color.split("-");
         String[] divisionPatron = patron.split("-");
@@ -73,397 +69,285 @@ public class ControlGato {
         }
     }
 
-    public String identificarRazaSegunEMS() {
-        for (String raza : divisionEMS) {
-            if (raza.equals("ABY")) {
+    public String identificarRazaSegunEMS(String[] divisionRaza) {
+        for (String raza : divisionRaza) {
+            if (raza.equals("ABY") || raza.equalsIgnoreCase("Abyssinian")) {
                 return "ABY-Abyssinian";
-            }
-            if (raza.equals("AMB")) {
+            } else if (raza.equals("AMB") || raza.equalsIgnoreCase("American Burmese")) {
                 return "AMB-American Burmese";
-            }
-            if (raza.equals("ACL")) {
+            } else if (raza.equals("ACL") || raza.equalsIgnoreCase("American Curl Longhair")) {
                 return "ACL-American Curl Longhair";
-            }
-            if (raza.equals("ACS")) {
+            } else if (raza.equals("ACS") || raza.equalsIgnoreCase("American Curl Shorthair")) {
                 return "ACS-American Curl Shorthair";
-            }
-            if (raza.equals("ASH")) {
+            } else if (raza.equals("ASH") || raza.equalsIgnoreCase("American Shorthair")) {
                 return "ASH-American Shorthair";
-            }
-            if (raza.equals("AWH")) {
+            } else if (raza.equals("AWH") || raza.equalsIgnoreCase("American Wirehair")) {
                 return "AWH-American Wirehair";
-            }
-            if (raza.equals("ANA")) {
+            } else if (raza.equals("ANA") || raza.equalsIgnoreCase("Anatoli")) {
                 return "ANA-Anatoli";
-            }
-            if (raza.equals("APL")) {
+            } else if (raza.equals("APL") || raza.equalsIgnoreCase("Aphrodite’s Giant Longhair")) {
                 return "APL-Aphrodite’s Giant Longhair";
-            }
-            if (raza.equals("APS")) {
+            } else if (raza.equals("APS") || raza.equalsIgnoreCase("Aphrodite’s Giant Shorthair")) {
                 return "APS-Aphrodite’s Giant Shorthair";
-            }
-            if (raza.equals("ARM")) {
+            } else if (raza.equals("ARM") || raza.equalsIgnoreCase("Arabian Mau")) {
                 return "ARM-Arabian Mau";
-            }
-            if (raza.equals("ASI")) {
+            } else if (raza.equals("ASI") || raza.equalsIgnoreCase("Asian")) {
                 return "ASI-Asian";
-            }
-            if (raza.equals("AUM")) {
+            } else if (raza.equals("AUM") || raza.equalsIgnoreCase("Australian Mist")) {
                 return "AUM-Australian Mist";
-            }
-            if (raza.equals("BAL")) {
+            } else if (raza.equals("BAL") || raza.equalsIgnoreCase("Balinese")) {
                 return "BAL-Balinese";
-            }
-            if (raza.equals("BEN")) {
+            } else if (raza.equals("BEN") || raza.equalsIgnoreCase("Bengal")) {
                 return "BEN-Bengal";
-            }
-            if (raza.equals("BOM")) {
+            } else if (raza.equals("BOM") || raza.equalsIgnoreCase("Bombay")) {
                 return "BOM-Bombay";
-            }
-            if (raza.equals("BRA")) {
+            } else if (raza.equals("BRA") || raza.equalsIgnoreCase("Brazilian Shorthair")) {
                 return "BRA-Brazilian Shorthair";
-            }
-            if (raza.equals("BLH")) {
+            } else if (raza.equals("BLH") || raza.equalsIgnoreCase("British Longhair")) {
                 return "BLH-British Longhair";
-            }
-            if (raza.equals("BRI")) {
+            } else if (raza.equals("BRI") || raza.equalsIgnoreCase("British Shorthair")) {
                 return "BRI-British Shorthair";
-            }
-            if (raza.equals("BUR")) {
+            } else if (raza.equals("BUR") || raza.equalsIgnoreCase("Burmese")) {
                 return "BUR-Burmese";
-            }
-            if (raza.equals("BML")) {
+            } else if (raza.equals("BML") || raza.equalsIgnoreCase("Burmilla Longhair")) {
                 return "BML-Burmilla Longhair";
-            }
-            if (raza.equals("BMS")) {
+            } else if (raza.equals("BMS") || raza.equalsIgnoreCase("Burmilla Shorthair")) {
                 return "BMS-Burmilla Shorthair";
-            }
-            if (raza.equals("CAM")) {
+            } else if (raza.equals("CAM") || raza.equalsIgnoreCase("Cashmere")) {
                 return "CAM-Cashmere";
-            }
-            if (raza.equals("KKH")) {
+            } else if (raza.equals("KKH") || raza.equalsIgnoreCase("Celtic Shorthair")) {
                 return "KKH-Celtic Shorthair";
-            }
-            if (raza.equals("CEY")) {
+            } else if (raza.equals("CEY") || raza.equalsIgnoreCase("Ceylon")) {
                 return "CEY-Ceylon";
-            }
-            if (raza.equals("CHA")) {
+            } else if (raza.equals("CHA") || raza.equalsIgnoreCase("Chartreux")) {
                 return "CHA-Chartreux";
-            }
-            if (raza.equals("CHS")) {
+            } else if (raza.equals("CHS") || raza.equalsIgnoreCase("Chausie")) {
                 return "CHS-Chausie";
-            }
-            if (raza.equals("CRX")) {
+            } else if (raza.equals("CRX") || raza.equalsIgnoreCase("Cornish Rex")) {
                 return "CRX-Cornish Rex";
-            }
-            if (raza.equals("CYM")) {
+            } else if (raza.equals("CYM") || raza.equalsIgnoreCase("Cymric")) {
                 return "CYM-Cymric";
-            }
-            if (raza.equals("DLH")) {
+            } else if (raza.equals("DLH") || raza.equalsIgnoreCase("Deutsch-Langhaar")) {
                 return "DLH-Deutsch-Langhaar";
-            }
-            if (raza.equals("DRX")) {
+            } else if (raza.equals("DRX") || raza.equalsIgnoreCase("Devon Rex")) {
                 return "DRX-Devon Rex";
-            }
-            if (raza.equals("DSX")) {
+            } else if (raza.equals("DSX") || raza.equalsIgnoreCase("Don Sphynx")) {
                 return "DSX-Don Sphynx";
-            }
-            if (raza.equals("MAU")) {
+            } else if (raza.equals("MAU") || raza.equalsIgnoreCase("Egyptian Mau")) {
                 return "MAU-Egyptian Mau";
-            }
-            if (raza.equals("EXO")) {
+            } else if (raza.equals("EXO") || raza.equalsIgnoreCase("Exotic Shorthair")) {
                 return "EXO-Exotic Shorthair";
-            }
-            if (raza.equals("GRX")) {
+            } else if (raza.equals("GRX") || raza.equalsIgnoreCase("German Rex")) {
                 return "GRX-German Rex";
-            }
-            if (raza.equals("HAV")) {
+            } else if (raza.equals("HAV") || raza.equalsIgnoreCase("Havana")) {
                 return "HAV-Havana";
-            }
-            if (raza.equals("SFL")) {
+            } else if (raza.equals("SFL") || raza.equalsIgnoreCase("Highland Fold")) {
                 return "SFL-Highland Fold";
-            }
-            if (raza.equals("PER")) {
+            } else if (raza.equals("PER") || raza.equalsIgnoreCase("Persian")) {
                 return "PER-Persian";
-            }
-            if (raza.equals("HHP")) {
+            } else if (raza.equals("HHP") || raza.equalsIgnoreCase("Household Pet")) {
                 return "HHP-Household Pet";
-            }
-            if (raza.equals("JBL")) {
+            } else if (raza.equals("JBL") || raza.equalsIgnoreCase("Japanese Bobtail Longhair")) {
                 return "JBL-Japanese Bobtail Longhair";
-            }
-            if (raza.equals("JBS")) {
+            } else if (raza.equals("JBS") || raza.equalsIgnoreCase("Japanese Bobtail Shorthair")) {
                 return "JBS-Japanese Bobtail Shorthair";
-            }
-            if (raza.equals("KAN")) {
+            } else if (raza.equals("KAN") || raza.equalsIgnoreCase("Kanaani")) {
                 return "KAN-Kanaani";
-            }
-            if (raza.equals("KAL")) {
+            } else if (raza.equals("KAL") || raza.equalsIgnoreCase("Karelian Bobtail Longhair")) {
                 return "KAL-Karelian Bobtail Longhair";
-            }
-            if (raza.equals("KAS")) {
+            } else if (raza.equals("KAS") || raza.equalsIgnoreCase("Karelian Bobtail Shorthair")) {
                 return "KAS-Karelian Bobtail Shorthair";
-            }
-            if (raza.equals("KAM")) {
+            } else if (raza.equals("KAM") || raza.equalsIgnoreCase("Khao Manee")) {
                 return "KAM-Khao Manee";
-            }
-            if (raza.equals("KOR")) {
+            } else if (raza.equals("KOR") || raza.equalsIgnoreCase("Korat")) {
                 return "KOR-Korat";
-            }
-            if (raza.equals("KBL")) {
+            } else if (raza.equals("KBL") || raza.equalsIgnoreCase("Kurilian Bobtail Langhaar")) {
                 return "KBL-Kurilian Bobtail Langhaar";
-            }
-            if (raza.equals("KBS")) {
+            } else if (raza.equals("KBS") || raza.equalsIgnoreCase("Kurilian Bobtail Shorthair")) {
                 return "KBS-Kurilian Bobtail Shorthair";
-            }
-            if (raza.equals("LPL")) {
+            } else if (raza.equals("LPL") || raza.equalsIgnoreCase("LaPerm Longhair")) {
                 return "LPL-LaPerm Longhair";
-            }
-            if (raza.equals("LPS")) {
+            } else if (raza.equals("LPS") || raza.equalsIgnoreCase("LaPerm Shorthair")) {
                 return "LPS-LaPerm Shorthair";
-            }
-            if (raza.equals("LYS")) {
+            } else if (raza.equals("LYS") || raza.equalsIgnoreCase("Lykoi")) {
                 return "LYS-Lykoi";
-            }
-            if (raza.equals("MCO")) {
+            } else if (raza.equals("MCO") || raza.equalsIgnoreCase("Maine Coon")) {
                 return "MCO-Maine Coon";
-            }
-            if (raza.equals("MAN")) {
+            } else if (raza.equals("MAN") || raza.equalsIgnoreCase("Manx")) {
                 return "MAN-Manx";
-            }
-            if (raza.equals("MBT")) {
+            } else if (raza.equals("MBT") || raza.equalsIgnoreCase("Mekong Bobtail")) {
                 return "MBT-Mekong Bobtail";
-            }
-            if (raza.equals("MIL")) {
+            } else if (raza.equals("MIL") || raza.equalsIgnoreCase("Minuet Longhair")) {
                 return "MIL-Minuet Longhair";
-            }
-            if (raza.equals("MIS")) {
+            } else if (raza.equals("MIS") || raza.equalsIgnoreCase("Minuet Shorthair")) {
                 return "MIS-Minuet Shorthair";
-            }
-            if (raza.equals("MNL")) {
+            } else if (raza.equals("MNL") || raza.equalsIgnoreCase("Munchkin Longhair")) {
                 return "MNL-Munchkin Longhair";
-            }
-            if (raza.equals("MNS")) {
+            } else if (raza.equals("MNS") || raza.equalsIgnoreCase("Munchkin Shorthair")) {
                 return "MNS-Munchkin Shorthair";
-            }
-            if (raza.equals("NEB")) {
+            } else if (raza.equals("NEB") || raza.equalsIgnoreCase("Nebelung")) {
                 return "NEB-Nebelung";
-            }
-            if (raza.equals("NFO")) {
+            } else if (raza.equals("NFO") || raza.equalsIgnoreCase("Norwegian Forest")) {
                 return "NFO-Norwegian Forest";
-            }
-            if (raza.equals("OCI")) {
+            } else if (raza.equals("OCI") || raza.equalsIgnoreCase("Ocicat")) {
                 return "OCI-Ocicat";
-            }
-            if (raza.equals("OSL")) {
+            } else if (raza.equals("OSL") || raza.equalsIgnoreCase("Oriental Semilonghair")) {
                 return "OSL-Oriental Semilonghair";
-            }
-            if (raza.equals("OSH")) {
+            } else if (raza.equals("OSH") || raza.equalsIgnoreCase("Oriental Shorthair")) {
                 return "OSH-Oriental Shorthair";
-            }
-            if (raza.equals("TLH")) {
+            } else if (raza.equals("TLH") || raza.equalsIgnoreCase("Original Longhair")) {
                 return "TLH-Original Longhair";
-            }
-            if (raza.equals("PBD")) {
+            } else if (raza.equals("PBD") || raza.equalsIgnoreCase("Peterbald")) {
                 return "PBD-Peterbald";
-            }
-            if (raza.equals("RGM")) {
+            } else if (raza.equals("RGM") || raza.equalsIgnoreCase("Ragamuffin")) {
                 return "RGM-Ragamuffin";
-            }
-            if (raza.equals("RAG")) {
+            } else if (raza.equals("RAG") || raza.equalsIgnoreCase("Ragdoll")) {
                 return "RAG-Ragdoll";
-            }
-            if (raza.equals("RUS")) {
+            } else if (raza.equals("RUS") || raza.equalsIgnoreCase("Russian Blue")) {
                 return "RUS-Russian Blue";
-            }
-            if (raza.equals("SBI")) {
+            } else if (raza.equals("SBI") || raza.equalsIgnoreCase("Sacred Birman")) {
                 return "SBI-Sacred Birman";
-            }
-            if (raza.equals("SFS")) {
+            } else if (raza.equals("SFS") || raza.equalsIgnoreCase("Scottish Fold")) {
                 return "SFS-Scottish Fold";
-            }
-            if (raza.equals("SRL")) {
+            } else if (raza.equals("SRL") || raza.equalsIgnoreCase("Selkirk Rex Longhair")) {
                 return "SRL-Selkirk Rex Longhair";
-            }
-            if (raza.equals("SRS")) {
+            } else if (raza.equals("SRS") || raza.equalsIgnoreCase("Selkirk Rex Shorthair")) {
                 return "SRS-Selkirk Rex Shorthair";
-            }
-            if (raza.equals("SIA")) {
+            } else if (raza.equals("SIA") || raza.equalsIgnoreCase("Siamese")) {
                 return "SIA-Siamese";
-            }
-            if (raza.equals("SIB")) {
+            } else if (raza.equals("SIB") || raza.equalsIgnoreCase("Siberian cat / Neva Masquerade")) {
                 return "SIB-Siberian cat / Neva Masquerade";
-            }
-            if (raza.equals("SIN")) {
+            } else if (raza.equals("SIN") || raza.equalsIgnoreCase("Singapura")) {
                 return "SIN-Singapura";
-            }
-            if (raza.equals("SNO")) {
+            } else if (raza.equals("SNO") || raza.equalsIgnoreCase("Snowshoe")) {
                 return "SNO-Snowshoe";
-            }
-            if (raza.equals("SOM")) {
+            } else if (raza.equals("SOM") || raza.equalsIgnoreCase("Somali")) {
                 return "SOM-Somali";
-            }
-            if (raza.equals("SPH")) {
+            } else if (raza.equals("SPH") || raza.equalsIgnoreCase("Sphynx")) {
                 return "SPH-Sphynx";
-            }
-            if (raza.equals("THA")) {
+            } else if (raza.equals("THA") || raza.equalsIgnoreCase("Thai")) {
                 return "THA-Thai";
-            }
-            if (raza.equals("TIF")) {
+            } else if (raza.equals("TIF") || raza.equalsIgnoreCase("Tiffanie")) {
                 return "TIF-Tiffanie";
-            }
-            if (raza.equals("TON")) {
+            } else if (raza.equals("TON") || raza.equalsIgnoreCase("Tonkinese")) {
                 return "TON-Tonkinese";
-            }
-            if (raza.equals("TOB")) {
+            } else if (raza.equals("TOB") || raza.equalsIgnoreCase("Toy Bob")) {
                 return "TOB-Toy Bob";
-            }
-            if (raza.equals("TUA")) {
+            } else if (raza.equals("TUA") || raza.equalsIgnoreCase("Turkish Angora")) {
                 return "TUA-Turkish Angora";
-            }
-            if (raza.equals("TUV")) {
+            } else if (raza.equals("TUV") || raza.equalsIgnoreCase("Turkish Van")) {
                 return "TUV-Turkish Van";
-            }
-            if (raza.equals("URL")) {
+            } else if (raza.equals("URL") || raza.equalsIgnoreCase("Ural Rex Longhair")) {
                 return "URL-Ural Rex Longhair";
-            }
-            if (raza.equals("URS")) {
+            } else if (raza.equals("URS") || raza.equalsIgnoreCase("Ural Rex Shorthair")) {
                 return "URS-Ural Rex Shorthair";
-            }
-            if (raza.equals("YOR")) {
+            } else if (raza.equals("YOR") || raza.equalsIgnoreCase("York")) {
                 return "YOR-York";
             }
         }
-        return null;
+        controlPrincipal.mostrarMensajeError("La raza digitada no existe o el campo se encuentra vacio");
+        return controlPrincipal.pedirAtributoNoExistente("raza");
     }
 
-    public String identificarColorCuerpoSegunEMS() {
-        for (String colorCuerpo : divisionEMS) {
-            if (colorCuerpo.equals("n")) {
+    public String identificarColorCuerpoSegunEMS(String[] divisionColor) {
+        for (String colorCuerpo : divisionColor) {
+            if (colorCuerpo.equals("n") || colorCuerpo.equalsIgnoreCase("black") || colorCuerpo.equalsIgnoreCase("seal")) {
                 return "n-black / seal";
-            }
-            if (colorCuerpo.equals("f")) {
+            } else if (colorCuerpo.equals("f") || colorCuerpo.equalsIgnoreCase("black tortie")) {
                 return "f-black tortie";
-            }
-            if (colorCuerpo.equals("a")) {
+            } else if (colorCuerpo.equals("a") || colorCuerpo.equalsIgnoreCase("blue")) {
                 return "a-blue";
-            }
-            if (colorCuerpo.equals("g")) {
+            } else if (colorCuerpo.equals("g") || colorCuerpo.equalsIgnoreCase("blue tortie")) {
                 return "g-blue tortie";
-            }
-            if (colorCuerpo.equals("b")) {
+            } else if (colorCuerpo.equals("b") || colorCuerpo.equalsIgnoreCase("chocolate")) {
                 return "b-chocolate";
-            }
-            if (colorCuerpo.equals("h")) {
+            } else if (colorCuerpo.equals("h") || colorCuerpo.equalsIgnoreCase("chocolate tortie")) {
                 return "h-chocolate tortie";
-            }
-            if (colorCuerpo.equals("c")) {
+            } else if (colorCuerpo.equals("c") || colorCuerpo.equalsIgnoreCase("lilac")) {
                 return "c-lilac";
-            }
-            if (colorCuerpo.equals("o")) {
+            } else if (colorCuerpo.equals("o") || colorCuerpo.equalsIgnoreCase("cinnamon")) {
                 return "o-cinnamon";
-            }
-            if (colorCuerpo.equals("q")) {
+            } else if (colorCuerpo.equals("q") || colorCuerpo.equalsIgnoreCase("cinnamon tortie")) {
                 return "q-cinnamon tortie";
-            }
-            if (colorCuerpo.equals("d")) {
+            } else if (colorCuerpo.equals("d") || colorCuerpo.equalsIgnoreCase("red")) {
                 return "d-red";
-            }
-            if (colorCuerpo.equals("e")) {
+            } else if (colorCuerpo.equals("e") || colorCuerpo.equalsIgnoreCase("cream")) {
                 return "e-cream";
-            }
-            if (colorCuerpo.equals("p")) {
+            } else if (colorCuerpo.equals("p") || colorCuerpo.equalsIgnoreCase("fawn")) {
                 return "p-fawn";
-            }
-            if (colorCuerpo.equals("r")) {
+            } else if (colorCuerpo.equals("r") || colorCuerpo.equalsIgnoreCase("fawn tortie")) {
                 return "r-fawn tortie";
-            }
-            if (colorCuerpo.equals("j")) {
+            } else if (colorCuerpo.equals("j") || colorCuerpo.equalsIgnoreCase("lilac tortie")) {
                 return "j-lilac tortie";
-            }
-            if (colorCuerpo.equals("w")) {
+            } else if (colorCuerpo.equals("w") || colorCuerpo.equalsIgnoreCase("white")) {
                 return "w-white";
-            }
-            if (colorCuerpo.equals("x")) {
+            } else if (colorCuerpo.equals("x") || colorCuerpo.equalsIgnoreCase("unrecognized")) {
                 return "x-unrecognized";
             }
         }
-        return null;
+        controlPrincipal.mostrarMensajeError("La raza digitada no existe o el campo se encuentra vacio");
+        return controlPrincipal.pedirAtributoNoExistente("colorCuerpo");
     }
 
-    public String identificarColaSegunEMS() {
-        for (String cola : divisionEMS) {
-            if (cola.equals("51")) {
+    public String identificarColaSegunEMS(String[] divisionCola) {
+        for (String cola : divisionCola) {
+            if (cola.equals("51") || cola.equalsIgnoreCase("rumpy") || cola.equalsIgnoreCase("sin cola")) {
                 return "51-rumpy – sin cola";
-            }
-            if (cola.equals("52")) {
+            } else if (cola.equals("52") || cola.equalsIgnoreCase("rumpy riser") || cola.equalsIgnoreCase("solo un poco de cola al final de la columna")) {
                 return "52-rumpy riser – solo un poco de cola al final de la columna";
-            }
-            if (cola.equals("53")) {
+            } else if (cola.equals("53") || cola.equalsIgnoreCase("stumpy") || cola.equalsIgnoreCase("cola corta") || cola.equalsIgnoreCase("cola corta de aprox 3-4 cm")) {
                 return "53-stumpy – cola corta de aprox 3-4 cm";
-            }
-            if (cola.equals("54")) {
+            } else if (cola.equals("54") || cola.equalsIgnoreCase("longie")) {
                 return "54-longie";
             }
         }
-        return null;
+        controlPrincipal.mostrarMensajeError("La cola digitada no existe o el campo se encuentra vacio");
+        return controlPrincipal.pedirAtributoNoExistente("cola");
     }
 
-    public String identificarPatronSegunEMS() {
-        for (String patron : divisionEMS) {
-            if (patron.equals("11")) {
+    public String identificarPatronSegunEMS(String[] divisionPatron) {
+        for (String patron : divisionPatron) {
+            if (patron.equals("11") || patron.equalsIgnoreCase("shaded")) {
                 return "11-shaded";
-            }
-            if (patron.equals("12")) {
+            } else if (patron.equals("12") || patron.equalsIgnoreCase("shell")) {
                 return "12-shell";
-            }
-            if (patron.equals("21")) {
+            } else if (patron.equals("21") || patron.equalsIgnoreCase("tabby") || patron.equalsIgnoreCase("lynx") || patron.equalsIgnoreCase("tabby / lynx")) {
                 return "21-tabby / lynx";
-            }
-            if (patron.equals("22")) {
+            } else if (patron.equals("22") || patron.equalsIgnoreCase("classic")) {
                 return "22-classic";
-            }
-            if (patron.equals("23")) {
+            } else if (patron.equals("23") || patron.equalsIgnoreCase("mackerel")) {
                 return "23-mackerel";
-            }
-            if (patron.equals("24")) {
+            } else if (patron.equals("24") || patron.equalsIgnoreCase("spotted")) {
                 return "24-spotted";
-            }
-            if (patron.equals("25")) {
+            } else if (patron.equals("25") || patron.equalsIgnoreCase("ticked")) {
                 return "25-ticked";
-            }
-            if (patron.equals("26")) {
+            } else if (patron.equals("26") || patron.equalsIgnoreCase("grizzled") || patron.equalsIgnoreCase("grizzled ticked")) {
                 return "26-grizzled ticked";
             }
         }
-        return null;
+        controlPrincipal.mostrarMensajeError("El patron digitado no existe o el campo se encuentra vacio");
+        return controlPrincipal.pedirAtributoNoExistente("patron");
     }
 
-    public String identificarColorOjosSegunEMS() {
-        for (String colorOjos : divisionEMS) {
-            if (colorOjos.equals("61")) {
+    public String identificarColorOjosSegunEMS(String[] divisionColorOjos) {
+        for (String colorOjos : divisionColorOjos) {
+            if (colorOjos.equals("61") || colorOjos.equalsIgnoreCase("blue")) {
                 return "61-blue";
-            }
-            if (colorOjos.equals("62")) {
+            } else if (colorOjos.equals("62") || colorOjos.equalsIgnoreCase("orange")) {
                 return "62-orange";
-            }
-            if (colorOjos.equals("63")) {
+            } else if (colorOjos.equals("63") || colorOjos.equalsIgnoreCase("odd")) {
                 return "63-odd";
-            }
-            if (colorOjos.equals("64")) {
+            } else if (colorOjos.equals("64") || colorOjos.equalsIgnoreCase("green")) {
                 return "64-green";
-            }
-            if (colorOjos.equals("65")) {
+            } else if (colorOjos.equals("65") || colorOjos.equalsIgnoreCase("golden") || colorOjos.equalsIgnoreCase("golden (BUR)")) {
                 return "65-golden (BUR)";
-            }
-            if (colorOjos.equals("66")) {
+            } else if (colorOjos.equals("66") || colorOjos.equalsIgnoreCase("aquamarine") || colorOjos.equalsIgnoreCase("aquamarine (TON)")) {
                 return "66-aquamarine (TON)";
-            }
-            if (colorOjos.equals("67")) {
+            } else if (colorOjos.equals("67") || colorOjos.equalsIgnoreCase("dark blue") || colorOjos.equalsIgnoreCase("dark blue (SIA)")) {
                 return "67-dark blue (SIA)";
             }
         }
-        return null;
+        controlPrincipal.mostrarMensajeError("El color digitado no existe o el campo se encuentra vacio");
+        return controlPrincipal.pedirAtributoNoExistente("colorOjos");
     }
-
 }

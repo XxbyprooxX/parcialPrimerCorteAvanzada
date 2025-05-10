@@ -87,5 +87,10 @@ public class ControlPrincipal {
     public void mostrarMensajeExito(String mensaje){
         controlGrafico.mostrarMensajeExito(mensaje);
     }
+    
+    public String pedirAtributoNoExistente(String atributoFaltante){
+        
+        return null;
+    }
 
 }
