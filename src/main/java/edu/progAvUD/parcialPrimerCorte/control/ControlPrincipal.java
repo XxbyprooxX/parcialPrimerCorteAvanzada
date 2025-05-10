@@ -56,20 +56,15 @@ public class ControlPrincipal {
         ConexionPropiedades conexionPropiedades = crearConexionPropiedades();
         try {
             Properties propiedadesGatos = conexionPropiedades.cargarPropiedades();
-            int cantidadDeGatosRegistrar = Integer.parseInt(propiedadesGatos.getProperty("numeroRegistrosGatos"));
+            int cantidadDeGatosRegistrar = Integer.parseInt(propiedadesGatos.getProperty("cantidadGatosARegistrar"));
             for (int i=1; i <= cantidadDeGatosRegistrar; i++){
-                int id = Integer.parseInt(propiedadesGatos.getProperty("idGato"));
-                String nombre = propiedadesGatos.getProperty("nombre");
-                String peso = propiedadesGatos.getProperty("peso");
+                String nombre = propiedadesGatos.getProperty("gato"+i+".nombre");
+                String peso = propiedadesGatos.getProperty("gato"+i+".peso");
                 double peso2 = Double.parseDouble(peso);
-                String edad = propiedadesGatos.getProperty("edad");
+                String edad = propiedadesGatos.getProperty("gato"+i+".edad");
                 int edad2 = Integer.parseInt(edad);
-                String colorCuerpo = propiedadesGatos.getProperty("colorCuerpo");
-                String patron = propiedadesGatos.getProperty("patron");
-                String colorOjos = propiedadesGatos.getProperty("colorOjos");
-                String cola = propiedadesGatos.getProperty("cola");
-                String codigoEMS = propiedadesGatos.getProperty("codigoEMS");
-                controlGato.crearGato(id, nombre, peso, edad, codigoEMS);
+                String codigoEMS = propiedadesGatos.getProperty("gato"+i+".codigoEMS");
+                controlGato.crearGato(i, nombre, peso, edad, codigoEMS);
             }
             controlGrafico.mostrarMensajeExito("Se han creado correctamente los gatos");
         } catch (IOException ex) {
