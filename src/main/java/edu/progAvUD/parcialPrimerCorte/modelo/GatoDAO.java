@@ -38,7 +38,7 @@ public class GatoDAO {
         return gato;
     }
 
-    public GatoVO darListaGatos(GatoVO gato) throws SQLException {
+    public GatoVO darGato(GatoVO gato) throws SQLException {
         String consulta = "SELECT * FROM gatos";
         connection = ConexionBD.getConnection();
         statement = connection.createStatement();

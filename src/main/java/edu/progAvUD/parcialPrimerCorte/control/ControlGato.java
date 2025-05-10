@@ -201,18 +201,42 @@ public class ControlGato {
 
         String codigoEMS = divisionRaza[0] + "/" + divisionColor[0] + "/" + divisionPatron[0] + "/" + divisionColorOjos[0] + "/" + divisionCola[0];
         gato = new GatoVO(nombre, peso, edad, codigoEMS, raza, color, patron, colorOjos, cola);
-        insertarGato(gato);
+        if(verificarGatoRepetido(gato)){
+          insertarGato(gato);  
+        }else{
+            controlPrincipal.mostrarMensajeError("No se ha creado el gato"+id+" de propiedades porque ya se encuentra en la Base de Datos");
+        }
+        
+        
+    }
+
+    public boolean verificarGatoRepetido(GatoVO gato) {
+        ArrayList<GatoVO> gatos = pedirListaGatos();
+        for (GatoVO gatoValidar : gatos) {
+            if (gato.getNombre().equals(gatoValidar.getNombre())
+                    && gato.getPeso().equals(gatoValidar.getPeso())
+                    && gato.getEdad().equals(gatoValidar.getEdad())
+                    && gato.getCodigoEMS().equals(gatoValidar.getCodigoEMS())
+                    && gato.getNombreRaza().equals(gatoValidar.getNombreRaza())
+                    && gato.getColorCuerpo().equals(gatoValidar.getColorCuerpo())
+                    && gato.getPatron().equals(gatoValidar.getPatron())
+                    && gato.getColorOjos().equals(gatoValidar.getColorOjos())
+                    && gato.getCola().equals(gatoValidar.getCola())) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public ArrayList<GatoVO> pedirListaGatos() {
-        ArrayList<GatoVO> gatosDabtaBase = new ArrayList<>();
+        ArrayList<GatoVO> gatosDataBase = new ArrayList<>();
         try {
             while (gatoDao.getResultSet().next()) {
                 GatoVO gato = new GatoVO();
-                gato = gatoDao.darListaGatos(gato);
-                gatosDabtaBase.add(gato);
+                gato = gatoDao.darGato(gato);
+                gatosDataBase.add(gato);
             }
-            return gatosDabtaBase;
+            return gatosDataBase;
         } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLException");
         }
