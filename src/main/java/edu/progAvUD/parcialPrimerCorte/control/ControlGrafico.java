@@ -22,6 +22,7 @@ public class ControlGrafico implements ActionListener {
         ventanaPrincipal.jMenuBar1.setVisible(false);
         ventanaPrincipal.mostrarPanel(ventanaPrincipal.panelPrincipal);
         ventanaPrincipal.panelPrincipal.jButtonContinuar.setEnabled(false);
+        ventanaPrincipal.panelPrincipal.jButtonPropiedadesGatos.setEnabled(false);
         ventanaPrincipal.panelPrincipal.jButtonContinuar.addActionListener(this);
         ventanaPrincipal.panelPrincipal.jButtonPropiedadesBD.addActionListener(this);
         ventanaPrincipal.panelPrincipal.jButtonPropiedadesGatos.addActionListener(this);
@@ -32,6 +33,7 @@ public class ControlGrafico implements ActionListener {
         if (e.getSource() == ventanaPrincipal.panelPrincipal.jButtonPropiedadesBD) {
             controlPrincipal.cargarDatosBD();
             ventanaPrincipal.panelPrincipal.jButtonPropiedadesBD.setEnabled(false);
+            ventanaPrincipal.panelPrincipal.jButtonPropiedadesGatos.setEnabled(true);
             verificarBotonesInctivos();
 
         }

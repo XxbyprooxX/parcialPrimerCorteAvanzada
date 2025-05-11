@@ -201,44 +201,57 @@ public class ControlGato {
 
         String codigoEMS = divisionRaza[0] + "/" + divisionColor[0] + "/" + divisionPatron[0] + "/" + divisionColorOjos[0] + "/" + divisionCola[0];
         gato = new GatoVO(nombre, peso, edad, codigoEMS, raza, color, patron, colorOjos, cola);
-        if(verificarGatoRepetido(gato)){
-          insertarGato(gato);  
-        }else{
-            controlPrincipal.mostrarMensajeError("No se ha creado el gato"+id+" de propiedades porque ya se encuentra en la Base de Datos");
+
+        if (consultarCantidadGatos() == 0) {
+            insertarGato(gato);
+            System.out.println("Se inserto gato "+ id);
+        } else {
+            if (verificarGatoRepetido(gato)) {
+                insertarGato(gato);
+                System.out.println("Se inserto gato "+ id);
+            } else {
+                controlPrincipal.mostrarMensajeError("No se ha creado el gato" + id + " de propiedades porque ya se encuentra en la Base de Datos");
+            }
         }
-        
-        
+
     }
 
     public boolean verificarGatoRepetido(GatoVO gato) {
-        ArrayList<GatoVO> gatos = pedirListaGatos();
+        ArrayList<GatoVO> gatos = darListaGatos();
         for (GatoVO gatoValidar : gatos) {
+
+            System.out.println(gato.getNombre() + " == " + gatoValidar.getNombre() + "\n"
+                    + gato.getPeso() + " == " + gatoValidar.getPeso() + "\n"
+                    + gato.getEdad() + " == " + gatoValidar.getEdad() + "\n"
+                    + gato.getCodigoEMS() + " == " + gatoValidar.getCodigoEMS() + "\n"+"\n");
+
             if (gato.getNombre().equals(gatoValidar.getNombre())
                     && gato.getPeso().equals(gatoValidar.getPeso())
                     && gato.getEdad().equals(gatoValidar.getEdad())
-                    && gato.getCodigoEMS().equals(gatoValidar.getCodigoEMS())
-                    && gato.getNombreRaza().equals(gatoValidar.getNombreRaza())
-                    && gato.getColorCuerpo().equals(gatoValidar.getColorCuerpo())
-                    && gato.getPatron().equals(gatoValidar.getPatron())
-                    && gato.getColorOjos().equals(gatoValidar.getColorOjos())
-                    && gato.getCola().equals(gatoValidar.getCola())) {
+                    && gato.getCodigoEMS().equals(gatoValidar.getCodigoEMS())) {
                 return false;
             }
         }
         return true;
     }
 
-    public ArrayList<GatoVO> pedirListaGatos() {
-        ArrayList<GatoVO> gatosDataBase = new ArrayList<>();
+    public int consultarCantidadGatos() {
         try {
-            while (gatoDao.getResultSet().next()) {
-                GatoVO gato = new GatoVO();
-                gato = gatoDao.darGato(gato);
-                gatosDataBase.add(gato);
-            }
-            return gatosDataBase;
+            return gatoDao.consultarCantidadGatos();
         } catch (SQLException ex) {
-            controlPrincipal.mostrarMensajeError("SQLException");
+            controlPrincipal.mostrarMensajeError("SQLException ConsultarCantidadGatos");
+            ex.printStackTrace();
+        }
+        return -1;
+    }
+
+    public ArrayList<GatoVO> darListaGatos() {
+        GatoVO gato = new GatoVO();
+        ArrayList<GatoVO> gatos = new ArrayList<>();
+        try {
+            return gatoDao.darListaGatos(gato, gatos);
+        } catch (SQLException ex) {
+            controlPrincipal.mostrarMensajeError("SQLException darListaGatos");
         }
         return null;
     }
@@ -248,7 +261,7 @@ public class ControlGato {
         try {
             gatoDao.consultarGato(id, gato);
         } catch (SQLException ex) {
-            controlPrincipal.mostrarMensajeError("SQLException");
+            controlPrincipal.mostrarMensajeError("SQLException pedirConsultaGato");
         }
     }
 
@@ -256,7 +269,7 @@ public class ControlGato {
         try {
             gatoDao.insertarGato(gato);
         } catch (SQLException ex) {
-            controlPrincipal.mostrarMensajeError("SQLException");
+            controlPrincipal.mostrarMensajeError("SQLException insertarGato");
         }
     }
 
@@ -264,7 +277,7 @@ public class ControlGato {
         try {
             gatoDao.eliminarGato(id);
         } catch (SQLException ex) {
-            controlPrincipal.mostrarMensajeError("SQLExceptio_ex :PPPPPPPPPPPPPPPPPPPPPPPPPPPPpp");
+            controlPrincipal.mostrarMensajeError("SQLException eliminarGato");
         }
     }
 

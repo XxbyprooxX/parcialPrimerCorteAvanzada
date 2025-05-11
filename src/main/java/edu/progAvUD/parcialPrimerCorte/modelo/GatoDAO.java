@@ -41,7 +41,7 @@ public class GatoDAO {
     }
 
     public int consultarCantidadGatos() throws SQLException {
-        String consulta = "SELECT COUNT() FROM gatos";
+        String consulta = "SELECT COUNT(*) FROM gatos";
         connection = ConexionBD.getConnection();
         statement = connection.createStatement();
         resultSet = statement.executeQuery(consulta);
