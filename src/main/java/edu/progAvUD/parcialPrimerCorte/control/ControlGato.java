@@ -1,12 +1,13 @@
 package edu.progAvUD.parcialPrimerCorte.control;
 
-import edu.progAvUD.parcialPrimerCorte.modelo.GatoDAO;
-import edu.progAvUD.parcialPrimerCorte.modelo.GatoVO;
-import edu.progAvUD.parcialPrimerCorte.modelo.Serializacion;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import edu.progAvUD.parcialPrimerCorte.modelo.GatoDAO;
+import edu.progAvUD.parcialPrimerCorte.modelo.GatoVO;
+import edu.progAvUD.parcialPrimerCorte.modelo.Serializacion;
 
 /**
  * Este conctrol se se encarga de manejar el gato y su de hablar con la conexion
@@ -238,10 +239,39 @@ public class ControlGato {
     public boolean verificarGatoRepetido(GatoVO gato) {
         ArrayList<GatoVO> gatos = darListaGatos();
         for (GatoVO gatoValidar : gatos) {
-            if (gato.getNombre().equals(gatoValidar.getNombre())
-                    && gato.getPeso().equals(gatoValidar.getPeso())
-                    && gato.getEdad().equals(gatoValidar.getEdad())
-                    && gato.getCodigoEMS().equals(gatoValidar.getCodigoEMS())) {
+            String nombre1 = gato.getNombre() != null ? gato.getNombre().trim().toLowerCase() : "";
+            String nombre2 = gatoValidar.getNombre() != null ? gatoValidar.getNombre().trim().toLowerCase() : "";
+            String codigoEMS1 = gato.getCodigoEMS() != null ? gato.getCodigoEMS().trim().toLowerCase() : "";
+            String codigoEMS2 = gatoValidar.getCodigoEMS() != null ? gatoValidar.getCodigoEMS().trim().toLowerCase() : "";
+            double peso1 = 0;
+            double peso2 = 0;
+            int edad1 = 0;
+            int edad2 = 0;
+            try {
+                peso1 = Double.parseDouble(gato.getPeso().trim());
+            } catch (Exception e) {
+                peso1 = 0;
+            }
+            try {
+                peso2 = Double.parseDouble(gatoValidar.getPeso().trim());
+            } catch (Exception e) {
+                peso2 = 0;
+            }
+            try {
+                edad1 = Integer.parseInt(gato.getEdad().trim());
+            } catch (Exception e) {
+                edad1 = 0;
+            }
+            try {
+                edad2 = Integer.parseInt(gatoValidar.getEdad().trim());
+            } catch (Exception e) {
+                edad2 = 0;
+            }
+
+            if (nombre1.equals(nombre2)
+                    && peso1 == peso2
+                    && edad1 == edad2
+                    && codigoEMS1.equals(codigoEMS2)) {
                 return false;
             }
         }
