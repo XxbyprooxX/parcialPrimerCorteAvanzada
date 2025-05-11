@@ -1,6 +1,7 @@
 package edu.progAvUD.parcialPrimerCorte.vista;
 
 import edu.progAvUD.parcialPrimerCorte.control.ControlGrafico;
+import java.awt.Dimension;
 import java.io.File;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -87,6 +88,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 "Hace falta el dato de '" + datoFaltante + "'.\n Escriba el dato:", "Dato Faltante",
                 JOptionPane.QUESTION_MESSAGE);
         return dato;
+    }
+
+    public String pedirNombreArchivo() {
+        JTextField txtNombre = new JTextField(20);
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(new JLabel("Digite el nombre del archivo:"));
+        panel.add(Box.createRigidArea(new Dimension(0, 5)));
+        panel.add(txtNombre);
+
+        int opcion = JOptionPane.showConfirmDialog(
+                null,
+                panel,
+                "Nombre de archivo",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.PLAIN_MESSAGE
+        );
+        return txtNombre.getText().trim();
     }
 
     /**

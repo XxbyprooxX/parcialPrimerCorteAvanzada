@@ -55,10 +55,10 @@ public class ControlGrafico implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == ventanaPrincipal.jMenuItemSalir) {
-
+            controlPrincipal.crearArchivoAleatorio();
         }
         if(e.getSource()== ventanaPrincipal.jMenuItemSerializar){
-            
+            controlPrincipal.crearSerializacion();
         }
         // ActionListener de PanelPrincipal
         if (e.getSource() == ventanaPrincipal.panelPrincipal.jButtonPropiedadesBD) {
@@ -208,5 +208,9 @@ public class ControlGrafico implements ActionListener {
 
     public File pedirArchivoAleatorio() throws NullPointerException, IOException {
         return ventanaPrincipal.pedirDirectorioArchivoAleatorio();
+    }
+    
+    public String pedirNombreArchivo(){
+        return ventanaPrincipal.pedirNombreArchivo();
     }
 }

@@ -113,25 +113,38 @@ public class ControlPrincipal {
      * Crea el archivo aleatorio en una direccion elejida por el usuario
      */
     public void crearArchivoAleatorio() {
-        try {
-            File carpetaSeleccionada = controlGrafico.pedirArchivoAleatorio();
-            if (carpetaSeleccionada == null || !carpetaSeleccionada.isDirectory()) {
-                controlGrafico.mostrarMensajeError("Debe seleccionar una carpeta válida.");
-                return;
+        boolean archivoCreado = false;
+        do {
+            String nombreBase = pedirNombreArchivo();
+            if (nombreBase == null || nombreBase.trim().isEmpty()) {
+                controlGrafico.mostrarMensajeError("Debe ingresar un nombre de archivo válido.");
+                continue;
             }
-            File archivo = new File(carpetaSeleccionada, "ArchivoAleatorio.dat");
-            if (!archivo.exists()) {
-                boolean creado = archivo.createNewFile();
-                if (!creado) {
-                    controlGrafico.mostrarMensajeError("No se pudo crear el archivo.");
-                    return;
+            String nombreArchivo = nombreBase.trim() + ".dat";
+            try {
+                controlGrafico.mostrarMensajeExito("Seleccione el lugar donde desea crear el archivo");
+                File carpetaSeleccionada = controlGrafico.pedirArchivoAleatorio();
+
+                if (carpetaSeleccionada == null || !carpetaSeleccionada.isDirectory()) {
+                    controlGrafico.mostrarMensajeError("Debe seleccionar una carpeta válida.");
+                    continue;
                 }
+                File archivo = new File(carpetaSeleccionada, nombreArchivo);
+                if (!archivo.exists()) {
+                    boolean creado = archivo.createNewFile();
+                    if (!creado) {
+                        controlGrafico.mostrarMensajeError("No se pudo crear el archivo. Intente de nuevo.");
+                        continue;
+                    }
+                }
+                archivoCreado = true;
+                ConexionArchivoAleatorio archivoAleatorio = new ConexionArchivoAleatorio(archivo);
+                pedirBaseDatosYEscribirAleatorio(archivoAleatorio);
+                controlGrafico.mostrarMensajeExito("Archivo creado y datos escritos con éxito en:\n" + archivo.getAbsolutePath());
+            } catch (IOException ioe) {
+                controlGrafico.mostrarMensajeError("Error al crear o abrir el archivo: " + ioe.getMessage());
             }
-            ConexionArchivoAleatorio archivoAleatorio = new ConexionArchivoAleatorio(archivo);
-            escrituraArchivoAleatorio(2, "", archivoAleatorio);
-        } catch (IOException ioe) {
-            controlGrafico.mostrarMensajeError("Error al crear o abrir el archivo: " + ioe.getMessage());
-        }
+        } while (!archivoCreado);
     }
 
     /**
@@ -151,6 +164,18 @@ public class ControlPrincipal {
         }
     }
 
+    public void pedirBaseDatosYEscribirAleatorio(ConexionArchivoAleatorio archivoAleatorio) {
+        Object[][] gatoInfo = darListaGatosObjectArchivoAleatorio();
+        for (int i = 0; i < gatoInfo.length; i++) {
+            int id = (Integer) gatoInfo[i][0];
+            String nombre = (String) gatoInfo[i][1];
+            String codigoEMS = (String) gatoInfo[i][2];
+            String datosGato = id + "," + nombre + "," + codigoEMS;
+            escrituraArchivoAleatorio(id, datosGato, archivoAleatorio);
+        }
+        System.exit(0);
+    }
+
     /**
      * Pide la lista de los gatos para enviarla
      *
@@ -158,6 +183,10 @@ public class ControlPrincipal {
      */
     public Object[][] darListaGatosObject() {
         return controlGato.darListaGatosObject();
+    }
+
+    public Object[][] darListaGatosObjectArchivoAleatorio() {
+        return controlGato.darListaGatosObjectArchivoAleatorio();
     }
 
     /**
@@ -274,4 +303,11 @@ public class ControlPrincipal {
         return controlGato.identificarColorOjosSegunEMS(divisionColorOjos);
     }
 
+    public void crearSerializacion() {
+        controlGato.crearSerializacion();
+    }
+
+    public String pedirNombreArchivo() {
+        return controlGrafico.pedirNombreArchivo();
+    }
 }

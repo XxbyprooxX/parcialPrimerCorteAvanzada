@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import edu.progAvUD.parcialPrimerCorte.modelo.GatoDAO;
 import edu.progAvUD.parcialPrimerCorte.modelo.GatoVO;
 import edu.progAvUD.parcialPrimerCorte.modelo.Serializacion;
+import java.io.File;
 
 /**
  * Este conctrol se se encarga de manejar el gato y su de hablar con la conexion
@@ -328,6 +329,21 @@ public class ControlGato {
         return arrGatos;
     }
 
+    public Object[][] darListaGatosObjectArchivoAleatorio() {
+        ArrayList<GatoVO> gatos = darListaGatos();
+        Object[][] arrGatos = new Object[gatos.size()][6];
+        for (int i = 0; i < gatos.size(); i++) {
+            GatoVO g = gatos.get(i);
+            arrGatos[i][0] = g.getId();
+            arrGatos[i][1] = g.getNombre();
+            arrGatos[i][2] = g.getPeso();
+            arrGatos[i][3] = g.getEdad();
+            arrGatos[i][4] = g.getNombreRaza();
+            arrGatos[i][5] = g.getCodigoEMS();
+        }
+        return arrGatos;
+    }
+
     /**
      * Consulta un gato por la id
      *
@@ -338,12 +354,12 @@ public class ControlGato {
         Object[] datosGato = new Object[6];
         try {
             GatoVO gatoCompleto = gatoDao.consultarGato(id, gato);
-            datosGato[0]=gatoCompleto.getId();
-            datosGato[1]=gatoCompleto.getNombre();
-            datosGato[2]=gatoCompleto.getPeso();
-            datosGato[3]=gatoCompleto.getEdad();
-            datosGato[4]=gatoCompleto.getNombreRaza();
-            datosGato[5]=gatoCompleto.getCodigoEMS();
+            datosGato[0] = gatoCompleto.getId();
+            datosGato[1] = gatoCompleto.getNombre();
+            datosGato[2] = gatoCompleto.getPeso();
+            datosGato[3] = gatoCompleto.getEdad();
+            datosGato[4] = gatoCompleto.getNombreRaza();
+            datosGato[5] = gatoCompleto.getCodigoEMS();
             return datosGato;
         } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLException pedirConsultaGato");
@@ -454,10 +470,17 @@ public class ControlGato {
      */
     public void crearSerializacion() {
         boolean flag = true;
+        String nombreArchivo = controlPrincipal.pedirNombreArchivo() + ".bin";
         Serializacion serializacion = null;
         do {
             try {
-                serializacion = new Serializacion(controlPrincipal.crearArchivoSerializado());
+                controlPrincipal.mostrarMensajeExito("Seleccione el lugar donde desea crear el archivo");
+                File carpetaSeleccionada = controlPrincipal.crearArchivoSerializado();
+                if (carpetaSeleccionada == null || !carpetaSeleccionada.isDirectory()) {
+                    controlPrincipal.mostrarMensajeError("Debe seleccionar una carpeta válida.");
+                }
+                File archivo = new File(carpetaSeleccionada, nombreArchivo);
+                serializacion = new Serializacion(archivo);
                 if (serializacion != null) {
                     flag = false;
                 }
@@ -493,9 +516,11 @@ public class ControlGato {
      * @param serializacion es la referencia para llamar a los metodos
      */
     public void escribirArchivoSerializado(Serializacion serializacion) {
-        GatoVO gato = null;
+        ArrayList<GatoVO> gatos = darListaGatos();
         try {
-            serializacion.escribirArchivoSerializado(gato);
+            for (GatoVO gato : gatos) {
+                serializacion.escribirArchivoSerializado(gato);
+            }
         } catch (IOException ex) {
             controlPrincipal.mostrarMensajeError("No se puede serializar la persona");
         }
