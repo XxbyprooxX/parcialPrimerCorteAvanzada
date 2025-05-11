@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- *
+ *Se encarga de hacer de tunel comunicador, crear y precargar documentos
  * @author Andres Felipe
  */
 public class ControlPrincipal {
@@ -17,11 +17,18 @@ public class ControlPrincipal {
     private ControlGato controlGato;
     private ControlGrafico controlGrafico;
 
+    /**
+     *Contruye el control y crea los otros controles
+     */
     public ControlPrincipal() {
         this.controlGato = new ControlGato(this);
         this.controlGrafico = new ControlGrafico(this);
     }
 
+    /**
+     *Este metodo se encarga de crear la conexion con las propiedades
+     * @return la conexion
+     */
     public ConexionPropiedades crearConexionPropiedades() {
         ConexionPropiedades conexionPropiedades = null;
         boolean flag = true;
@@ -39,6 +46,9 @@ public class ControlPrincipal {
         return conexionPropiedades;
     }
 
+    /**
+     *Este metodo se encarga de cargar las propiedades de la base de datos
+     */
     public void cargarDatosBD() {
         ConexionPropiedades conexionPropiedades = crearConexionPropiedades();
         try {
@@ -55,10 +65,13 @@ public class ControlPrincipal {
         }
     }
 
+    /**
+     *Carga los datos de los gatos desde las propiedades
+     */
     public void cargarDatosGatosPropiedades() {
         ConexionPropiedades conexionPropiedades = crearConexionPropiedades();
-        boolean flag =  true;
-        do{
+        boolean flag = true;
+        do {
             try {
                 Properties propiedadesGatos = conexionPropiedades.cargarPropiedades();
                 int cantidadDeGatosRegistrar = Integer.parseInt(propiedadesGatos.getProperty("cantidadGatosARegistrar"));
@@ -91,10 +104,12 @@ public class ControlPrincipal {
                 controlGrafico.mostrarMensajeError("Algun dato del gato no corresponde");
                 flag = true;
             }
-        }while(flag);
-        
+        } while (flag);
     }
 
+    /**
+     *Crea el archivo aleatorio en una direccion elejida por el usuario
+     */
     public void crearArchivoAleatorio() {
         try {
             File carpetaSeleccionada = controlGrafico.pedirArchivoAleatorio();
@@ -117,6 +132,12 @@ public class ControlPrincipal {
         }
     }
 
+    /**
+     *Escribe en el archivo la informacion a guardar
+     * @param id parametro del gato
+     * @param datosGato informacion completa del gato
+     * @param archivoAleatorio es la conexion para poder escribir
+     */
     public void escrituraArchivoAleatorio(int id, String datosGato, ConexionArchivoAleatorio archivoAleatorio) {
         try {
             archivoAleatorio.escribirArchivoAleatorio(id, datosGato);
@@ -126,43 +147,95 @@ public class ControlPrincipal {
             controlGrafico.mostrarMensajeError("Hay un error al momento de escribir el archivo");
         }
     }
-    
-    public String[] darListaGatos(){
+
+    /**
+     *Pide la lista de los gatos para enviarla
+     * @return la lista de gatos
+     */
+    public String[] pedirListaGatos() {
         return controlGato.darListaGatosString();
     }
-    
-    public void pedirConsultaGato(int id){
+
+    /**
+     *Ese parametro consula al gato segun su id
+     * @param id identificador
+     */
+    public void pedirConsultaGato(int id) {
         controlGato.pedirConsultaGato(id);
     }
-    
-    public void pedirConsultaGato(String datoBuscado){
+
+    /**
+     *Ese parametro consula al gato segun un dato especifico
+     * @param datoBuscado
+     */
+    public void pedirConsultaGato(String datoBuscado) {
         controlGato.pedirConsultaGato(datoBuscado);
     }
-    
-    public void crearInsercionGato(String nombre, String peso, String edad, String raza, String color, String patron, String colorOjos, String cola){
+
+    /**
+     *Permite insertar un nuevo gato a la base de datos
+     * @param nombre del gato
+     * @param peso del gato
+     * @param edad del gato
+     * @param raza del gato
+     * @param color del gato
+     * @param patron del gato
+     * @param colorOjos del gato
+     * @param cola del gato
+     */
+    public void crearInsercionGato(String nombre, String peso, String edad, String raza, String color, String patron, String colorOjos, String cola) {
         controlGato.crearInsercionGato(nombre, peso, edad, raza, color, patron, colorOjos, cola);
     }
-    
-    public void eliminarGato(int id){
+
+    /**
+     *Permite eliminar a un gato segun la id
+     * @param id parametro identificador
+     */
+    public void eliminarGato(int id) {
         controlGato.eliminarGato(id);
     }
 
+    /**
+     *Muestra un mensaje a la persona en caso de error
+     * @param mensaje a mostrar
+     */
     public void mostrarMensajeError(String mensaje) {
         controlGrafico.mostrarMensajeError(mensaje);
     }
 
+    /**
+     *Muestra un mensaje a la persona en caso de exito
+     * @param mensaje a mostrar
+     */
     public void mostrarMensajeExito(String mensaje) {
         controlGrafico.mostrarMensajeExito(mensaje);
     }
 
+    /**
+     *Este metodo se encarga de crear el archivo en la direccion indicada por la persona
+     * @return el archivo pedido al usuario
+     * @throws NullPointerException devuelve la excepcion
+     * @throws IOException devuelve la excepcion
+     */
     public File crearArchivoSerializado() throws NullPointerException, IOException {
         return controlGrafico.pedirArchivoAleatorio();
     }
 
+    /**
+     *Manda a mostrar las opciones a elegir por el usuario
+     * @param datoFaltante es el dato vacio
+     * @param opciones son las posibles elecciones de la persona
+     * @return el valor seleccionado
+     */
     public Object mostrarJOptionSeleccionarDatoFaltante(String datoFaltante, Object[] opciones) {
         return controlGrafico.mostrarJOptionSeleccionarDatoFaltante(datoFaltante, opciones);
     }
 
+    /**
+     *Manda a mostrar las opciones a elegir por el usuario
+     * @param datoFaltante es el dato esta en blanco
+     * @return el valor seleccionado
+     */
     public String mostrarJOptionEscribirDatoFaltante(String datoFaltante) {
         return controlGrafico.mostrarJOptionEscribirDatoFaltante(datoFaltante);
     }

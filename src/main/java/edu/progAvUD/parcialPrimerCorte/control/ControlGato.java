@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
+ * Este conctrol se se encarga de manejar el gato y su de hablar con la conexion
+ * a la base de datos para manejar la informacion de cada cosa
  *
  * @author Andres Felipe
  */
@@ -17,11 +19,31 @@ public class ControlGato {
     private ControlPrincipal controlPrincipal;
     private GatoDAO gatoDao;
 
+    /**
+     * Este metodo es el constructor del control y de la conexion
+     *
+     * @param controlPrincipal parametro para la comunicaciones entre los
+     * controles
+     */
     public ControlGato(ControlPrincipal controlPrincipal) {
         this.controlPrincipal = controlPrincipal;
         this.gatoDao = new GatoDAO();
     }
 
+    /**
+     * Este metodo se encarga de crear el gato
+     *
+     * @param id parametro unico del gato
+     * @param nombre del gato
+     * @param peso del gato
+     * @param edad del gato
+     * @param raza del gato
+     * @param color del gato
+     * @param patron del gato
+     * @param colorOjos del gato
+     * @param cola del gato
+     * @return devuelve el gato creado
+     */
     public GatoVO crearGato(int id, String nombre, String peso, String edad, String raza, String color, String patron, String colorOjos, String cola) {
         Object[] opcionesRaza = {
             "ABY-Abyssinian",
@@ -207,6 +229,13 @@ public class ControlGato {
         return gato;
     }
 
+    /**
+     * Se encarga de verificar que en la base de datos no esten repetidos los
+     * mismos gatos
+     *
+     * @param gato le llega el gato para comprobar si esta o no repetido
+     * @return un true o false para saber si esta o no repetido
+     */
     public boolean verificarGatoRepetido(GatoVO gato) {
         ArrayList<GatoVO> gatos = darListaGatos();
         for (GatoVO gatoValidar : gatos) {
@@ -220,6 +249,13 @@ public class ControlGato {
         return true;
     }
 
+    /**
+     * Se encarga de consultar la cantidad de filas o gatos que hay en la base
+     * de datos
+     *
+     * @return el valor total de gatos o -1 en caso de que no pueda conectarse o
+     * sea 0
+     */
     public int consultarCantidadGatos() {
         try {
             return gatoDao.consultarCantidadGatos();
@@ -229,6 +265,11 @@ public class ControlGato {
         return -1;
     }
 
+    /**
+     * Pide la lista completa de los gatos
+     *
+     * @return la lista con los gatos que estan en la dataBase
+     */
     public ArrayList<GatoVO> darListaGatos() {
         try {
             return gatoDao.darListaGatos();
@@ -238,6 +279,12 @@ public class ControlGato {
         return null;
     }
 
+    /**
+     * Vuelve los gatos de la base de datos a un String para mostrar en una
+     * tabla
+     *
+     * @return devuelte la tabla en strings
+     */
     public String[] darListaGatosString() {
         try {
             ArrayList<GatoVO> gatos = gatoDao.darListaGatos();
@@ -262,6 +309,11 @@ public class ControlGato {
         return null;
     }
 
+    /**
+     * Consulta un gato por la id
+     *
+     * @param id es el parametro unico identificador
+     */
     public void pedirConsultaGato(int id) {
         GatoVO gato = new GatoVO();
         try {
@@ -271,6 +323,11 @@ public class ControlGato {
         }
     }
 
+    /**
+     * Consulta el gato segun un dato referente
+     *
+     * @param datoBuscado es el dato identificador
+     */
     public void pedirConsultaGato(String datoBuscado) {
         GatoVO gato = new GatoVO();
         try {
@@ -280,6 +337,11 @@ public class ControlGato {
         }
     }
 
+    /**
+     * Este metodo se encarga de insertar un gato a la tabla
+     *
+     * @param gato
+     */
     public void insertarGato(GatoVO gato) {
         try {
             gatoDao.insertarGato(gato);
@@ -288,12 +350,30 @@ public class ControlGato {
         }
     }
 
+    /**
+     * Se encarga de comunicar la creacion del gato con la insercion de este a
+     * la base de datos
+     *
+     * @param nombre del gato
+     * @param peso del gato
+     * @param edad del gato
+     * @param raza del gato
+     * @param color del gato
+     * @param patron del gato
+     * @param colorOjos del gato
+     * @param cola del gato
+     */
     public void crearInsercionGato(String nombre, String peso, String edad, String raza, String color, String patron, String colorOjos, String cola) {
         GatoVO gato = crearGato(0, nombre, peso, edad, raza, color, patron, colorOjos, cola);
         insertarGato(gato);
         controlPrincipal.mostrarMensajeExito("Se ha insertado correctamente el usuario");
     }
 
+    /**
+     * Se encarga de eliminar al gato de la base de datos
+     *
+     * @param id parametro unico identificador
+     */
     public void eliminarGato(int id) {
         try {
             gatoDao.eliminarGato(id);
@@ -302,6 +382,13 @@ public class ControlGato {
         }
     }
 
+    /**
+     * Este metodo comprueba si el dato si es un double o un int
+     *
+     * @param mensaje para pedir el dato faltante
+     * @param tipo es para saber que parametro se va a parsear
+     * @return el valor
+     */
     private String obtenerDatoFaltante(String mensaje, String tipo) {
         String dato = controlPrincipal.mostrarJOptionEscribirDatoFaltante(mensaje);
         if (tipo.equals("peso") || tipo.equals("edad")) {
@@ -313,18 +400,28 @@ public class ControlGato {
                 }
             } catch (NumberFormatException e) {
                 controlPrincipal.mostrarMensajeError("Se ha escrito algo incorrecto en el " + tipo);
-                return obtenerDatoFaltante(mensaje, tipo); // Volver a pedir el dato
+                return obtenerDatoFaltante(mensaje, tipo);
             }
         }
         return dato;
     }
 
+    /**
+     * Este metodo pide las opciones faltantes para crear correctamente el gato
+     *
+     * @param mensaje a mostar para pedir la informacion
+     * @param opciones son las opciones que eligira la persona
+     * @return el valor elegido por la persona
+     */
     private String seleccionarOpcionFaltante(String mensaje, Object[] opciones) {
         Object seleccion = controlPrincipal.mostrarJOptionSeleccionarDatoFaltante(mensaje, opciones);
         return seleccion != null ? seleccion.toString() : "";
     }
 
-    public void crearSerializacion(String accion) {
+    /**
+     * Crea la serializacion para poder escribir el documento
+     */
+    public void crearSerializacion() {
         boolean flag = true;
         Serializacion serializacion = null;
         do {
@@ -346,6 +443,8 @@ public class ControlGato {
     /**
      *
      * Cierra el stream de entrada de objetos si está abierto.
+     *
+     * @param serializacion
      */
     public void cerrarArchivoSerializadoIn(Serializacion serializacion) {
         if (serializacion != null && serializacion.getSalidaSerializacion() != null) {
@@ -357,6 +456,10 @@ public class ControlGato {
         }
     }
 
+    /**
+     *Escribe en el documento lo que se requiere
+     * @param serializacion es la referencia para llamar a los metodos
+     */
     public void escribirArchivoSerializado(Serializacion serializacion) {
         GatoVO gato = null;
         try {
@@ -366,6 +469,11 @@ public class ControlGato {
         }
     }
 
+    /**
+     *Completa la raza segun los puesto por la persona
+     * @param divisionRaza es el dato para identificar
+     * @return el nuevo valor de la raza
+     */
     public String[] identificarRazaSegunEMS(String[] divisionRaza) {
         for (String raza : divisionRaza) {
             if (raza.equals("ABY") || raza.equalsIgnoreCase("Abyssinian")) {
@@ -546,6 +654,11 @@ public class ControlGato {
         return null;
     }
 
+    /**
+     *Completa la raza segun los puesto por la persona
+     * @param divisionColor parametro para identificar
+     * @return el valor
+     */
     public String[] identificarColorCuerpoSegunEMS(String[] divisionColor) {
         for (String colorCuerpo : divisionColor) {
             if (colorCuerpo.equals("n") || colorCuerpo.equalsIgnoreCase("black") || colorCuerpo.equalsIgnoreCase("seal")) {
@@ -585,6 +698,11 @@ public class ControlGato {
         return null;
     }
 
+    /**
+     *Completa la raza segun los puesto por la persona
+     * @param divisionCola parametro identificador
+     * @return el valor
+     */
     public String[] identificarColaSegunEMS(String[] divisionCola) {
         for (String cola : divisionCola) {
             if (cola.equals("51") || cola.equalsIgnoreCase("rumpy") || cola.equalsIgnoreCase("sin cola")) {
@@ -600,6 +718,11 @@ public class ControlGato {
         return null;
     }
 
+    /**
+     *Completa la raza segun los puesto por la persona
+     * @param divisionPatron parametro identificador
+     * @return el valor
+     */
     public String[] identificarPatronSegunEMS(String[] divisionPatron) {
         for (String patron : divisionPatron) {
             if (patron.equals("11") || patron.equalsIgnoreCase("shaded")) {
@@ -623,6 +746,11 @@ public class ControlGato {
         return null;
     }
 
+    /**
+     *Completa la raza segun los puesto por la persona
+     * @param divisionColorOjos parametro identificador
+     * @return el valor
+     */
     public String[] identificarColorOjosSegunEMS(String[] divisionColorOjos) {
         for (String colorOjos : divisionColorOjos) {
             if (colorOjos.equals("61") || colorOjos.equalsIgnoreCase("blue")) {

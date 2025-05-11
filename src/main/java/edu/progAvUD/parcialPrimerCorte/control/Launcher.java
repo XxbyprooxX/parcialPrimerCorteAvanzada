@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package edu.progAvUD.parcialPrimerCorte.control;
 
 /**
@@ -10,6 +6,10 @@ package edu.progAvUD.parcialPrimerCorte.control;
  */
 public class Launcher {
 
+    /**
+     *Lanza el programa
+     * @param args
+     */
     public static void main(String[] args) {
         new ControlPrincipal();
     }

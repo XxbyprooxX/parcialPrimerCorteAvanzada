@@ -2,12 +2,19 @@ package edu.progAvUD.parcialPrimerCorte.modelo;
 
 import java.io.Serializable;
 
-public class GatoVO implements Serializable{
-    
+/**
+ * Clase que representa un objeto de tipo Gato.
+ * Implementa Serializable para permitir su serialización.
+ */
+public class GatoVO implements Serializable {
+
+    // Atributos que no serán serializados (por ejemplo, si se guarda en archivo o se transmite por red)
     private transient int id;
     private transient String nombre;
     private transient String peso;
     private transient String edad;
+
+    // Atributos que sí serán serializados
     private String codigoEMS;
     private String nombreRaza;
     private transient String colorCuerpo;
@@ -15,6 +22,10 @@ public class GatoVO implements Serializable{
     private transient String colorOjos;
     private transient String cola;
 
+    /**
+     * Constructor con todos los atributos (menos el ID).
+     * Se utiliza al crear un nuevo gato con datos específicos.
+     */
     public GatoVO(String nombre, String peso, String edad, String codigoEMS, String nombreRaza, String colorCuerpo, String patron, String colorOjos, String cola) {
         this.nombre = nombre;
         this.peso = peso;
@@ -27,8 +38,14 @@ public class GatoVO implements Serializable{
         this.cola = cola;
     }
 
+    /**
+     * Constructor vacío.
+     * Útil cuando se quiere construir el objeto paso a paso con setters.
+     */
     public GatoVO() {
     }
+
+    // Métodos getter y setter para acceder y modificar los atributos
 
     public int getId() {
         return id;
