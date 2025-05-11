@@ -101,6 +101,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemSalir = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItemSerializar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,6 +112,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenu1.add(jMenuItemSalir);
 
         jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Serializar Base de Datos");
+
+        jMenuItemSerializar.setText("Serializar");
+        jMenu2.add(jMenuItemSerializar);
+
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -130,7 +139,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     public javax.swing.JMenuBar jMenuBar1;
     public javax.swing.JMenuItem jMenuItemSalir;
+    public javax.swing.JMenuItem jMenuItemSerializar;
     // End of variables declaration//GEN-END:variables
 }

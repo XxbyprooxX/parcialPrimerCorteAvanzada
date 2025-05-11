@@ -26,6 +26,7 @@ public class ControlGrafico implements ActionListener {
         ventanaPrincipal.panelPrincipal.jButtonPropiedadesGatos.setEnabled(false);
 
         ventanaPrincipal.jMenuItemSalir.addActionListener(this);
+        ventanaPrincipal.jMenuItemSerializar.addActionListener(this);
 
         ventanaPrincipal.panelPrincipal.jButtonContinuar.addActionListener(this);
         ventanaPrincipal.panelPrincipal.jButtonPropiedadesBD.addActionListener(this);
@@ -55,6 +56,9 @@ public class ControlGrafico implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == ventanaPrincipal.jMenuItemSalir) {
 
+        }
+        if(e.getSource()== ventanaPrincipal.jMenuItemSerializar){
+            
         }
         // ActionListener de PanelPrincipal
         if (e.getSource() == ventanaPrincipal.panelPrincipal.jButtonPropiedadesBD) {
