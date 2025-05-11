@@ -225,7 +225,7 @@ public class ControlGato {
                 controlPrincipal.mostrarMensajeError("No se ha creado el gato" + id + " de propiedades porque ya se encuentra en la Base de Datos");
             }
         }
-        
+
     }
 
     /**
@@ -286,29 +286,16 @@ public class ControlGato {
      *
      * @return devuelte la tabla en strings
      */
-    public String[] darListaGatosString() {
-        try {
-            ArrayList<GatoVO> gatos = gatoDao.darListaGatos();
-            String[] arrGatos = new String[gatos.size()];
-            for (int i = 0; i < gatos.size(); i++) {
-                GatoVO g = gatos.get(i);
-                arrGatos[i] = g.getId() + ","
-                        + g.getNombre() + ","
-                        + g.getPeso() + ","
-                        + g.getEdad() + ","
-                        + g.getCodigoEMS() + ","
-                        + g.getNombreRaza() + ","
-                        + g.getColorCuerpo() + ","
-                        + g.getPatron() + ","
-                        + g.getColorOjos() + ","
-                        + g.getCola();
-            }
-            return arrGatos;
-        } catch (SQLException ex) {
-            controlPrincipal.mostrarMensajeError("SQLException darListaGatos");
-            ex.printStackTrace();
+    public Object[][] darListaGatosObject() {
+        ArrayList<GatoVO> gatos = darListaGatos();
+        Object[][] arrGatos = new Object[gatos.size()][3];
+        for (int i = 0; i < gatos.size(); i++) {
+            GatoVO g = gatos.get(i);
+            arrGatos[i][0] = g.getId();
+            arrGatos[i][1] = g.getNombre();
+            arrGatos[i][2] = g.getCodigoEMS();
         }
-        return null;
+        return arrGatos;
     }
 
     /**
@@ -462,7 +449,8 @@ public class ControlGato {
     }
 
     /**
-     *Escribe en el documento lo que se requiere
+     * Escribe en el documento lo que se requiere
+     *
      * @param serializacion es la referencia para llamar a los metodos
      */
     public void escribirArchivoSerializado(Serializacion serializacion) {
@@ -475,7 +463,8 @@ public class ControlGato {
     }
 
     /**
-     *Completa la raza segun los puesto por la persona
+     * Completa la raza segun los puesto por la persona
+     *
      * @param divisionRaza es el dato para identificar
      * @return el nuevo valor de la raza
      */
@@ -660,7 +649,8 @@ public class ControlGato {
     }
 
     /**
-     *Completa la raza segun los puesto por la persona
+     * Completa la raza segun los puesto por la persona
+     *
      * @param divisionColor parametro para identificar
      * @return el valor
      */
@@ -704,7 +694,8 @@ public class ControlGato {
     }
 
     /**
-     *Completa la raza segun los puesto por la persona
+     * Completa la raza segun los puesto por la persona
+     *
      * @param divisionCola parametro identificador
      * @return el valor
      */
@@ -724,7 +715,8 @@ public class ControlGato {
     }
 
     /**
-     *Completa la raza segun los puesto por la persona
+     * Completa la raza segun los puesto por la persona
+     *
      * @param divisionPatron parametro identificador
      * @return el valor
      */
@@ -752,7 +744,8 @@ public class ControlGato {
     }
 
     /**
-     *Completa la raza segun los puesto por la persona
+     * Completa la raza segun los puesto por la persona
+     *
      * @param divisionColorOjos parametro identificador
      * @return el valor
      */

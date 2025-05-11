@@ -152,8 +152,8 @@ public class ControlPrincipal {
      *Pide la lista de los gatos para enviarla
      * @return la lista de gatos
      */
-    public String[] pedirListaGatos() {
-        return controlGato.darListaGatosString();
+    public Object[][] darListaGatosObject() {
+        return controlGato.darListaGatosObject();
     }
 
     /**

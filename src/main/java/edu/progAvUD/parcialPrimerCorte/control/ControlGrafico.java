@@ -41,6 +41,7 @@ public class ControlGrafico implements ActionListener {
         ventanaPrincipal.panelInsertarGato.jButtonLimpiarCampos.addActionListener(this);
         
         ventanaPrincipal.panelMostrarGatos.jButtonAtras.addActionListener(this);
+        ventanaPrincipal.panelMostrarGatos.jButtonMasInfo.addActionListener(this);
         
         ventanaPrincipal.panelConsultarGato.jButtonAtras.addActionListener(this);
         
@@ -73,6 +74,7 @@ public class ControlGrafico implements ActionListener {
         // ActionListener de PanelOpcionesCRUD
         if(e.getSource() == ventanaPrincipal.panelOpcionesCRUD.jButtonVerGatos){
             ventanaPrincipal.mostrarPanel(ventanaPrincipal.panelMostrarGatos);
+            cargarDatosTablaPanelMostrarGatos();
         }
         if(e.getSource() == ventanaPrincipal.panelOpcionesCRUD.jButtonCrearGato){
             ventanaPrincipal.mostrarPanel(ventanaPrincipal.panelInsertarGato);
@@ -109,6 +111,10 @@ public class ControlGrafico implements ActionListener {
             ventanaPrincipal.mostrarPanel(ventanaPrincipal.panelOpcionesCRUD);
         }
         // ActionListener de PanelMostrarGatos
+        if(e.getSource() == ventanaPrincipal.panelMostrarGatos.jButtonMasInfo){
+            ventanaPrincipal.panelMostrarGatos.crearDialog(ventanaPrincipal);
+            
+        }
         if(e.getSource() == ventanaPrincipal.panelMostrarGatos.jButtonAtras){
             ventanaPrincipal.mostrarPanel(ventanaPrincipal.panelOpcionesCRUD);
         }
@@ -131,7 +137,15 @@ public class ControlGrafico implements ActionListener {
             ventanaPrincipal.panelPrincipal.jButtonContinuar.setEnabled(true);
         }
     }
-
+    
+    public void cargarDatosTablaPanelMostrarGatos(){
+        Object[][] datosGatos= controlPrincipal.darListaGatosObject();
+        ventanaPrincipal.panelMostrarGatos.modeloTablaGatos.setRowCount(0);
+        for(Object[] fila: datosGatos){
+            ventanaPrincipal.panelMostrarGatos.modeloTablaGatos.addRow(fila);
+        }
+    }
+    
     public File pedirArchivoPropiedades() {
         return ventanaPrincipal.pedirArchivoPropiedades();
     }

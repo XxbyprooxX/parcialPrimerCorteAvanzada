@@ -4,17 +4,28 @@
  */
 package edu.progAvUD.parcialPrimerCorte.vista;
 
+import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Andres Felipe
  */
 public class PanelMostrarGatos extends javax.swing.JPanel {
-
+    
+    public DialogInformacionGato dialogInformacionGato;
     /**
      * Creates new form PanelMostrarGatos
      */
     public PanelMostrarGatos() {
         initComponents();
+        
+    }
+    
+    public void crearDialog(JFrame frame){
+        this.dialogInformacionGato = new DialogInformacionGato(frame,"Datos gatos", true);
+        dialogInformacionGato.setLocationRelativeTo(frame);
+        dialogInformacionGato.setVisible(true);
     }
 
     /**
@@ -27,22 +38,47 @@ public class PanelMostrarGatos extends javax.swing.JPanel {
     private void initComponents() {
 
         jButtonAtras = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButtonMasInfo = new javax.swing.JButton();
 
         jButtonAtras.setText("Atras");
+
+        modeloTablaGatos= new DefaultTableModel(new Object[]{ "ID Gato", "Nombre Gato","CodigoEMS Gato"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        jTable1.setModel(modeloTablaGatos);
+        jScrollPane1.setViewportView(jTable1);
+
+        jButtonMasInfo.setText("Mostrar Mas Informacion");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButtonAtras)
-                .addContainerGap(322, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonAtras)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(153, 153, 153)
+                        .addComponent(jButtonMasInfo)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(271, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonMasInfo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonAtras)
                 .addContainerGap())
         );
@@ -51,5 +87,10 @@ public class PanelMostrarGatos extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton jButtonAtras;
+    public javax.swing.JButton jButtonMasInfo;
+    private javax.swing.JScrollPane jScrollPane1;
+    public DefaultTableModel modeloTablaGatos;
+    public javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+    
 }
