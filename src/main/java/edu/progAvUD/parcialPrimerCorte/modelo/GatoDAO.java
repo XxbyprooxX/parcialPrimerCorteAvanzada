@@ -39,6 +39,24 @@ public class GatoDAO {
         ConexionBD.desconectar();
         return gato;
     }
+    
+    public GatoVO consultarGato(String datoBuscado, GatoVO gato) throws SQLException {
+        String consulta = "SELECT * FROM gatos where id='" + datoBuscado + "'";
+        connection = (Connection) ConexionBD.getConnection();
+        statement = connection.createStatement();
+        resultSet = statement.executeQuery(consulta);
+        if (resultSet.next()){
+        gato.setId(resultSet.getInt("id"));
+        gato.setNombre(resultSet.getString("nombre"));
+        gato.setPeso(resultSet.getString("peso"));
+        gato.setEdad(resultSet.getString("edad"));
+        gato.setNombreRaza(resultSet.getString("nombreRaza"));
+        gato.setCodigoEMS(resultSet.getString("codigoEMS"));
+        }
+        statement.close();
+        ConexionBD.desconectar();
+        return gato;
+    }
 
     public int consultarCantidadGatos() throws SQLException {
         String consulta = "SELECT COUNT(*) FROM gatos";
