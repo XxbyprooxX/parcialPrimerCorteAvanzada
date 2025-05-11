@@ -24,7 +24,7 @@ public class ControlGato {
         this.gatoDao = new GatoDAO();
     }
 
-    public void crearGato(int id, String nombre, String peso, String edad, String raza, String color, String patron, String colorOjos, String cola) {
+    public GatoVO crearGato(int id, String nombre, String peso, String edad, String raza, String color, String patron, String colorOjos, String cola) {
         Object[] opcionesRaza = {
             "ABY-Abyssinian",
             "AMB-American Burmese",
@@ -213,7 +213,7 @@ public class ControlGato {
                 controlPrincipal.mostrarMensajeError("No se ha creado el gato" + id + " de propiedades porque ya se encuentra en la Base de Datos");
             }
         }
-
+        return gato;
     }
 
     public boolean verificarGatoRepetido(GatoVO gato) {
@@ -270,6 +270,12 @@ public class ControlGato {
         } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLException insertarGato");
         }
+    }
+    
+    public void crearInsercionGato(String nombre, String peso, String edad, String raza, String color, String patron, String colorOjos, String cola){
+        GatoVO gato = crearGato(0, nombre, peso, edad, raza, color, patron, colorOjos, cola);
+        insertarGato(gato);
+        controlPrincipal.mostrarMensajeExito("Se ha insertado correctamente el usuario");
     }
 
     public void eliminarGato(int id) {
