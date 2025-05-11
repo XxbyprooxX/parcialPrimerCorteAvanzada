@@ -169,23 +169,18 @@ public class ControlGato {
             raza = seleccionarOpcionFaltante("raza del gato " + id, opcionesRaza);
         }
         if (color.isBlank()) {
-            Object[] colores = { /* Lista de colores */};
             color = seleccionarOpcionFaltante("color del gato " + id, opcionesColor);
         }
         if (patron.isBlank()) {
-            Object[] patrones = { /* Lista de patrones */};
             patron = seleccionarOpcionFaltante("patrón del gato " + id, opcionesPatron);
         }
         if (colorOjos.isBlank()) {
-            Object[] coloresOjos = { /* Lista de colores de ojos */};
             colorOjos = seleccionarOpcionFaltante("color de ojos del gato " + id, opcionesColorOjos);
         }
         if (cola.isBlank()) {
-            Object[] colas = { /* Lista de tipos de cola */};
             cola = seleccionarOpcionFaltante("cola del gato " + id, opcionesCola);
         }
 
-        GatoVO gato = null;
         String[] divisionRaza = raza.split("-");
         divisionRaza = identificarRazaSegunEMS(divisionRaza);
         String[] divisionColor = color.split("-");
@@ -198,7 +193,7 @@ public class ControlGato {
         divisionCola = identificarColaSegunEMS(divisionCola);
 
         String codigoEMS = divisionRaza[0] + "/" + divisionColor[0] + "/" + divisionPatron[0] + "/" + divisionColorOjos[0] + "/" + divisionCola[0];
-        gato = new GatoVO(nombre, peso, edad, codigoEMS, raza, color, patron, colorOjos, cola);
+        GatoVO gato = new GatoVO(nombre, peso, edad, codigoEMS, raza, color, patron, colorOjos, cola);
 
         if (consultarCantidadGatos() == 0) {
             insertarGato(gato);
@@ -236,8 +231,6 @@ public class ControlGato {
     }
 
     public ArrayList<GatoVO> darListaGatos() {
-        GatoVO gato = new GatoVO();
-        ArrayList<GatoVO> gatos = new ArrayList<>();
         try {
             return gatoDao.darListaGatos();
         } catch (SQLException ex) {
@@ -556,7 +549,7 @@ public class ControlGato {
             } else if (colorCuerpo.equals("x") || colorCuerpo.equalsIgnoreCase("unrecognized")) {
                 return ("x-unrecognized").split("-");
             }
-        };
+        }
         return null;
     }
 
@@ -572,7 +565,6 @@ public class ControlGato {
                 return ("54-longie").split("-");
             }
         }
-        ;
         return null;
     }
 
