@@ -210,7 +210,6 @@ public class ControlGato {
     public boolean verificarGatoRepetido(GatoVO gato) {
         ArrayList<GatoVO> gatos = darListaGatos();
         for (GatoVO gatoValidar : gatos) {
-
             if (gato.getNombre().equals(gatoValidar.getNombre())
                     && gato.getPeso().equals(gatoValidar.getPeso())
                     && gato.getEdad().equals(gatoValidar.getEdad())
@@ -239,10 +238,43 @@ public class ControlGato {
         return null;
     }
 
+    public String[] darListaGatosString() {
+        try {
+            ArrayList<GatoVO> gatos = gatoDao.darListaGatos();
+            String[] arrGatos = new String[gatos.size()];
+            for (int i = 0; i < gatos.size(); i++) {
+                GatoVO g = gatos.get(i);
+                arrGatos[i] = g.getId() + ","
+                        + g.getNombre() + ","
+                        + g.getPeso() + ","
+                        + g.getEdad() + ","
+                        + g.getCodigoEMS() + ","
+                        + g.getNombreRaza() + ","
+                        + g.getColorCuerpo() + ","
+                        + g.getPatron() + ","
+                        + g.getColorOjos() + ","
+                        + g.getCola();
+            }
+            return arrGatos;
+        } catch (SQLException ex) {
+            controlPrincipal.mostrarMensajeError("SQLException darListaGatos");
+        }
+        return null;
+    }
+
     public void pedirConsultaGato(int id) {
         GatoVO gato = new GatoVO();
         try {
             gatoDao.consultarGato(id, gato);
+        } catch (SQLException ex) {
+            controlPrincipal.mostrarMensajeError("SQLException pedirConsultaGato");
+        }
+    }
+
+    public void pedirConsultaGato(String datoBuscado) {
+        GatoVO gato = new GatoVO();
+        try {
+            gatoDao.consultarGato(datoBuscado, gato);
         } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLException pedirConsultaGato");
         }
@@ -255,8 +287,8 @@ public class ControlGato {
             controlPrincipal.mostrarMensajeError("SQLException insertarGato");
         }
     }
-    
-    public void crearInsercionGato(String nombre, String peso, String edad, String raza, String color, String patron, String colorOjos, String cola){
+
+    public void crearInsercionGato(String nombre, String peso, String edad, String raza, String color, String patron, String colorOjos, String cola) {
         GatoVO gato = crearGato(0, nombre, peso, edad, raza, color, patron, colorOjos, cola);
         insertarGato(gato);
         controlPrincipal.mostrarMensajeExito("Se ha insertado correctamente el usuario");

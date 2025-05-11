@@ -126,6 +126,26 @@ public class ControlPrincipal {
             controlGrafico.mostrarMensajeError("Hay un error al momento de escribir el archivo");
         }
     }
+    
+    public String[] darListaGatos(){
+        return controlGato.darListaGatosString();
+    }
+    
+    public void pedirConsultaGato(int id){
+        controlGato.pedirConsultaGato(id);
+    }
+    
+    public void pedirConsultaGato(String datoBuscado){
+        controlGato.pedirConsultaGato(datoBuscado);
+    }
+    
+    public void crearInsercionGato(String nombre, String peso, String edad, String raza, String color, String patron, String colorOjos, String cola){
+        controlGato.crearInsercionGato(nombre, peso, edad, raza, color, patron, colorOjos, cola);
+    }
+    
+    public void eliminarGato(int id){
+        controlGato.eliminarGato(id);
+    }
 
     public void mostrarMensajeError(String mensaje) {
         controlGrafico.mostrarMensajeError(mensaje);
