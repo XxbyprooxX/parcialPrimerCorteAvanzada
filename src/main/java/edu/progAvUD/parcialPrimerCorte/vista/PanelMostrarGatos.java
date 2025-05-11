@@ -25,7 +25,6 @@ public class PanelMostrarGatos extends javax.swing.JPanel {
     public void crearDialog(JFrame frame){
         this.dialogInformacionGato = new DialogInformacionGato(frame,"Datos gatos", true);
         dialogInformacionGato.setLocationRelativeTo(frame);
-        dialogInformacionGato.setVisible(true);
     }
 
     /**

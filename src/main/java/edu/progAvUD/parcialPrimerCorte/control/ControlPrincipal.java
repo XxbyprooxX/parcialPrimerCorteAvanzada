@@ -9,7 +9,8 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- *Se encarga de hacer de tunel comunicador, crear y precargar documentos
+ * Se encarga de hacer de tunel comunicador, crear y precargar documentos
+ *
  * @author Andres Felipe
  */
 public class ControlPrincipal {
@@ -18,7 +19,7 @@ public class ControlPrincipal {
     private ControlGrafico controlGrafico;
 
     /**
-     *Contruye el control y crea los otros controles
+     * Contruye el control y crea los otros controles
      */
     public ControlPrincipal() {
         this.controlGato = new ControlGato(this);
@@ -26,7 +27,8 @@ public class ControlPrincipal {
     }
 
     /**
-     *Este metodo se encarga de crear la conexion con las propiedades
+     * Este metodo se encarga de crear la conexion con las propiedades
+     *
      * @return la conexion
      */
     public ConexionPropiedades crearConexionPropiedades() {
@@ -47,7 +49,7 @@ public class ControlPrincipal {
     }
 
     /**
-     *Este metodo se encarga de cargar las propiedades de la base de datos
+     * Este metodo se encarga de cargar las propiedades de la base de datos
      */
     public void cargarDatosBD() {
         ConexionPropiedades conexionPropiedades = crearConexionPropiedades();
@@ -66,7 +68,7 @@ public class ControlPrincipal {
     }
 
     /**
-     *Carga los datos de los gatos desde las propiedades
+     * Carga los datos de los gatos desde las propiedades
      */
     public void cargarDatosGatosPropiedades() {
         ConexionPropiedades conexionPropiedades = crearConexionPropiedades();
@@ -108,7 +110,7 @@ public class ControlPrincipal {
     }
 
     /**
-     *Crea el archivo aleatorio en una direccion elejida por el usuario
+     * Crea el archivo aleatorio en una direccion elejida por el usuario
      */
     public void crearArchivoAleatorio() {
         try {
@@ -133,7 +135,8 @@ public class ControlPrincipal {
     }
 
     /**
-     *Escribe en el archivo la informacion a guardar
+     * Escribe en el archivo la informacion a guardar
+     *
      * @param id parametro del gato
      * @param datosGato informacion completa del gato
      * @param archivoAleatorio es la conexion para poder escribir
@@ -149,7 +152,8 @@ public class ControlPrincipal {
     }
 
     /**
-     *Pide la lista de los gatos para enviarla
+     * Pide la lista de los gatos para enviarla
+     *
      * @return la lista de gatos
      */
     public Object[][] darListaGatosObject() {
@@ -157,15 +161,17 @@ public class ControlPrincipal {
     }
 
     /**
-     *Ese parametro consula al gato segun su id
+     * Ese parametro consula al gato segun su id
+     *
      * @param id identificador
      */
-    public void pedirConsultaGato(int id) {
-        controlGato.pedirConsultaGato(id);
+    public Object[] pedirConsultaGato(int id) {
+        return controlGato.pedirConsultaGato(id);
     }
 
     /**
-     *Ese parametro consula al gato segun un dato especifico
+     * Ese parametro consula al gato segun un dato especifico
+     *
      * @param datoBuscado
      */
     public void pedirConsultaGato(String datoBuscado) {
@@ -173,7 +179,8 @@ public class ControlPrincipal {
     }
 
     /**
-     *Permite insertar un nuevo gato a la base de datos
+     * Permite insertar un nuevo gato a la base de datos
+     *
      * @param nombre del gato
      * @param peso del gato
      * @param edad del gato
@@ -188,7 +195,8 @@ public class ControlPrincipal {
     }
 
     /**
-     *Permite eliminar a un gato segun la id
+     * Permite eliminar a un gato segun la id
+     *
      * @param id parametro identificador
      */
     public void eliminarGato(int id) {
@@ -196,7 +204,8 @@ public class ControlPrincipal {
     }
 
     /**
-     *Muestra un mensaje a la persona en caso de error
+     * Muestra un mensaje a la persona en caso de error
+     *
      * @param mensaje a mostrar
      */
     public void mostrarMensajeError(String mensaje) {
@@ -204,7 +213,8 @@ public class ControlPrincipal {
     }
 
     /**
-     *Muestra un mensaje a la persona en caso de exito
+     * Muestra un mensaje a la persona en caso de exito
+     *
      * @param mensaje a mostrar
      */
     public void mostrarMensajeExito(String mensaje) {
@@ -212,7 +222,9 @@ public class ControlPrincipal {
     }
 
     /**
-     *Este metodo se encarga de crear el archivo en la direccion indicada por la persona
+     * Este metodo se encarga de crear el archivo en la direccion indicada por
+     * la persona
+     *
      * @return el archivo pedido al usuario
      * @throws NullPointerException devuelve la excepcion
      * @throws IOException devuelve la excepcion
@@ -222,7 +234,8 @@ public class ControlPrincipal {
     }
 
     /**
-     *Manda a mostrar las opciones a elegir por el usuario
+     * Manda a mostrar las opciones a elegir por el usuario
+     *
      * @param datoFaltante es el dato vacio
      * @param opciones son las posibles elecciones de la persona
      * @return el valor seleccionado
@@ -232,11 +245,33 @@ public class ControlPrincipal {
     }
 
     /**
-     *Manda a mostrar las opciones a elegir por el usuario
+     * Manda a mostrar las opciones a elegir por el usuario
+     *
      * @param datoFaltante es el dato esta en blanco
      * @return el valor seleccionado
      */
     public String mostrarJOptionEscribirDatoFaltante(String datoFaltante) {
         return controlGrafico.mostrarJOptionEscribirDatoFaltante(datoFaltante);
     }
+
+    public String identificarRazaSegunEMS(String[] divisionRaza) {
+        return controlGato.identificarRazaSegunEMS(divisionRaza);
+    }
+
+    public String identificarColorCuerpoSegunEMS(String[] divisionColor) {
+        return controlGato.identificarColorCuerpoSegunEMS(divisionColor);
+    }
+
+    public String identificarColaSegunEMS(String[] divisionCola) {
+        return controlGato.identificarColaSegunEMS(divisionCola);
+    }
+
+    public String identificarPatronSegunEMS(String[] divisionPatron) {
+        return controlGato.identificarPatronSegunEMS(divisionPatron);
+    }
+
+    public String identificarColorOjosSegunEMS(String[] divisionColorOjos) {
+        return controlGato.identificarColorOjosSegunEMS(divisionColorOjos);
+    }
+
 }
