@@ -42,9 +42,8 @@ public class ControlGato {
      * @param patron del gato
      * @param colorOjos del gato
      * @param cola del gato
-     * @return devuelve el gato creado
      */
-    public GatoVO crearGato(int id, String nombre, String peso, String edad, String raza, String color, String patron, String colorOjos, String cola) {
+    public void crearGato(int id, String nombre, String peso, String edad, String raza, String color, String patron, String colorOjos, String cola) {
         Object[] opcionesRaza = {
             "ABY-Abyssinian",
             "AMB-American Burmese",
@@ -226,7 +225,7 @@ public class ControlGato {
                 controlPrincipal.mostrarMensajeError("No se ha creado el gato" + id + " de propiedades porque ya se encuentra en la Base de Datos");
             }
         }
-        return gato;
+        
     }
 
     /**
@@ -261,6 +260,7 @@ public class ControlGato {
             return gatoDao.consultarCantidadGatos();
         } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLException ConsultarCantidadGatos");
+            ex.printStackTrace();
         }
         return -1;
     }
@@ -275,6 +275,7 @@ public class ControlGato {
             return gatoDao.darListaGatos();
         } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLException darListaGatos");
+            ex.printStackTrace();
         }
         return null;
     }
@@ -305,6 +306,7 @@ public class ControlGato {
             return arrGatos;
         } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLException darListaGatos");
+            ex.printStackTrace();
         }
         return null;
     }
@@ -320,6 +322,7 @@ public class ControlGato {
             gatoDao.consultarGato(id, gato);
         } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLException pedirConsultaGato");
+            ex.printStackTrace();
         }
     }
 
@@ -334,6 +337,7 @@ public class ControlGato {
             gatoDao.consultarGato(datoBuscado, gato);
         } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLException pedirConsultaGato");
+            ex.printStackTrace();
         }
     }
 
@@ -347,6 +351,7 @@ public class ControlGato {
             gatoDao.insertarGato(gato);
         } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLException insertarGato");
+            ex.printStackTrace();
         }
     }
 
@@ -364,8 +369,7 @@ public class ControlGato {
      * @param cola del gato
      */
     public void crearInsercionGato(String nombre, String peso, String edad, String raza, String color, String patron, String colorOjos, String cola) {
-        GatoVO gato = crearGato(0, nombre, peso, edad, raza, color, patron, colorOjos, cola);
-        insertarGato(gato);
+        crearGato(0, nombre, peso, edad, raza, color, patron, colorOjos, cola);
         controlPrincipal.mostrarMensajeExito("Se ha insertado correctamente el usuario");
     }
 
@@ -379,6 +383,7 @@ public class ControlGato {
             gatoDao.eliminarGato(id);
         } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLException eliminarGato");
+            ex.printStackTrace();
         }
     }
 

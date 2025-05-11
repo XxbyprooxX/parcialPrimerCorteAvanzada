@@ -37,11 +37,11 @@ public class PanelOpcionesCRUD extends javax.swing.JPanel {
         jButtonActualizarGato = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButtonCrearGato = new javax.swing.JButton();
+        jButtonVerGatos = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jButtonBuscarGato = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        jButtonCrearGato1 = new javax.swing.JButton();
+        jButtonCrearGato = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
@@ -81,14 +81,14 @@ public class PanelOpcionesCRUD extends javax.swing.JPanel {
 
         jLabel6.setIcon(new ImageIcon(System.getProperty("user.dir") + "/src/main/java/edu/progAvUD/parcialPrimerCorte/Imagenes/GatoActualizar.jpg"));
 
-        jButtonCrearGato.setBackground(new java.awt.Color(102, 0, 102));
-        jButtonCrearGato.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonCrearGato.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonCrearGato.setText("VER GATOS ");
-        jButtonCrearGato.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButtonCrearGato.addActionListener(new java.awt.event.ActionListener() {
+        jButtonVerGatos.setBackground(new java.awt.Color(102, 0, 102));
+        jButtonVerGatos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonVerGatos.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonVerGatos.setText("VER GATOS ");
+        jButtonVerGatos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonVerGatos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCrearGatoActionPerformed(evt);
+                jButtonVerGatosActionPerformed(evt);
             }
         });
 
@@ -102,11 +102,11 @@ public class PanelOpcionesCRUD extends javax.swing.JPanel {
 
         jLabel8.setIcon(new ImageIcon(System.getProperty("user.dir") + "/src/main/java/edu/progAvUD/parcialPrimerCorte/Imagenes/lineadecorada.jpg"));
 
-        jButtonCrearGato1.setBackground(new java.awt.Color(0, 204, 51));
-        jButtonCrearGato1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonCrearGato1.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonCrearGato1.setText("CREAR GATO");
-        jButtonCrearGato1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonCrearGato.setBackground(new java.awt.Color(0, 204, 51));
+        jButtonCrearGato.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonCrearGato.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonCrearGato.setText("CREAR GATO");
+        jButtonCrearGato.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel9.setIcon(new ImageIcon(System.getProperty("user.dir") + "/src/main/java/edu/progAvUD/parcialPrimerCorte/Imagenes/VerGatos.png"));
 
@@ -120,7 +120,7 @@ public class PanelOpcionesCRUD extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonCrearGato1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButtonCrearGato, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,7 +135,7 @@ public class PanelOpcionesCRUD extends javax.swing.JPanel {
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jButtonCrearGato, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButtonVerGatos, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jButtonBuscarGato, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,16 +172,16 @@ public class PanelOpcionesCRUD extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(32, 32, 32)
-                        .addComponent(jButtonCrearGato, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButtonVerGatos, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel9))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
+                        .addGap(31, 31, 31)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonCrearGato1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21)
+                        .addComponent(jButtonCrearGato, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -226,17 +226,17 @@ public class PanelOpcionesCRUD extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonActualizarGatoActionPerformed
 
-    private void jButtonCrearGatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearGatoActionPerformed
+    private void jButtonVerGatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerGatosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonCrearGatoActionPerformed
+    }//GEN-LAST:event_jButtonVerGatosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton jButtonActualizarGato;
     public javax.swing.JButton jButtonBuscarGato;
     public javax.swing.JButton jButtonCrearGato;
-    public javax.swing.JButton jButtonCrearGato1;
     public javax.swing.JButton jButtonEliminarGato;
+    public javax.swing.JButton jButtonVerGatos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

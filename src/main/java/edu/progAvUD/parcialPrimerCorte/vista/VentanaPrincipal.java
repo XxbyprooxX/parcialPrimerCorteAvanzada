@@ -14,6 +14,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private ControlGrafico controlGrafico;
     public PanelPrincipal panelPrincipal;
     public PanelOpcionesCRUD panelOpcionesCRUD;
+    public PanelConsultarGato panelConsultarGato;
+    public PanelEliminarGato panelEliminarGato;
+    public PanelInsertarGato panelInsertarGato;
+    public PanelModificarGato panelModificarGato;
+    public PanelMostrarGatos panelMostrarGatos;
 
     /**
      * Creates new form VentanaPrincipal
@@ -26,6 +31,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setVisible(true);
         this.panelPrincipal = new PanelPrincipal();
         this.panelOpcionesCRUD = new PanelOpcionesCRUD();
+        this.panelConsultarGato = new PanelConsultarGato();
+        this.panelEliminarGato = new PanelEliminarGato();
+        this.panelInsertarGato = new PanelInsertarGato();
+        this.panelModificarGato = new PanelModificarGato();
+        this.panelMostrarGatos = new PanelMostrarGatos();
     }
 
     public void mostrarMensajeExito(String mensaje) {
@@ -88,7 +98,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItemSalir = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jMenu1.setText("Salir");
+
+        jMenuItemSalir.setText("Salir");
+        jMenu1.add(jMenuItemSalir);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,7 +121,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 277, Short.MAX_VALUE)
         );
 
         pack();
@@ -106,5 +129,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
+    public javax.swing.JMenuBar jMenuBar1;
+    public javax.swing.JMenuItem jMenuItemSalir;
     // End of variables declaration//GEN-END:variables
 }
