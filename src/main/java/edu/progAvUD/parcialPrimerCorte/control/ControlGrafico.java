@@ -46,6 +46,11 @@ public class ControlGrafico implements ActionListener {
         ventanaPrincipal.panelMostrarGatos.jButtonMasInfo.addActionListener(this);
 
         ventanaPrincipal.panelConsultarGato.jButtonAtras.addActionListener(this);
+        ventanaPrincipal.panelConsultarGato.jButtonConsultar.addActionListener(this);
+        ventanaPrincipal.panelConsultarGato.jButtonLimpiarCampos.addActionListener(this);
+        ventanaPrincipal.panelConsultarGato.jButtonInfoGato.addActionListener(this);
+        ventanaPrincipal.panelConsultarGato.jRadioButtonRaza.addActionListener(this);
+        ventanaPrincipal.panelConsultarGato.jRadioButtonCodigoEMS.addActionListener(this);
 
         ventanaPrincipal.panelModificarGato.jButtonAtras.addActionListener(this);
 
@@ -57,7 +62,7 @@ public class ControlGrafico implements ActionListener {
         if (e.getSource() == ventanaPrincipal.jMenuItemSalir) {
             controlPrincipal.crearArchivoAleatorio();
         }
-        if(e.getSource()== ventanaPrincipal.jMenuItemSerializar){
+        if (e.getSource() == ventanaPrincipal.jMenuItemSerializar) {
             controlPrincipal.crearSerializacion();
         }
         // ActionListener de PanelPrincipal
@@ -85,6 +90,14 @@ public class ControlGrafico implements ActionListener {
             ventanaPrincipal.mostrarPanel(ventanaPrincipal.panelInsertarGato);
         }
         if (e.getSource() == ventanaPrincipal.panelOpcionesCRUD.jButtonBuscarGato) {
+            ventanaPrincipal.panelConsultarGato.jScrollPaneTablaGatos.setVisible(false);
+            ventanaPrincipal.panelConsultarGato.jButtonInfoGato.setVisible(false);
+            ventanaPrincipal.panelConsultarGato.jButtonLimpiarCampos.setVisible(false);
+            ventanaPrincipal.panelConsultarGato.jTextFieldCodigoEMS.setVisible(false);
+            ventanaPrincipal.panelConsultarGato.jComboBoxRaza.setVisible(false);
+            ventanaPrincipal.panelConsultarGato.jLabelTextoCodigoEMS.setVisible(false);
+            ventanaPrincipal.panelConsultarGato.jLabelTextoRaza.setVisible(false);
+            ventanaPrincipal.panelConsultarGato.jButtonConsultar.setVisible(false);
             ventanaPrincipal.mostrarPanel(ventanaPrincipal.panelConsultarGato);
         }
         if (e.getSource() == ventanaPrincipal.panelOpcionesCRUD.jButtonActualizarGato) {
@@ -126,7 +139,48 @@ public class ControlGrafico implements ActionListener {
         }
         // ActionListener de PanelConsultarGatos
         if (e.getSource() == ventanaPrincipal.panelConsultarGato.jButtonAtras) {
-            ventanaPrincipal.mostrarPanel(ventanaPrincipal.panelOpcionesCRUD);
+            ventanaPrincipal.mostrarPanel(ventanaPrincipal.panelOpcionesCRUD); 
+        }
+        if (e.getSource() == ventanaPrincipal.panelConsultarGato.jButtonConsultar) {
+            if(ventanaPrincipal.panelConsultarGato.jRadioButtonRaza.isSelected()){
+                
+                
+            }else if(ventanaPrincipal.panelConsultarGato.jRadioButtonCodigoEMS.isSelected()){
+                
+                
+            }
+            
+            
+        }
+        if (e.getSource() == ventanaPrincipal.panelConsultarGato.jButtonLimpiarCampos) {
+            ventanaPrincipal.panelConsultarGato.jScrollPaneTablaGatos.setVisible(false);
+            ventanaPrincipal.panelConsultarGato.jButtonInfoGato.setVisible(false);
+            ventanaPrincipal.panelConsultarGato.jButtonLimpiarCampos.setVisible(false);
+            ventanaPrincipal.panelConsultarGato.jTextFieldCodigoEMS.setVisible(false);
+            ventanaPrincipal.panelConsultarGato.jComboBoxRaza.setVisible(false);
+            ventanaPrincipal.panelConsultarGato.jLabelTextoCodigoEMS.setVisible(false);
+            ventanaPrincipal.panelConsultarGato.jLabelTextoRaza.setVisible(false);
+            ventanaPrincipal.panelConsultarGato.jButtonConsultar.setVisible(false);
+            ventanaPrincipal.panelConsultarGato.limpiarCampos();
+        }
+        if (e.getSource() == ventanaPrincipal.panelConsultarGato.jButtonInfoGato) {
+
+        }
+        if (e.getSource() == ventanaPrincipal.panelConsultarGato.jRadioButtonCodigoEMS) {
+            ventanaPrincipal.panelConsultarGato.jLabelTextoRaza.setVisible(false);
+            ventanaPrincipal.panelConsultarGato.jComboBoxRaza.setVisible(false);
+            ventanaPrincipal.panelConsultarGato.jLabelTextoCodigoEMS.setVisible(true);
+            ventanaPrincipal.panelConsultarGato.jTextFieldCodigoEMS.setVisible(true);
+            ventanaPrincipal.panelConsultarGato.jButtonConsultar.setVisible(true);
+            ventanaPrincipal.panelConsultarGato.jButtonLimpiarCampos.setVisible(true);
+        }
+        if (e.getSource() == ventanaPrincipal.panelConsultarGato.jRadioButtonRaza) {
+            ventanaPrincipal.panelConsultarGato.jLabelTextoRaza.setVisible(true);
+            ventanaPrincipal.panelConsultarGato.jComboBoxRaza.setVisible(true);
+            ventanaPrincipal.panelConsultarGato.jLabelTextoCodigoEMS.setVisible(false);
+            ventanaPrincipal.panelConsultarGato.jTextFieldCodigoEMS.setVisible(false);
+            ventanaPrincipal.panelConsultarGato.jButtonConsultar.setVisible(true);
+            ventanaPrincipal.panelConsultarGato.jButtonLimpiarCampos.setVisible(true);
         }
         // Action Listener de PanelModificarGato
         if (e.getSource() == ventanaPrincipal.panelModificarGato.jButtonAtras) {
@@ -209,8 +263,8 @@ public class ControlGrafico implements ActionListener {
     public File pedirArchivoAleatorio() throws NullPointerException, IOException {
         return ventanaPrincipal.pedirDirectorioArchivoAleatorio();
     }
-    
-    public String pedirNombreArchivo(){
+
+    public String pedirNombreArchivo() {
         return ventanaPrincipal.pedirNombreArchivo();
     }
 }

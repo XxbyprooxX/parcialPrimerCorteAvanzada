@@ -5,24 +5,36 @@
 package edu.progAvUD.parcialPrimerCorte.vista;
 
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Andres Felipe
  */
 public class PanelConsultarGato extends javax.swing.JPanel {
-    
+
     public DialogInformacionGato dialogInformacionGato;
+
     /**
      * Creates new form PanelConsultarGato
      */
     public PanelConsultarGato() {
         initComponents();
     }
-    
-    public void crearDialog(JFrame frame){
-        this.dialogInformacionGato = new DialogInformacionGato(frame,"Datos gatos", true);
+
+    public void crearDialog(JFrame frame) {
+        this.dialogInformacionGato = new DialogInformacionGato(frame, "Datos gatos", true);
         dialogInformacionGato.setLocationRelativeTo(frame);
+    }
+
+    public void limpiarCampos() {
+        buttonGroupTipoConsulta.clearSelection();
+        // Reiniciar selección del combo box
+        jComboBoxRaza.setSelectedIndex(0);
+        // Limpiar campo de texto
+        jTextFieldCodigoEMS.setText("");
+        // Limpiar tabla
+        modeloTablaGatos.setRowCount(0);
     }
 
     /**
@@ -34,98 +46,123 @@ public class PanelConsultarGato extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroupTipoConsulta = new javax.swing.ButtonGroup();
         jButtonAtras = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        jRadioButtonRaza = new javax.swing.JRadioButton();
+        jRadioButtonCodigoEMS = new javax.swing.JRadioButton();
+        jComboBoxRaza = new javax.swing.JComboBox<>();
+        jScrollPaneTablaGatos = new javax.swing.JScrollPane();
+        jTableGatos = new javax.swing.JTable();
+        jButtonConsultar = new javax.swing.JButton();
+        jButtonLimpiarCampos = new javax.swing.JButton();
+        jTextFieldCodigoEMS = new javax.swing.JTextField();
+        jButtonInfoGato = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabelTextoRaza = new javax.swing.JLabel();
+        jLabelTextoCodigoEMS = new javax.swing.JLabel();
 
         jButtonAtras.setText("Atras");
 
-        jRadioButton1.setText("jRadioButton1");
+        buttonGroupTipoConsulta.add(jRadioButtonRaza);
+        jRadioButtonRaza.setText("Nombre de Raza");
 
-        jRadioButton2.setText("jRadioButton2");
+        buttonGroupTipoConsulta.add(jRadioButtonCodigoEMS);
+        jRadioButtonCodigoEMS.setText("Codigo EMS");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxRaza.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ABY-Abyssinian", "AMB-American Burmese", "ACL-American Curl Longhair", "ACS-American Curl Shorthair", "ASH-American Shorthair", "AWH-American Wirehair", "ANA-Anatoli", "APL-Aphrodite’s Giant Longhair", "APS-Aphrodite’s Giant Shorthair", "ARM-Arabian Mau", "ASI-Asian", "AUM-Australian Mist", "BAL-Balinese", "BEN-Bengal", "BOM-Bombay", "BRA-Brazilian Shorthair", "BLH-British Longhair", "BRI-British Shorthair", "BUR-Burmese", "BML-Burmilla Longhair", "BMS-Burmilla Shorthair", "CAM-Cashmere", "KKH-Celtic Shorthair", "CEY-Ceylon", "CHA-Chartreux", "CHS-Chausie", "CRX-Cornish Rex", "CYM-Cymric", "DLH-Deutsch-Langhaar", "DRX-Devon Rex", "DSX-Don Sphynx", "MAU-Egyptian Mau", "EXO-Exotic Shorthair", "GRX-German Rex", "HAV-Havana", "SFL-Highland Fold", "PER-Himalayan / Colourpoint", "HHP-Household Pet", "JBL-Japanese Bobtail Longhair", "JBS-Japanese Bobtail Shorthair", "KAN-Kanaani", "KAL-Karelian Bobtail Longhair", "KAS-Karelian Bobtail Shorthair", "KAM-Khao Manee", "KOR-Korat", "KBL-Kurilian Bobtail Langhaar", "KBS-Kurilian Bobtail Shorthair", "LPL-LaPerm Longhair", "LPS-LaPerm Shorthair", "LYS-Lykoi", "MCO-Maine Coon", "MAN-Manx", "MBT-Mekong Bobtail", "MIL-Minuet Longhair", "MIS-Minuet Shorthair", "MNL-Munchkin Longhair", "MNS-Munchkin Shorthair", "NEB-Nebelung", "NFO-Norwegian Forest", "OCI-Ocicat", "OSL-Oriental Semilonghair", "OSH-Oriental Shorthair", "TLH-Original Longhair", "PER-Persian", "PBD-Peterbald", "RGM-Ragamuffin", "RAG-Ragdoll", "RUS-Russian Blue", "SBI-Sacred Birman", "SFS-Scottish Fold", "SRL-Selkirk Rex Longhair", "SRS-Selkirk Rex Shorthair", "SIA-Siamese", "SIB-Siberian cat / Neva Masquerade", "SIN-Singapura", "SNO-Snowshoe", "SOM-Somali", "SPH-Sphynx", "THA-Thai", "TIF-Tiffanie", "TON-Tonkinese", "TOB-Toy Bob", "TUA-Turkish Angora", "TUV-Turkish Van", "URL-Ural Rex Longhair", "URS-Ural Rex Shorthair", "YOR-York" }));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        modeloTablaGatos= new DefaultTableModel(new Object[]{ "ID Gato", "Nombre Gato","CodigoEMS Gato"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        };
+        jTableGatos.setModel(modeloTablaGatos);
+        jScrollPaneTablaGatos.setViewportView(jTableGatos);
 
-        jButton1.setText("jButton1");
+        jButtonConsultar.setText("Consultar");
 
-        jButton2.setText("jButton2");
+        jButtonLimpiarCampos.setText("Limpiar Campos");
 
-        jTextField1.setText("jTextField1");
+        jButtonInfoGato.setText("Ver Informacion del Gato");
 
-        jButton3.setText("jButton3");
+        jLabel1.setText("Seleccione el parametro que decea utilizar para la consulta");
+
+        jLabelTextoRaza.setText("Selecciona la Raza");
+
+        jLabelTextoCodigoEMS.setText("Escriba el Codigo EMS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(124, 124, 124)
+                .addComponent(jButtonLimpiarCampos)
+                .addGap(27, 27, 27)
+                .addComponent(jButtonConsultar)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButtonAtras))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                        .addComponent(jButtonAtras)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 45, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(111, 111, 111)
-                                .addComponent(jButton2)
-                                .addGap(27, 27, 27)
-                                .addComponent(jButton1)
-                                .addGap(87, 87, 87))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(157, 157, 157)
-                                .addComponent(jButton3))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(jRadioButton1)
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButton2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(56, Short.MAX_VALUE))
+                                .addComponent(jScrollPaneTablaGatos, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabelTextoRaza)
+                                            .addComponent(jLabelTextoCodigoEMS))
+                                        .addGap(56, 56, 56)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jComboBoxRaza, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextFieldCodigoEMS, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(82, 82, 82))))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonInfoGato)
+                .addGap(142, 142, 142))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(93, 93, 93)
+                .addComponent(jRadioButtonRaza)
+                .addGap(59, 59, 59)
+                .addComponent(jRadioButtonCodigoEMS)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
-                .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioButtonRaza)
+                    .addComponent(jRadioButtonCodigoEMS))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jComboBoxRaza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelTextoRaza))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldCodigoEMS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelTextoCodigoEMS))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonConsultar)
+                    .addComponent(jButtonLimpiarCampos))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPaneTablaGatos, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonInfoGato)
+                .addGap(12, 12, 12)
                 .addComponent(jButtonAtras)
                 .addContainerGap())
         );
@@ -133,15 +170,20 @@ public class PanelConsultarGato extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.ButtonGroup buttonGroupTipoConsulta;
     public javax.swing.JButton jButtonAtras;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    public javax.swing.JButton jButtonConsultar;
+    public javax.swing.JButton jButtonInfoGato;
+    public javax.swing.JButton jButtonLimpiarCampos;
+    public javax.swing.JComboBox<String> jComboBoxRaza;
+    private javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel jLabelTextoCodigoEMS;
+    public javax.swing.JLabel jLabelTextoRaza;
+    public javax.swing.JRadioButton jRadioButtonCodigoEMS;
+    public javax.swing.JRadioButton jRadioButtonRaza;
+    public javax.swing.JScrollPane jScrollPaneTablaGatos;
+    public DefaultTableModel modeloTablaGatos;
+    public javax.swing.JTable jTableGatos;
+    public javax.swing.JTextField jTextFieldCodigoEMS;
     // End of variables declaration//GEN-END:variables
 }

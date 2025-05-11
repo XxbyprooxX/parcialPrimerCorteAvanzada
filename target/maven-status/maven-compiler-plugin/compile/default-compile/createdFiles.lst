@@ -15,6 +15,7 @@ edu\progAvUD\parcialPrimerCorte\control\ControlGato.class
 edu\progAvUD\parcialPrimerCorte\vista\PanelMostrarGatos$1.class
 edu\progAvUD\parcialPrimerCorte\modelo\Serializacion.class
 edu\progAvUD\parcialPrimerCorte\modelo\ConexionBD.class
+edu\progAvUD\parcialPrimerCorte\vista\PanelConsultarGato$1.class
 edu\progAvUD\parcialPrimerCorte\vista\PanelOpcionesCRUD.class
 edu\progAvUD\parcialPrimerCorte\control\ControlPrincipal.class
 edu\progAvUD\parcialPrimerCorte\vista\PanelOpcionesCRUD$1.class

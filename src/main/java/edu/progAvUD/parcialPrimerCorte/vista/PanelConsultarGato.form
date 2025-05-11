@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.4" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupTipoConsulta">
+    </Component>
+  </NonVisualComponents>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -17,65 +21,91 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
+              <Component id="jButtonLimpiarCampos" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <Component id="jButtonConsultar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Component id="jButtonAtras" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="45" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
-                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+                              <Component id="jScrollPaneTablaGatos" min="-2" pref="375" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane1" alignment="0" min="-2" pref="375" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
-                              <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabelTextoRaza" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabelTextoCodigoEMS" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jComboBoxRaza" min="-2" pref="127" max="-2" attributes="0"/>
+                                          <Component id="jTextFieldCodigoEMS" alignment="0" min="-2" pref="127" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
                           </Group>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
-                      <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jComboBox1" min="-2" pref="127" max="-2" attributes="0"/>
-                          <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField1" alignment="0" min="-2" pref="127" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="56" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jButtonInfoGato" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+              <Component id="jRadioButtonRaza" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+              <Component id="jRadioButtonCodigoEMS" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-              <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="15" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonRaza" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonCodigoEMS" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="275" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jComboBoxRaza" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelTextoRaza" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jTextFieldCodigoEMS" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelTextoCodigoEMS" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButtonConsultar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonLimpiarCampos" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jScrollPaneTablaGatos" min="-2" pref="275" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButton3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jButtonInfoGato" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Component id="jButtonAtras" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -91,71 +121,198 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonRaza">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jRadioButton1"/>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTipoConsulta"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Nombre de Raza"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonCodigoEMS">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jRadioButton2"/>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupTipoConsulta"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Codigo EMS"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="jComboBoxRaza">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="87">
+            <StringItem index="0" value="ABY-Abyssinian"/>
+            <StringItem index="1" value="AMB-American Burmese"/>
+            <StringItem index="2" value="ACL-American Curl Longhair"/>
+            <StringItem index="3" value="ACS-American Curl Shorthair"/>
+            <StringItem index="4" value="ASH-American Shorthair"/>
+            <StringItem index="5" value="AWH-American Wirehair"/>
+            <StringItem index="6" value="ANA-Anatoli"/>
+            <StringItem index="7" value="APL-Aphrodite&#x2019;s Giant Longhair"/>
+            <StringItem index="8" value="APS-Aphrodite&#x2019;s Giant Shorthair"/>
+            <StringItem index="9" value="ARM-Arabian Mau"/>
+            <StringItem index="10" value="ASI-Asian"/>
+            <StringItem index="11" value="AUM-Australian Mist"/>
+            <StringItem index="12" value="BAL-Balinese"/>
+            <StringItem index="13" value="BEN-Bengal"/>
+            <StringItem index="14" value="BOM-Bombay"/>
+            <StringItem index="15" value="BRA-Brazilian Shorthair"/>
+            <StringItem index="16" value="BLH-British Longhair"/>
+            <StringItem index="17" value="BRI-British Shorthair"/>
+            <StringItem index="18" value="BUR-Burmese"/>
+            <StringItem index="19" value="BML-Burmilla Longhair"/>
+            <StringItem index="20" value="BMS-Burmilla Shorthair"/>
+            <StringItem index="21" value="CAM-Cashmere"/>
+            <StringItem index="22" value="KKH-Celtic Shorthair"/>
+            <StringItem index="23" value="CEY-Ceylon"/>
+            <StringItem index="24" value="CHA-Chartreux"/>
+            <StringItem index="25" value="CHS-Chausie"/>
+            <StringItem index="26" value="CRX-Cornish Rex"/>
+            <StringItem index="27" value="CYM-Cymric"/>
+            <StringItem index="28" value="DLH-Deutsch-Langhaar"/>
+            <StringItem index="29" value="DRX-Devon Rex"/>
+            <StringItem index="30" value="DSX-Don Sphynx"/>
+            <StringItem index="31" value="MAU-Egyptian Mau"/>
+            <StringItem index="32" value="EXO-Exotic Shorthair"/>
+            <StringItem index="33" value="GRX-German Rex"/>
+            <StringItem index="34" value="HAV-Havana"/>
+            <StringItem index="35" value="SFL-Highland Fold"/>
+            <StringItem index="36" value="PER-Himalayan / Colourpoint"/>
+            <StringItem index="37" value="HHP-Household Pet"/>
+            <StringItem index="38" value="JBL-Japanese Bobtail Longhair"/>
+            <StringItem index="39" value="JBS-Japanese Bobtail Shorthair"/>
+            <StringItem index="40" value="KAN-Kanaani"/>
+            <StringItem index="41" value="KAL-Karelian Bobtail Longhair"/>
+            <StringItem index="42" value="KAS-Karelian Bobtail Shorthair"/>
+            <StringItem index="43" value="KAM-Khao Manee"/>
+            <StringItem index="44" value="KOR-Korat"/>
+            <StringItem index="45" value="KBL-Kurilian Bobtail Langhaar"/>
+            <StringItem index="46" value="KBS-Kurilian Bobtail Shorthair"/>
+            <StringItem index="47" value="LPL-LaPerm Longhair"/>
+            <StringItem index="48" value="LPS-LaPerm Shorthair"/>
+            <StringItem index="49" value="LYS-Lykoi"/>
+            <StringItem index="50" value="MCO-Maine Coon"/>
+            <StringItem index="51" value="MAN-Manx"/>
+            <StringItem index="52" value="MBT-Mekong Bobtail"/>
+            <StringItem index="53" value="MIL-Minuet Longhair"/>
+            <StringItem index="54" value="MIS-Minuet Shorthair"/>
+            <StringItem index="55" value="MNL-Munchkin Longhair"/>
+            <StringItem index="56" value="MNS-Munchkin Shorthair"/>
+            <StringItem index="57" value="NEB-Nebelung"/>
+            <StringItem index="58" value="NFO-Norwegian Forest"/>
+            <StringItem index="59" value="OCI-Ocicat"/>
+            <StringItem index="60" value="OSL-Oriental Semilonghair"/>
+            <StringItem index="61" value="OSH-Oriental Shorthair"/>
+            <StringItem index="62" value="TLH-Original Longhair"/>
+            <StringItem index="63" value="PER-Persian"/>
+            <StringItem index="64" value="PBD-Peterbald"/>
+            <StringItem index="65" value="RGM-Ragamuffin"/>
+            <StringItem index="66" value="RAG-Ragdoll"/>
+            <StringItem index="67" value="RUS-Russian Blue"/>
+            <StringItem index="68" value="SBI-Sacred Birman"/>
+            <StringItem index="69" value="SFS-Scottish Fold"/>
+            <StringItem index="70" value="SRL-Selkirk Rex Longhair"/>
+            <StringItem index="71" value="SRS-Selkirk Rex Shorthair"/>
+            <StringItem index="72" value="SIA-Siamese"/>
+            <StringItem index="73" value="SIB-Siberian cat / Neva Masquerade"/>
+            <StringItem index="74" value="SIN-Singapura"/>
+            <StringItem index="75" value="SNO-Snowshoe"/>
+            <StringItem index="76" value="SOM-Somali"/>
+            <StringItem index="77" value="SPH-Sphynx"/>
+            <StringItem index="78" value="THA-Thai"/>
+            <StringItem index="79" value="TIF-Tiffanie"/>
+            <StringItem index="80" value="TON-Tonkinese"/>
+            <StringItem index="81" value="TOB-Toy Bob"/>
+            <StringItem index="82" value="TUA-Turkish Angora"/>
+            <StringItem index="83" value="TUV-Turkish Van"/>
+            <StringItem index="84" value="URL-Ural Rex Longhair"/>
+            <StringItem index="85" value="URS-Ural Rex Shorthair"/>
+            <StringItem index="86" value="YOR-York"/>
           </StringArray>
         </Property>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTablaGatos">
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="jTableGatos">
           <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="4">
-                <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                <Column editable="true" title="Title 4" type="java.lang.Object"/>
-              </Table>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="modeloTablaGatos" type="code"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="public DefaultTableModel modeloTablaGatos;"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="modeloTablaGatos= new DefaultTableModel(new Object[]{ &quot;ID Gato&quot;, &quot;Nombre Gato&quot;,&quot;CodigoEMS Gato&quot;}, 0) {&#xd;&#xa;            @Override&#xd;&#xa;            public boolean isCellEditable(int row, int column) {&#xd;&#xa;                return false;&#xd;&#xa;            }&#xd;&#xa;        };"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="jButtonConsultar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jButton1"/>
+        <Property name="text" type="java.lang.String" value="Consultar"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonLimpiarCampos">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Limpiar Campos"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldCodigoEMS">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonInfoGato">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ver Informacion del Gato"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Seleccione el parametro que decea utilizar para la consulta"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JLabel" name="jLabelTextoRaza">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jButton2"/>
+        <Property name="text" type="java.lang.String" value="Selecciona la Raza"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JLabel" name="jLabelTextoCodigoEMS">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
+        <Property name="text" type="java.lang.String" value="Escriba el Codigo EMS"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jButton3"/>
-      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
