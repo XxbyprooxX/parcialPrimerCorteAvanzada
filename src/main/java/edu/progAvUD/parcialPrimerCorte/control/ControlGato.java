@@ -15,12 +15,10 @@ import java.util.ArrayList;
 public class ControlGato {
 
     private ControlPrincipal controlPrincipal;
-    private ArrayList<GatoVO> gatos;
     private GatoDAO gatoDao;
 
     public ControlGato(ControlPrincipal controlPrincipal) {
         this.controlPrincipal = controlPrincipal;
-        this.gatos = new ArrayList<>();
         this.gatoDao = new GatoDAO();
     }
 
@@ -204,11 +202,9 @@ public class ControlGato {
 
         if (consultarCantidadGatos() == 0) {
             insertarGato(gato);
-            System.out.println("Se inserto gato "+ id);
         } else {
             if (verificarGatoRepetido(gato)) {
                 insertarGato(gato);
-                System.out.println("Se inserto gato "+ id);
             } else {
                 controlPrincipal.mostrarMensajeError("No se ha creado el gato" + id + " de propiedades porque ya se encuentra en la Base de Datos");
             }
@@ -219,11 +215,6 @@ public class ControlGato {
     public boolean verificarGatoRepetido(GatoVO gato) {
         ArrayList<GatoVO> gatos = darListaGatos();
         for (GatoVO gatoValidar : gatos) {
-
-            System.out.println(gato.getNombre() + " == " + gatoValidar.getNombre() + "\n"
-                    + gato.getPeso() + " == " + gatoValidar.getPeso() + "\n"
-                    + gato.getEdad() + " == " + gatoValidar.getEdad() + "\n"
-                    + gato.getCodigoEMS() + " == " + gatoValidar.getCodigoEMS() + "\n"+"\n");
 
             if (gato.getNombre().equals(gatoValidar.getNombre())
                     && gato.getPeso().equals(gatoValidar.getPeso())
