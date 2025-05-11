@@ -19,7 +19,6 @@ public class ControlGrafico implements ActionListener {
         this.controlPrincipal = controlPrincipal;
         this.ventanaPrincipal = new VentanaPrincipal(this);
 
-        ventanaPrincipal.jMenuBar1.setVisible(false);
         ventanaPrincipal.mostrarPanel(ventanaPrincipal.panelPrincipal);
         ventanaPrincipal.panelPrincipal.jButtonContinuar.setEnabled(false);
         ventanaPrincipal.panelPrincipal.jButtonPropiedadesGatos.setEnabled(false);
@@ -43,8 +42,7 @@ public class ControlGrafico implements ActionListener {
             verificarBotonesInctivos();
         }
         if (e.getSource() == ventanaPrincipal.panelPrincipal.jButtonContinuar) {
-            ventanaPrincipal.panelPrincipal.setVisible(false);
-            ventanaPrincipal.jMenuBar1.setVisible(true);
+            ventanaPrincipal.mostrarPanel(ventanaPrincipal.panelOpcionesCRUD);
         }
     }
 
