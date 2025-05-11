@@ -55,12 +55,14 @@ public class GatoDAO {
         return numero;
     }
 
-    public ArrayList<GatoVO> darListaGatos(GatoVO gato, ArrayList<GatoVO> gatos) throws SQLException {
+    public ArrayList<GatoVO> darListaGatos() throws SQLException {
         String consulta = "SELECT * FROM gatos";
         connection = ConexionBD.getConnection();
         statement = connection.createStatement();
         resultSet = statement.executeQuery(consulta);
+        ArrayList<GatoVO> gatos = new ArrayList<>();
         while (resultSet.next()) {
+            GatoVO gato = new GatoVO(); 
             gato.setId(resultSet.getInt("id"));
             gato.setNombre(resultSet.getString("nombre"));
             gato.setPeso(resultSet.getString("peso"));

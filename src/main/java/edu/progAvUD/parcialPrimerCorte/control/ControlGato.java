@@ -240,7 +240,6 @@ public class ControlGato {
             return gatoDao.consultarCantidadGatos();
         } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLException ConsultarCantidadGatos");
-            ex.printStackTrace();
         }
         return -1;
     }
@@ -249,7 +248,7 @@ public class ControlGato {
         GatoVO gato = new GatoVO();
         ArrayList<GatoVO> gatos = new ArrayList<>();
         try {
-            return gatoDao.darListaGatos(gato, gatos);
+            return gatoDao.darListaGatos();
         } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLException darListaGatos");
         }
