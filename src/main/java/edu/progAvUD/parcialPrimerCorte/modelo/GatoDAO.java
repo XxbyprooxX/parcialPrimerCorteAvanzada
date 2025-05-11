@@ -27,12 +27,14 @@ public class GatoDAO {
         connection = (Connection) ConexionBD.getConnection();
         statement = connection.createStatement();
         resultSet = statement.executeQuery(consulta);
+        if (resultSet.next()){
         gato.setId(resultSet.getInt("id"));
         gato.setNombre(resultSet.getString("nombre"));
         gato.setPeso(resultSet.getString("peso"));
         gato.setEdad(resultSet.getString("edad"));
         gato.setNombreRaza(resultSet.getString("nombreRaza"));
         gato.setCodigoEMS(resultSet.getString("codigoEMS"));
+        }
         statement.close();
         ConexionBD.desconectar();
         return gato;
@@ -99,9 +101,5 @@ public class GatoDAO {
         statement.close();
         ConexionBD.desconectar();
         return true;
-    }
-
-    public ResultSet getResultSet() {
-        return resultSet;
     }
 }
