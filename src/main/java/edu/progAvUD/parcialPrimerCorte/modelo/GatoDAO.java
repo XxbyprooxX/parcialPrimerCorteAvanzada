@@ -38,20 +38,38 @@ public class GatoDAO {
         return gato;
     }
 
-    public GatoVO darGato(GatoVO gato) throws SQLException {
+    public int consultarCantidadGatos() throws SQLException {
+        String consulta = "SELECT COUNT() FROM gatos";
+        connection = ConexionBD.getConnection();
+        statement = connection.createStatement();
+        resultSet = statement.executeQuery(consulta);
+        int numero = 0;
+        if (resultSet.next()) {
+            numero = resultSet.getInt(1);
+        }
+        resultSet.close();
+        statement.close();
+        ConexionBD.desconectar();
+        return numero;
+    }
+
+    public ArrayList<GatoVO> darListaGatos(GatoVO gato, ArrayList<GatoVO> gatos) throws SQLException {
         String consulta = "SELECT * FROM gatos";
         connection = ConexionBD.getConnection();
         statement = connection.createStatement();
         resultSet = statement.executeQuery(consulta);
-        gato.setId(resultSet.getInt("id"));
-        gato.setNombre(resultSet.getString("nombre"));
-        gato.setPeso(resultSet.getString("peso"));
-        gato.setEdad(resultSet.getString("edad"));
-        gato.setNombreRaza(resultSet.getString("nombreRaza"));
-        gato.setCodigoEMS(resultSet.getString("codigoEMS"));
+        while (resultSet.next()) {
+            gato.setId(resultSet.getInt("id"));
+            gato.setNombre(resultSet.getString("nombre"));
+            gato.setPeso(resultSet.getString("peso"));
+            gato.setEdad(resultSet.getString("edad"));
+            gato.setNombreRaza(resultSet.getString("nombreRaza"));
+            gato.setCodigoEMS(resultSet.getString("codigoEMS"));
+            gatos.add(gato);
+        }
         statement.close();
         ConexionBD.desconectar();
-        return gato;
+        return gatos;
     }
 
     public void insertarGato(GatoVO gato) throws SQLException {
