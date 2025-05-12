@@ -62,6 +62,7 @@ public class ControlGrafico implements ActionListener {
 
         ventanaPrincipal.panelEliminarGato.jButtonAtras.addActionListener(this);
         ventanaPrincipal.panelEliminarGato.jButtonIrAEliminar.addActionListener(this);
+        ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jButtonEliminarGato.addActionListener(this);
     }
 
     @Override
@@ -139,7 +140,7 @@ public class ControlGrafico implements ActionListener {
         // ActionListener de PanelMostrarGatos
         if (e.getSource() == ventanaPrincipal.panelMostrarGatos.jButtonMasInfo) {
             ventanaPrincipal.panelMostrarGatos.crearDialog(ventanaPrincipal);
-            mostrarDatosGatoDialogMostrarGatos(ventanaPrincipal.panelMostrarGatos.dialogInformacionGato, ventanaPrincipal.panelMostrarGatos);
+            mostrarDatosGatoDialog(ventanaPrincipal.panelMostrarGatos.dialogInformacionGato, ventanaPrincipal.panelMostrarGatos);
 
         }
         if (e.getSource() == ventanaPrincipal.panelMostrarGatos.jButtonAtras) {
@@ -173,7 +174,7 @@ public class ControlGrafico implements ActionListener {
         }
         if (e.getSource() == ventanaPrincipal.panelConsultarGato.jButtonInfoGato) {
             ventanaPrincipal.panelConsultarGato.crearDialog(ventanaPrincipal);
-            mostrarDatosGatoDialogMostrarGatos(ventanaPrincipal.panelConsultarGato.dialogInformacionGato, ventanaPrincipal.panelConsultarGato);
+            mostrarDatosGatoDialog(ventanaPrincipal.panelConsultarGato.dialogInformacionGato, ventanaPrincipal.panelConsultarGato);
         }
         if (e.getSource() == ventanaPrincipal.panelConsultarGato.jRadioButtonCodigoEMS) {
             ventanaPrincipal.panelConsultarGato.jLabelTextoRaza.setEnabled(false);
@@ -195,8 +196,7 @@ public class ControlGrafico implements ActionListener {
         if (e.getSource() == ventanaPrincipal.panelModificarGato.jButtonAtras) {
             ventanaPrincipal.mostrarPanel(ventanaPrincipal.panelOpcionesCRUD);
         }
-        if (e.getSource() == ventanaPrincipal.panelModificarGato.jButtonMasInfo) {
-            ventanaPrincipal.panelModificarGato.crearDialog(ventanaPrincipal);
+        if (e.getSource() == ventanaPrincipal.panelModificarGato.jButtonMasInfo) { 
             ventanaPrincipal.panelModificarGato.dialogModificarGato.setVisible(true);
         }
         // Action Listener de PanelEliminarGato
@@ -204,8 +204,19 @@ public class ControlGrafico implements ActionListener {
             ventanaPrincipal.mostrarPanel(ventanaPrincipal.panelOpcionesCRUD);
         }
         if (e.getSource() == ventanaPrincipal.panelEliminarGato.jButtonIrAEliminar) {
-            ventanaPrincipal.panelEliminarGato.crearDialog(ventanaPrincipal);
-            ventanaPrincipal.panelModificarGato.dialogModificarGato.setVisible(true);
+            mostrarDatosGatoDialogEliminar();
+        }
+        if (e.getSource() == ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jButtonEliminarGato) {
+            int filaSeleccionada = ventanaPrincipal.panelEliminarGato.jTable1.getSelectedRow();
+
+            Object IdGatoObject = ventanaPrincipal.panelEliminarGato.jTable1.getValueAt(filaSeleccionada, 0);
+            int idGatoSeleccionado = (IdGatoObject instanceof Integer)
+                    ? (Integer) IdGatoObject
+                    : Integer.parseInt(IdGatoObject.toString());
+            controlPrincipal.eliminarGato(idGatoSeleccionado);
+            ventanaPrincipal.mostrarMensajeExito("Se ha eliminado el gato seleccionado");
+            ventanaPrincipal.panelEliminarGato.dialogEliminarGato.setVisible(false);
+
         }
     }
 
@@ -247,7 +258,40 @@ public class ControlGrafico implements ActionListener {
         }
     }
 
-    public void mostrarDatosGatoDialogMostrarGatos(DialogInformacionGato dialogInformacionGato, JPanel panel) {
+    public void mostrarDatosGatoDialogEliminar() {
+        int filaSeleccionada = ventanaPrincipal.panelEliminarGato.jTable1.getSelectedRow();
+
+        if (filaSeleccionada != -1) { // Verificar que se haya seleccionado una fila
+            Object IdGatoObject = ventanaPrincipal.panelEliminarGato.jTable1.getValueAt(filaSeleccionada, 0);
+            int idGatoSeleccionado = (IdGatoObject instanceof Integer)
+                    ? (Integer) IdGatoObject
+                    : Integer.parseInt(IdGatoObject.toString());
+            Object[] datosGatoSeleccionado = controlPrincipal.pedirConsultaGato(idGatoSeleccionado);
+            ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelIdGato.setText(String.valueOf(datosGatoSeleccionado[0]));
+            ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelNombreGato.setText(String.valueOf(datosGatoSeleccionado[1]));
+            ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelPesoGato.setText(String.valueOf(datosGatoSeleccionado[2]));
+            ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelEdadGato.setText(String.valueOf(datosGatoSeleccionado[3]));
+            ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelRazaGato.setText(String.valueOf(datosGatoSeleccionado[4]));
+            ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelEMSGato.setText(String.valueOf(datosGatoSeleccionado[5]));
+            String codigoEMS = (String) datosGatoSeleccionado[5];
+            String[] atributosGato = codigoEMS.split("/");
+            String color = controlPrincipal.identificarColorCuerpoSegunEMS(new String[]{atributosGato[1]});
+            String patron = controlPrincipal.identificarPatronSegunEMS(new String[]{atributosGato[2]});
+            String colorOjos = controlPrincipal.identificarColorOjosSegunEMS(new String[]{atributosGato[3]});
+            String cola = controlPrincipal.identificarColaSegunEMS(new String[]{atributosGato[4]});
+            ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelColorGato.setText(color);
+            ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelPatronGato.setText(patron);
+            ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelColorOjosGato.setText(colorOjos);
+            ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelColaGato.setText(cola);
+
+            ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelImagenGato.setIcon(new ImageIcon(System.getProperty("user.dir") + "/src/main/java/edu/progAvUD/parcialPrimerCorte/Imagenes/" + atributosGato[0] + ".png"));
+            ventanaPrincipal.panelEliminarGato.dialogEliminarGato.setVisible(true);
+        } else {
+            ventanaPrincipal.mostrarMensajeError("No se ha seleccionado ninguna fila de la tabla.");
+        }
+    }
+
+    public void mostrarDatosGatoDialog(DialogInformacionGato dialogInformacionGato, JPanel panel) {
         JTable tablaGatos = null;
 
         if (panel instanceof PanelMostrarGatos) {

@@ -18,14 +18,13 @@ public class PanelModificarGato extends javax.swing.JPanel {
     /**
      * Creates new form PanelModificarGato
      */
-    public PanelModificarGato() {
+    public PanelModificarGato(JFrame frame) {
+        this.dialogModificarGato = new DialogModificarGato(frame,"Datos gatos", true);
+        dialogModificarGato.setLocationRelativeTo(frame);
         initComponents();
     }
     
-    public void crearDialog(JFrame frame){
-        this.dialogModificarGato = new DialogModificarGato(frame,"Datos gatos", true);
-        dialogModificarGato.setLocationRelativeTo(frame);
-    }
+    
     
     
     /**

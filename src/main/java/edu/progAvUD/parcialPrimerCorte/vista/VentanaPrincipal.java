@@ -33,9 +33,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.panelPrincipal = new PanelPrincipal();
         this.panelOpcionesCRUD = new PanelOpcionesCRUD();
         this.panelConsultarGato = new PanelConsultarGato();
-        this.panelEliminarGato = new PanelEliminarGato();
+        this.panelEliminarGato = new PanelEliminarGato(this);
         this.panelInsertarGato = new PanelInsertarGato();
-        this.panelModificarGato = new PanelModificarGato();
+        this.panelModificarGato = new PanelModificarGato(this);
         this.panelMostrarGatos = new PanelMostrarGatos();
     }
 

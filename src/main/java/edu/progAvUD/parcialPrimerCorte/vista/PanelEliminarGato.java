@@ -18,14 +18,13 @@ public class PanelEliminarGato extends javax.swing.JPanel {
     /**
      * Creates new form PanelEliminarGato
      */
-    public PanelEliminarGato() {
+    public PanelEliminarGato(JFrame frame) {
+        this.dialogEliminarGato = new DialogEliminarGato(frame,"Eliminar Gato", true);
+        dialogEliminarGato.setLocationRelativeTo(frame);
         initComponents();
     }
     
-    public void crearDialog(JFrame frame){
-        this.dialogEliminarGato = new DialogEliminarGato(frame,"Eliminar Gato", true);
-        dialogEliminarGato.setLocationRelativeTo(frame);
-    }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
