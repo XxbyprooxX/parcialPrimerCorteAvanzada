@@ -1,21 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package edu.progAvUD.parcialPrimerCorte.vista;
 
 /**
- *
- * @author Andres Felipe
+ * Diálogo modal utilizado para confirmar o realizar la eliminación de un gato registrado.
+ * Forma parte de la interfaz gráfica de usuario para gestionar datos de gatos.
+ * 
+ * Autor: Andres Felipe
  */
 public class DialogEliminarGato extends javax.swing.JDialog {
 
     /**
-     * Creates new form DialogEliminarGato
+     * Constructor de la clase DialogEliminarGato. Inicializa el diálogo con su
+     * marco padre, un título personalizado y la propiedad de modalidad.
+     *
+     * @param parent el JFrame al cual estará asociado este diálogo
+     * @param mensajeDialog el título que se mostrará en la barra del diálogo
+     * @param modal define si el diálogo debe ser modal (true) o no (false)
      */
-    public DialogEliminarGato(java.awt.Frame parent,String mensajeDialog, boolean modal) {
-        super(parent,mensajeDialog, modal);
-        initComponents();
+    public DialogEliminarGato(java.awt.Frame parent, String mensajeDialog, boolean modal) {
+        super(parent, mensajeDialog, modal);
+        initComponents(); // Método que configura y organiza los componentes gráficos del formulario
     }
 
     /**
@@ -256,7 +259,6 @@ public class DialogEliminarGato extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton jButtonEliminarGato;

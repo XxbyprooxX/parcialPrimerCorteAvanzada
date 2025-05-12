@@ -1,11 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package edu.progAvUD.parcialPrimerCorte.vista;
 
 /**
- *
+ *Este panel sirve para poder insertar un nuevo gato a la base de datos
  * @author Andres Felipe
  */
 public class PanelInsertarGato extends javax.swing.JPanel {
@@ -17,6 +13,9 @@ public class PanelInsertarGato extends javax.swing.JPanel {
         initComponents();
     }
 
+    /**
+     *Este metodo limpia los campos del panel
+     */
     public void limpiarCampos() {
         // Restablece JComboBox al primer elemento (índice 0)
         jComboBoxColaGato.setSelectedIndex(0);

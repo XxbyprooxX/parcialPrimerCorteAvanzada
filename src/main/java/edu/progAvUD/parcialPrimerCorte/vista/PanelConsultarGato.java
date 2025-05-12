@@ -1,39 +1,52 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package edu.progAvUD.parcialPrimerCorte.vista;
 
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * Panel encargado de gestionar la consulta de información sobre gatos. Contiene
+ * un diálogo para mostrar los datos detallados y métodos para manejar la
+ * interfaz.
  *
  * @author Andres Felipe
  */
 public class PanelConsultarGato extends javax.swing.JPanel {
 
+    /**
+     * Diálogo utilizado para mostrar información detallada del gato
+     * seleccionado.
+     */
     public DialogInformacionGato dialogInformacionGato;
 
     /**
-     * Creates new form PanelConsultarGato
+     * Constructor del panel PanelConsultarGato. Inicializa los componentes
+     * gráficos del panel.
      */
     public PanelConsultarGato() {
         initComponents();
     }
 
+    /**
+     * Crea y configura el diálogo modal que muestra la información específica
+     * del gato.
+     *
+     * @param frame el JFrame padre al que estará asociado el diálogo
+     */
     public void crearDialog(JFrame frame) {
         this.dialogInformacionGato = new DialogInformacionGato(frame, "Datos gatos", true);
-        dialogInformacionGato.setLocationRelativeTo(frame);
+        dialogInformacionGato.setLocationRelativeTo(frame); // Centrar respecto al frame
     }
 
+    /**
+     * Limpia todos los campos del panel de consulta: - Deselecciona los botones
+     * del grupo. - Reinicia la selección del combo box de raza. - Borra el
+     * contenido del campo de texto del código EMS. - Vacía la tabla de
+     * resultados.
+     */
     public void limpiarCampos() {
         buttonGroupTipoConsulta.clearSelection();
-        // Reiniciar selección del combo box
         jComboBoxRaza.setSelectedIndex(0);
-        // Limpiar campo de texto
         jTextFieldCodigoEMS.setText("");
-        // Limpiar tabla
         modeloTablaGatos.setRowCount(0);
     }
 

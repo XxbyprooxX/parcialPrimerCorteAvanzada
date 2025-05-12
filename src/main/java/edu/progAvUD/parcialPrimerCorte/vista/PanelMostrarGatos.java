@@ -1,29 +1,41 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package edu.progAvUD.parcialPrimerCorte.vista;
 
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * En este panel se muestra cada gato que esta en la base de datos
  *
  * @author Andres Felipe
  */
 public class PanelMostrarGatos extends javax.swing.JPanel {
-    
+
+    /**
+     * Este es una referencia con la que se comunica en caso de querer
+     * especificar una gato
+     */
     public DialogInformacionGato dialogInformacionGato;
+
     /**
      * Creates new form PanelMostrarGatos
      */
     public PanelMostrarGatos() {
         initComponents();
-        
+
     }
-    
-    public void crearDialog(JFrame frame){
-        this.dialogInformacionGato = new DialogInformacionGato(frame,"Datos gatos", true);
+
+    /**
+     * Crea y configura un diálogo modal que muestra información específica del
+     * gato.
+     *
+     * @param frame el JFrame padre sobre el cual se posicionará el diálogo
+     */
+    public void crearDialog(JFrame frame) {
+        // Se crea una instancia del diálogo de información del gato con el título "Datos gatos"
+        // El parámetro "true" indica que el diálogo es modal (bloquea la interacción con otras ventanas hasta que se cierre)
+        this.dialogInformacionGato = new DialogInformacionGato(frame, "Datos gatos", true);
+
+        // Se posiciona el diálogo en el centro del frame padre
         dialogInformacionGato.setLocationRelativeTo(frame);
     }
 
@@ -91,5 +103,5 @@ public class PanelMostrarGatos extends javax.swing.JPanel {
     public DefaultTableModel modeloTablaGatos;
     public javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
-    
+
 }

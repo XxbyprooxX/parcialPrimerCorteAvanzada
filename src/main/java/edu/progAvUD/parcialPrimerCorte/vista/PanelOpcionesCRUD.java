@@ -1,13 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package edu.progAvUD.parcialPrimerCorte.vista;
 
 import javax.swing.ImageIcon;
 
 /**
- *
+ *Esta clase es el menu para que la persona elimine, consulte o vea las cosas de la base de datos
  * @author Ganimedes
  */
 public class PanelOpcionesCRUD extends javax.swing.JPanel {

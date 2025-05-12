@@ -1,21 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package edu.progAvUD.parcialPrimerCorte.vista;
 
 /**
+ * Diálogo utilizado para modificar los datos de un gato. Hereda de JDialog y es
+ * modal para bloquear la interacción con otras ventanas mientras está abierto.
  *
  * @author Andres Felipe
  */
 public class DialogModificarGato extends javax.swing.JDialog {
 
     /**
-     * Creates new form DialogModificarGato
+     * Constructor del diálogo DialogModificarGato. Inicializa el diálogo con el
+     * título, el marco padre y si es modal o no.
+     *
+     * @param parent el marco (ventana) padre al que estará asociado el diálogo
+     * @param mensajeDialog el título que se mostrará en la barra del diálogo
+     * @param modal indica si el diálogo será modal (bloquea otras ventanas) o
+     * no
      */
-    public DialogModificarGato(java.awt.Frame parent,String mensajeDialog, boolean modal) {
-        super(parent,mensajeDialog, modal);
-        initComponents();
+    public DialogModificarGato(java.awt.Frame parent, String mensajeDialog, boolean modal) {
+        super(parent, mensajeDialog, modal);
+        initComponents(); // Inicializa los componentes visuales del formulario
     }
 
     /**

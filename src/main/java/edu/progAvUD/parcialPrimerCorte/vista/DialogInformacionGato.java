@@ -1,21 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package edu.progAvUD.parcialPrimerCorte.vista;
 
 /**
+ * Diálogo modal que muestra información detallada de un gato. Este componente
+ * se utiliza para visualizar atributos específicos de un gato en una interfaz
+ * emergente.
  *
- * @author Andres Felipe
+ * Autor: Andres Felipe
  */
 public class DialogInformacionGato extends javax.swing.JDialog {
 
     /**
-     * Creates new form DialogInformacionGato
+     * Constructor de la clase DialogInformacionGato. Inicializa el diálogo con
+     * un marco padre, un título personalizado y la opción de ser modal.
+     *
+     * @param parent el marco principal (JFrame) al que estará asociado el
+     * diálogo
+     * @param mensajeDialog el texto que aparecerá como título del diálogo
+     * @param modal indica si el diálogo es modal (bloquea interacción con otras
+     * ventanas) o no
      */
-    public DialogInformacionGato(java.awt.Frame parent,String mensajeDialog, boolean modal) {
-        super(parent,mensajeDialog, modal);
-        initComponents();
+    public DialogInformacionGato(java.awt.Frame parent, String mensajeDialog, boolean modal) {
+        super(parent, mensajeDialog, modal);
+        initComponents(); // Método generado automáticamente que inicializa los elementos gráficos
     }
 
     /**
