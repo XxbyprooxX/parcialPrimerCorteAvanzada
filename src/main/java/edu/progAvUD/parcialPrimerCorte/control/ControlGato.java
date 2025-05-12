@@ -353,7 +353,7 @@ public class ControlGato {
         GatoVO gato = new GatoVO();
         Object[] datosGato = new Object[6];
         try {
-            GatoVO gatoCompleto = gatoDao.consultarGato(id, gato);
+            GatoVO gatoCompleto = gatoDao.consultarGatoPorId(id, gato);
             datosGato[0] = gatoCompleto.getId();
             datosGato[1] = gatoCompleto.getNombre();
             datosGato[2] = gatoCompleto.getPeso();
@@ -367,31 +367,25 @@ public class ControlGato {
         }
         return null;
     }
-
-    /**
-     * Consulta el gato segun un dato referente
-     *
-     * @param datoBuscado es el dato identificador
-     */
-    public Object[] pedirConsultaGato(String datoBuscado) {
-        GatoVO gato = new GatoVO();
-        Object[] datosGato = new Object[6];
-        try {
-            GatoVO gatoCompleto = gatoDao.consultarGato(datoBuscado, gato);
-            datosGato[0] = gatoCompleto.getId();
-            datosGato[1] = gatoCompleto.getNombre();
-            datosGato[2] = gatoCompleto.getPeso();
-            datosGato[3] = gatoCompleto.getEdad();
-            datosGato[4] = gatoCompleto.getNombreRaza();
-            datosGato[5] = gatoCompleto.getCodigoEMS();
-            return datosGato;
-        } catch (SQLException ex) {
-            controlPrincipal.mostrarMensajeError("SQLException pedirConsultaGato");
+    
+    public Object[][] pedirConsultaGatos(String factorBusqueda,String datoBuscado) {
+        try{
+            ArrayList<GatoVO> gatos = gatoDao.consultarGatos(factorBusqueda, datoBuscado);
+            Object[][] arrGatos = new Object[gatos.size()][3];
+            for (int i = 0; i < gatos.size(); i++) {
+                GatoVO g = gatos.get(i);
+                arrGatos[i][0] = g.getId();
+                arrGatos[i][1] = g.getNombre();
+                arrGatos[i][2] = g.getCodigoEMS();
+            }
+            return arrGatos;  
+        }catch(SQLException ex){
+            controlPrincipal.mostrarMensajeError("SQLException pedirConsultaGatos");
             ex.printStackTrace();
         }
         return null;
     }
-
+    
     /**
      * Este metodo se encarga de insertar un gato a la tabla
      *

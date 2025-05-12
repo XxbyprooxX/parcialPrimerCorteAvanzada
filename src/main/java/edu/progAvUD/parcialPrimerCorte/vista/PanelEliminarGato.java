@@ -4,19 +4,29 @@
  */
 package edu.progAvUD.parcialPrimerCorte.vista;
 
+import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Andres Felipe
  */
 public class PanelEliminarGato extends javax.swing.JPanel {
 
+    public DialogEliminarGato dialogEliminarGato;
+    
     /**
      * Creates new form PanelEliminarGato
      */
     public PanelEliminarGato() {
         initComponents();
     }
-
+    
+    public void crearDialog(JFrame frame){
+        this.dialogEliminarGato = new DialogEliminarGato(frame,"Eliminar Gato", true);
+        dialogEliminarGato.setLocationRelativeTo(frame);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,22 +37,60 @@ public class PanelEliminarGato extends javax.swing.JPanel {
     private void initComponents() {
 
         jButtonAtras = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButtonIrAEliminar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         jButtonAtras.setText("Atras");
+
+        modeloTablaGatos= new DefaultTableModel(new Object[]{ "ID Gato", "Nombre Gato","CodigoEMS Gato"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        jTable1.setModel(modeloTablaGatos);
+        jScrollPane1.setViewportView(jTable1);
+
+        jButtonIrAEliminar.setText("Ir a Eliminar Gato");
+
+        jLabel1.setText("Seleccione el gato que desea eliminar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButtonAtras)
-                .addContainerGap(322, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonIrAEliminar)
+                                .addGap(164, 164, 164))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButtonAtras)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(132, 132, 132)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(271, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
+                .addComponent(jLabel1)
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonIrAEliminar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonAtras)
                 .addContainerGap())
         );
@@ -51,5 +99,10 @@ public class PanelEliminarGato extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton jButtonAtras;
+    public javax.swing.JButton jButtonIrAEliminar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    public DefaultTableModel modeloTablaGatos;
+    public javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

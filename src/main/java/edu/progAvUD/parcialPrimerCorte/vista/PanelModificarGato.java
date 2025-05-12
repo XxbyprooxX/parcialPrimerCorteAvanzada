@@ -4,19 +4,30 @@
  */
 package edu.progAvUD.parcialPrimerCorte.vista;
 
+import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Andres Felipe
  */
 public class PanelModificarGato extends javax.swing.JPanel {
 
+    public DialogModificarGato dialogModificarGato;
+    
     /**
      * Creates new form PanelModificarGato
      */
     public PanelModificarGato() {
         initComponents();
     }
-
+    
+    public void crearDialog(JFrame frame){
+        this.dialogModificarGato = new DialogModificarGato(frame,"Datos gatos", true);
+        dialogModificarGato.setLocationRelativeTo(frame);
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,22 +38,60 @@ public class PanelModificarGato extends javax.swing.JPanel {
     private void initComponents() {
 
         jButtonAtras = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButtonMasInfo = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         jButtonAtras.setText("Atras");
+
+        modeloTablaGatos= new DefaultTableModel(new Object[]{ "ID Gato", "Nombre Gato","CodigoEMS Gato"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        jTable1.setModel(modeloTablaGatos);
+        jScrollPane1.setViewportView(jTable1);
+
+        jButtonMasInfo.setText("Ir a Modificar");
+
+        jLabel1.setText("Seleccione el gato que desea modificar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButtonAtras)
-                .addContainerGap(322, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jButtonAtras))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(124, 124, 124)
+                                .addComponent(jLabel1)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 6, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(180, 180, 180)
+                .addComponent(jButtonMasInfo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(271, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
+                .addComponent(jLabel1)
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonMasInfo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonAtras)
                 .addContainerGap())
         );
@@ -51,5 +100,10 @@ public class PanelModificarGato extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton jButtonAtras;
+    public javax.swing.JButton jButtonMasInfo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    public DefaultTableModel modeloTablaGatos;
+    public javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

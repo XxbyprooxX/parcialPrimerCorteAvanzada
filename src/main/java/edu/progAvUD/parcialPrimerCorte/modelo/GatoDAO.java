@@ -7,9 +7,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- * Clase que actúa como Data Access Object (DAO) para la entidad Gato.
- * Se encarga de manejar las operaciones CRUD sobre la tabla `gatos` de la base de datos.
- * 
+ * Clase que actúa como Data Access Object (DAO) para la entidad Gato. Se
+ * encarga de manejar las operaciones CRUD sobre la tabla `gatos` de la base de
+ * datos.
+ *
  * Autor: Andres Felipe
  */
 public class GatoDAO {
@@ -28,14 +29,15 @@ public class GatoDAO {
     }
 
     /**
-     * Consulta un gato por ID (entero) y carga sus datos en el objeto GatoVO dado.
-     * 
+     * Consulta un gato por ID (entero) y carga sus datos en el objeto GatoVO
+     * dado.
+     *
      * @param id Identificador del gato.
      * @param gato Objeto GatoVO que será llenado con los datos encontrados.
      * @return GatoVO con los datos del gato si se encuentra.
      * @throws SQLException Si ocurre un error al ejecutar la consulta.
      */
-    public GatoVO consultarGato(int id, GatoVO gato) throws SQLException {
+    public GatoVO consultarGatoPorId(int id, GatoVO gato) throws SQLException {
         String consulta = "SELECT * FROM gatos where id='" + id + "'";
         connection = ConexionBD.getConnection();
         statement = connection.createStatement();
@@ -54,35 +56,38 @@ public class GatoDAO {
     }
 
     /**
-     * Consulta un gato por ID representado como String.
-     * (Útil si el ID proviene de una entrada textual).
-     * 
+     * Consulta un gato por ID representado como String. (Útil si el ID proviene
+     * de una entrada textual).
+     *
      * @param datoBuscado ID del gato en formato String.
      * @param gato Objeto a llenar con los datos del gato encontrado.
      * @return GatoVO con los datos consultados.
      * @throws SQLException Si ocurre un error al ejecutar la consulta.
      */
-    public GatoVO consultarGato(String datoBuscado, GatoVO gato) throws SQLException {
-        String consulta = "SELECT * FROM gatos where id='" + datoBuscado + "'";
+    public ArrayList<GatoVO> consultarGatos(String factorBusqueda, String datoBuscado) throws SQLException {
+        String consulta = "SELECT * FROM gatos where " + factorBusqueda + "='" + datoBuscado + "'";
         connection = ConexionBD.getConnection();
         statement = connection.createStatement();
         resultSet = statement.executeQuery(consulta);
-        if (resultSet.next()) {
+        ArrayList<GatoVO> gatos = new ArrayList<>();
+        while (resultSet.next()) {
+            GatoVO gato = new GatoVO();
             gato.setId(resultSet.getInt("id"));
             gato.setNombre(resultSet.getString("nombre"));
             gato.setPeso(resultSet.getString("peso"));
             gato.setEdad(resultSet.getString("edad"));
             gato.setNombreRaza(resultSet.getString("nombreRaza"));
             gato.setCodigoEMS(resultSet.getString("codigoEMS"));
+            gatos.add(gato);
         }
         statement.close();
         ConexionBD.desconectar();
-        return gato;
+        return gatos;
     }
 
     /**
      * Consulta la cantidad total de gatos en la base de datos.
-     * 
+     *
      * @return Número de gatos registrados.
      * @throws SQLException Si ocurre un error al ejecutar la consulta.
      */
@@ -103,7 +108,7 @@ public class GatoDAO {
 
     /**
      * Obtiene la lista completa de gatos registrados en la base de datos.
-     * 
+     *
      * @return Lista de objetos GatoVO.
      * @throws SQLException Si ocurre un error al ejecutar la consulta.
      */
@@ -130,14 +135,14 @@ public class GatoDAO {
 
     /**
      * Inserta un nuevo gato en la base de datos.
-     * 
+     *
      * @param gato Objeto GatoVO con la información del gato a registrar.
      * @throws SQLException Si ocurre un error al insertar.
      */
     public void insertarGato(GatoVO gato) throws SQLException {
-        String insercion = "INSERT INTO `gatos`(`nombre`, `peso`, `edad`, `nombreRaza`, `codigoEMS`) " +
-                "VALUES ('" + gato.getNombre() + "'," + gato.getPeso() + "," + gato.getEdad() + ",'" +
-                gato.getNombreRaza() + "','" + gato.getCodigoEMS() + "')";
+        String insercion = "INSERT INTO `gatos`(`nombre`, `peso`, `edad`, `nombreRaza`, `codigoEMS`) "
+                + "VALUES ('" + gato.getNombre() + "'," + gato.getPeso() + "," + gato.getEdad() + ",'"
+                + gato.getNombreRaza() + "','" + gato.getCodigoEMS() + "')";
         connection = ConexionBD.getConnection();
         statement = connection.createStatement();
         statement.executeUpdate(insercion);
@@ -147,7 +152,7 @@ public class GatoDAO {
 
     /**
      * Elimina un gato de la base de datos según su ID.
-     * 
+     *
      * @param id Identificador del gato.
      * @return true si se ejecuta correctamente.
      * @throws SQLException Si ocurre un error al ejecutar la eliminación.
@@ -164,7 +169,7 @@ public class GatoDAO {
 
     /**
      * Modifica un atributo específico de un gato en la base de datos.
-     * 
+     *
      * @param id ID del gato a modificar.
      * @param atributoModificado Nombre del campo a modificar.
      * @param valorModificado Nuevo valor que se quiere asignar.

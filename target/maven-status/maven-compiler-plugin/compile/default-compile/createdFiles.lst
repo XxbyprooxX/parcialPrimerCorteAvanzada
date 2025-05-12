@@ -6,6 +6,8 @@ edu\progAvUD\parcialPrimerCorte\vista\PanelEliminarGato.class
 edu\progAvUD\parcialPrimerCorte\vista\VentanaPrincipal.class
 edu\progAvUD\parcialPrimerCorte\vista\PanelInsertarGato.class
 edu\progAvUD\parcialPrimerCorte\vista\PanelOpcionesCRUD$2.class
+edu\progAvUD\parcialPrimerCorte\vista\PanelModificarGato$1.class
+edu\progAvUD\parcialPrimerCorte\vista\DialogModificarGato.class
 edu\progAvUD\parcialPrimerCorte\vista\PanelMostrarGatos.class
 edu\progAvUD\parcialPrimerCorte\vista\PanelPrincipal.class
 edu\progAvUD\parcialPrimerCorte\control\ControlGrafico.class
@@ -15,7 +17,9 @@ edu\progAvUD\parcialPrimerCorte\control\ControlGato.class
 edu\progAvUD\parcialPrimerCorte\vista\PanelMostrarGatos$1.class
 edu\progAvUD\parcialPrimerCorte\modelo\Serializacion.class
 edu\progAvUD\parcialPrimerCorte\modelo\ConexionBD.class
+edu\progAvUD\parcialPrimerCorte\vista\DialogEliminarGato.class
 edu\progAvUD\parcialPrimerCorte\vista\PanelConsultarGato$1.class
+edu\progAvUD\parcialPrimerCorte\vista\PanelEliminarGato$1.class
 edu\progAvUD\parcialPrimerCorte\vista\PanelOpcionesCRUD.class
 edu\progAvUD\parcialPrimerCorte\control\ControlPrincipal.class
 edu\progAvUD\parcialPrimerCorte\vista\PanelOpcionesCRUD$1.class

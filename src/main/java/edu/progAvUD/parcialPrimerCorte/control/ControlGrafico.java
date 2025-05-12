@@ -1,11 +1,16 @@
 package edu.progAvUD.parcialPrimerCorte.control;
 
+import edu.progAvUD.parcialPrimerCorte.vista.DialogInformacionGato;
+import edu.progAvUD.parcialPrimerCorte.vista.PanelConsultarGato;
+import edu.progAvUD.parcialPrimerCorte.vista.PanelMostrarGatos;
 import edu.progAvUD.parcialPrimerCorte.vista.VentanaPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import javax.swing.JTable;
 
 /**
  *
@@ -53,8 +58,10 @@ public class ControlGrafico implements ActionListener {
         ventanaPrincipal.panelConsultarGato.jRadioButtonCodigoEMS.addActionListener(this);
 
         ventanaPrincipal.panelModificarGato.jButtonAtras.addActionListener(this);
+        ventanaPrincipal.panelModificarGato.jButtonMasInfo.addActionListener(this);
 
         ventanaPrincipal.panelEliminarGato.jButtonAtras.addActionListener(this);
+        ventanaPrincipal.panelEliminarGato.jButtonIrAEliminar.addActionListener(this);
     }
 
     @Override
@@ -90,21 +97,22 @@ public class ControlGrafico implements ActionListener {
             ventanaPrincipal.mostrarPanel(ventanaPrincipal.panelInsertarGato);
         }
         if (e.getSource() == ventanaPrincipal.panelOpcionesCRUD.jButtonBuscarGato) {
-            ventanaPrincipal.panelConsultarGato.jScrollPaneTablaGatos.setVisible(false);
-            ventanaPrincipal.panelConsultarGato.jButtonInfoGato.setVisible(false);
-            ventanaPrincipal.panelConsultarGato.jButtonLimpiarCampos.setVisible(false);
-            ventanaPrincipal.panelConsultarGato.jTextFieldCodigoEMS.setVisible(false);
-            ventanaPrincipal.panelConsultarGato.jComboBoxRaza.setVisible(false);
-            ventanaPrincipal.panelConsultarGato.jLabelTextoCodigoEMS.setVisible(false);
-            ventanaPrincipal.panelConsultarGato.jLabelTextoRaza.setVisible(false);
-            ventanaPrincipal.panelConsultarGato.jButtonConsultar.setVisible(false);
+            ventanaPrincipal.panelConsultarGato.jButtonInfoGato.setEnabled(false);
+            ventanaPrincipal.panelConsultarGato.jButtonLimpiarCampos.setEnabled(false);
+            ventanaPrincipal.panelConsultarGato.jTextFieldCodigoEMS.setEnabled(false);
+            ventanaPrincipal.panelConsultarGato.jComboBoxRaza.setEnabled(false);
+            ventanaPrincipal.panelConsultarGato.jLabelTextoCodigoEMS.setEnabled(false);
+            ventanaPrincipal.panelConsultarGato.jLabelTextoRaza.setEnabled(false);
+            ventanaPrincipal.panelConsultarGato.jButtonConsultar.setEnabled(false);
             ventanaPrincipal.mostrarPanel(ventanaPrincipal.panelConsultarGato);
         }
         if (e.getSource() == ventanaPrincipal.panelOpcionesCRUD.jButtonActualizarGato) {
             ventanaPrincipal.mostrarPanel(ventanaPrincipal.panelModificarGato);
+            cargarDatosTablaPanelModificarGatos();
         }
         if (e.getSource() == ventanaPrincipal.panelOpcionesCRUD.jButtonEliminarGato) {
             ventanaPrincipal.mostrarPanel(ventanaPrincipal.panelEliminarGato);
+            cargarDatosTablaPanelEliminarGatos();
         }
         // ActionListener de PanelInsertarGato
         if (e.getSource() == ventanaPrincipal.panelInsertarGato.jButtonInsertarGato) {
@@ -131,7 +139,7 @@ public class ControlGrafico implements ActionListener {
         // ActionListener de PanelMostrarGatos
         if (e.getSource() == ventanaPrincipal.panelMostrarGatos.jButtonMasInfo) {
             ventanaPrincipal.panelMostrarGatos.crearDialog(ventanaPrincipal);
-            mostrarDatosGatoDialogMostrarGatos();
+            mostrarDatosGatoDialogMostrarGatos(ventanaPrincipal.panelMostrarGatos.dialogInformacionGato, ventanaPrincipal.panelMostrarGatos);
 
         }
         if (e.getSource() == ventanaPrincipal.panelMostrarGatos.jButtonAtras) {
@@ -139,55 +147,65 @@ public class ControlGrafico implements ActionListener {
         }
         // ActionListener de PanelConsultarGatos
         if (e.getSource() == ventanaPrincipal.panelConsultarGato.jButtonAtras) {
-            ventanaPrincipal.mostrarPanel(ventanaPrincipal.panelOpcionesCRUD); 
+            ventanaPrincipal.mostrarPanel(ventanaPrincipal.panelOpcionesCRUD);
         }
         if (e.getSource() == ventanaPrincipal.panelConsultarGato.jButtonConsultar) {
-            ventanaPrincipal.panelMostrarGatos.crearDialog(ventanaPrincipal);
-            if(ventanaPrincipal.panelConsultarGato.jRadioButtonRaza.isSelected()){
+            ventanaPrincipal.panelConsultarGato.jScrollPaneTablaGatos.setVisible(true);
+            ventanaPrincipal.panelConsultarGato.jTableGatos.setVisible(true);
+            ventanaPrincipal.panelConsultarGato.jButtonInfoGato.setEnabled(true);
+            if (ventanaPrincipal.panelConsultarGato.jRadioButtonRaza.isSelected()) {
                 String nombreRaza = (String) ventanaPrincipal.panelConsultarGato.jComboBoxRaza.getSelectedItem();
-                consultarGato(nombreRaza);
-            }else if(ventanaPrincipal.panelConsultarGato.jRadioButtonCodigoEMS.isSelected()){
+                cargarDatosTablaPanelConsultarGatos("nombreRaza", nombreRaza);
+            } else if (ventanaPrincipal.panelConsultarGato.jRadioButtonCodigoEMS.isSelected()) {
                 String codigoEMS = (String) ventanaPrincipal.panelConsultarGato.jTextFieldCodigoEMS.getText();
-                consultarGato(codigoEMS);
+                cargarDatosTablaPanelConsultarGatos("codigoEMS", codigoEMS);
             }
         }
         if (e.getSource() == ventanaPrincipal.panelConsultarGato.jButtonLimpiarCampos) {
-            ventanaPrincipal.panelConsultarGato.jScrollPaneTablaGatos.setVisible(false);
-            ventanaPrincipal.panelConsultarGato.jButtonInfoGato.setVisible(false);
-            ventanaPrincipal.panelConsultarGato.jButtonLimpiarCampos.setVisible(false);
-            ventanaPrincipal.panelConsultarGato.jTextFieldCodigoEMS.setVisible(false);
-            ventanaPrincipal.panelConsultarGato.jComboBoxRaza.setVisible(false);
-            ventanaPrincipal.panelConsultarGato.jLabelTextoCodigoEMS.setVisible(false);
-            ventanaPrincipal.panelConsultarGato.jLabelTextoRaza.setVisible(false);
-            ventanaPrincipal.panelConsultarGato.jButtonConsultar.setVisible(false);
+            ventanaPrincipal.panelConsultarGato.jButtonInfoGato.setEnabled(false);
+            ventanaPrincipal.panelConsultarGato.jButtonLimpiarCampos.setEnabled(false);
+            ventanaPrincipal.panelConsultarGato.jTextFieldCodigoEMS.setEnabled(false);
+            ventanaPrincipal.panelConsultarGato.jComboBoxRaza.setEnabled(false);
+            ventanaPrincipal.panelConsultarGato.jLabelTextoCodigoEMS.setEnabled(false);
+            ventanaPrincipal.panelConsultarGato.jLabelTextoRaza.setEnabled(false);
+            ventanaPrincipal.panelConsultarGato.jButtonConsultar.setEnabled(false);
             ventanaPrincipal.panelConsultarGato.limpiarCampos();
         }
         if (e.getSource() == ventanaPrincipal.panelConsultarGato.jButtonInfoGato) {
-
+            ventanaPrincipal.panelConsultarGato.crearDialog(ventanaPrincipal);
+            mostrarDatosGatoDialogMostrarGatos(ventanaPrincipal.panelConsultarGato.dialogInformacionGato, ventanaPrincipal.panelConsultarGato);
         }
         if (e.getSource() == ventanaPrincipal.panelConsultarGato.jRadioButtonCodigoEMS) {
-            ventanaPrincipal.panelConsultarGato.jLabelTextoRaza.setVisible(false);
-            ventanaPrincipal.panelConsultarGato.jComboBoxRaza.setVisible(false);
-            ventanaPrincipal.panelConsultarGato.jLabelTextoCodigoEMS.setVisible(true);
-            ventanaPrincipal.panelConsultarGato.jTextFieldCodigoEMS.setVisible(true);
-            ventanaPrincipal.panelConsultarGato.jButtonConsultar.setVisible(true);
-            ventanaPrincipal.panelConsultarGato.jButtonLimpiarCampos.setVisible(true);
+            ventanaPrincipal.panelConsultarGato.jLabelTextoRaza.setEnabled(false);
+            ventanaPrincipal.panelConsultarGato.jComboBoxRaza.setEnabled(false);
+            ventanaPrincipal.panelConsultarGato.jLabelTextoCodigoEMS.setEnabled(true);
+            ventanaPrincipal.panelConsultarGato.jTextFieldCodigoEMS.setEnabled(true);
+            ventanaPrincipal.panelConsultarGato.jButtonConsultar.setEnabled(true);
+            ventanaPrincipal.panelConsultarGato.jButtonLimpiarCampos.setEnabled(true);
         }
         if (e.getSource() == ventanaPrincipal.panelConsultarGato.jRadioButtonRaza) {
-            ventanaPrincipal.panelConsultarGato.jLabelTextoRaza.setVisible(true);
-            ventanaPrincipal.panelConsultarGato.jComboBoxRaza.setVisible(true);
-            ventanaPrincipal.panelConsultarGato.jLabelTextoCodigoEMS.setVisible(false);
-            ventanaPrincipal.panelConsultarGato.jTextFieldCodigoEMS.setVisible(false);
-            ventanaPrincipal.panelConsultarGato.jButtonConsultar.setVisible(true);
-            ventanaPrincipal.panelConsultarGato.jButtonLimpiarCampos.setVisible(true);
+            ventanaPrincipal.panelConsultarGato.jLabelTextoRaza.setEnabled(true);
+            ventanaPrincipal.panelConsultarGato.jComboBoxRaza.setEnabled(true);
+            ventanaPrincipal.panelConsultarGato.jLabelTextoCodigoEMS.setEnabled(false);
+            ventanaPrincipal.panelConsultarGato.jTextFieldCodigoEMS.setEnabled(false);
+            ventanaPrincipal.panelConsultarGato.jButtonConsultar.setEnabled(true);
+            ventanaPrincipal.panelConsultarGato.jButtonLimpiarCampos.setEnabled(true);
         }
         // Action Listener de PanelModificarGato
         if (e.getSource() == ventanaPrincipal.panelModificarGato.jButtonAtras) {
             ventanaPrincipal.mostrarPanel(ventanaPrincipal.panelOpcionesCRUD);
         }
+        if (e.getSource() == ventanaPrincipal.panelModificarGato.jButtonMasInfo) {
+            ventanaPrincipal.panelModificarGato.crearDialog(ventanaPrincipal);
+            ventanaPrincipal.panelModificarGato.dialogModificarGato.setVisible(true);
+        }
         // Action Listener de PanelEliminarGato
         if (e.getSource() == ventanaPrincipal.panelEliminarGato.jButtonAtras) {
             ventanaPrincipal.mostrarPanel(ventanaPrincipal.panelOpcionesCRUD);
+        }
+        if (e.getSource() == ventanaPrincipal.panelEliminarGato.jButtonIrAEliminar) {
+            ventanaPrincipal.panelEliminarGato.crearDialog(ventanaPrincipal);
+            ventanaPrincipal.panelModificarGato.dialogModificarGato.setVisible(true);
         }
     }
 
@@ -205,61 +223,76 @@ public class ControlGrafico implements ActionListener {
         }
     }
 
-    public void mostrarDatosGatoDialogMostrarGatos() {
-        int filaSeleccionada = ventanaPrincipal.panelMostrarGatos.jTable1.getSelectedRow();
+    public void cargarDatosTablaPanelEliminarGatos() {
+        Object[][] datosGatos = controlPrincipal.darListaGatosObject();
+        ventanaPrincipal.panelEliminarGato.modeloTablaGatos.setRowCount(0);
+        for (Object[] fila : datosGatos) {
+            ventanaPrincipal.panelEliminarGato.modeloTablaGatos.addRow(fila);
+        }
+    }
 
-        if (filaSeleccionada != -1) { // Verificar que se haya seleccionado una fila
-            Object IdGatoObject = ventanaPrincipal.panelMostrarGatos.jTable1.getValueAt(filaSeleccionada, 0);
-            int idGatoSeleccionado = (IdGatoObject instanceof Integer)
-                    ? (Integer) IdGatoObject
-                    : Integer.parseInt(IdGatoObject.toString());
-            Object[] datosGatoSeleccionado = controlPrincipal.pedirConsultaGato(idGatoSeleccionado);
-            ventanaPrincipal.panelMostrarGatos.dialogInformacionGato.jLabelIdGato.setText(String.valueOf(datosGatoSeleccionado[0]));
-            ventanaPrincipal.panelMostrarGatos.dialogInformacionGato.jLabelNombreGato.setText(String.valueOf(datosGatoSeleccionado[1]));
-            ventanaPrincipal.panelMostrarGatos.dialogInformacionGato.jLabelPesoGato.setText(String.valueOf(datosGatoSeleccionado[2]));
-            ventanaPrincipal.panelMostrarGatos.dialogInformacionGato.jLabelEdadGato.setText(String.valueOf(datosGatoSeleccionado[3]));
-            ventanaPrincipal.panelMostrarGatos.dialogInformacionGato.jLabelRazaGato.setText(String.valueOf(datosGatoSeleccionado[4]));
-            ventanaPrincipal.panelMostrarGatos.dialogInformacionGato.jLabelEMSGato.setText(String.valueOf(datosGatoSeleccionado[5]));
-            String codigoEMS = (String) datosGatoSeleccionado[5];
-            String[] atributosGato = codigoEMS.split("/");
-            String color = controlPrincipal.identificarColorCuerpoSegunEMS(new String[]{atributosGato[1]});
-            String patron = controlPrincipal.identificarPatronSegunEMS(new String[]{atributosGato[2]});
-            String colorOjos = controlPrincipal.identificarColorOjosSegunEMS(new String[]{atributosGato[3]});
-            String cola = controlPrincipal.identificarColaSegunEMS(new String[]{atributosGato[4]});
-            ventanaPrincipal.panelMostrarGatos.dialogInformacionGato.jLabelColorGato.setText(color);
-            ventanaPrincipal.panelMostrarGatos.dialogInformacionGato.jLabelPatronGato.setText(patron);
-            ventanaPrincipal.panelMostrarGatos.dialogInformacionGato.jLabelColorOjosGato.setText(colorOjos);
-            ventanaPrincipal.panelMostrarGatos.dialogInformacionGato.jLabelColaGato.setText(cola);
+    public void cargarDatosTablaPanelModificarGatos() {
+        Object[][] datosGatos = controlPrincipal.darListaGatosObject();
+        ventanaPrincipal.panelModificarGato.modeloTablaGatos.setRowCount(0);
+        for (Object[] fila : datosGatos) {
+            ventanaPrincipal.panelModificarGato.modeloTablaGatos.addRow(fila);
+        }
+    }
 
-            //ventanaPrincipal.panelMostrarGatos.dialogInformacionGato.jLabelImagenGato.setIcon(new ImageIcon(System.getProperty("user.dir") + "/src/main/java/edu/progAvUD/parcialPrimerCorte/Imagenes/"+atributosGato[0]+".png"));
-            ventanaPrincipal.panelMostrarGatos.dialogInformacionGato.setVisible(true);
-        } else {
-            ventanaPrincipal.mostrarMensajeError("No se ha seleccionado ninguna fila de la tabla.");
+    public void cargarDatosTablaPanelConsultarGatos(String factorBusqueda, String datoBuscado) {
+        Object[][] datosGatos = controlPrincipal.pedirConsultaGatos(factorBusqueda, datoBuscado);
+        ventanaPrincipal.panelConsultarGato.modeloTablaGatos.setRowCount(0);
+        for (Object[] fila : datosGatos) {
+            ventanaPrincipal.panelConsultarGato.modeloTablaGatos.addRow(fila);
+        }
+    }
+
+    public void mostrarDatosGatoDialogMostrarGatos(DialogInformacionGato dialogInformacionGato, JPanel panel) {
+        JTable tablaGatos = null;
+
+        if (panel instanceof PanelMostrarGatos) {
+            tablaGatos = ventanaPrincipal.panelMostrarGatos.jTable1;
+        } else if (panel instanceof PanelConsultarGato) {
+            tablaGatos = ventanaPrincipal.panelConsultarGato.jTableGatos;
         }
 
+        if (tablaGatos != null) {
+            int filaSeleccionada = tablaGatos.getSelectedRow();
+
+            if (filaSeleccionada != -1) { // Verificar que se haya seleccionado una fila
+                int idGatoSeleccionado = obtenerIdGatoSeleccionado(tablaGatos, filaSeleccionada);
+                Object[] datosGatoSeleccionado = controlPrincipal.pedirConsultaGato(idGatoSeleccionado);
+                actualizarDialogInformacionGato(dialogInformacionGato, datosGatoSeleccionado);
+                dialogInformacionGato.setVisible(true);
+            } else {
+                ventanaPrincipal.mostrarMensajeError("No se ha seleccionado ninguna fila de la tabla.");
+            }
+        }
     }
-    
-    public void consultarGato(String datoBuscado){
-        Object[] datosGatoSeleccionado = controlPrincipal.pedirConsultaGato(datoBuscado);
-            ventanaPrincipal.panelMostrarGatos.dialogInformacionGato.jLabelIdGato.setText(String.valueOf(datosGatoSeleccionado[0]));
-            ventanaPrincipal.panelMostrarGatos.dialogInformacionGato.jLabelNombreGato.setText(String.valueOf(datosGatoSeleccionado[1]));
-            ventanaPrincipal.panelMostrarGatos.dialogInformacionGato.jLabelPesoGato.setText(String.valueOf(datosGatoSeleccionado[2]));
-            ventanaPrincipal.panelMostrarGatos.dialogInformacionGato.jLabelEdadGato.setText(String.valueOf(datosGatoSeleccionado[3]));
-            ventanaPrincipal.panelMostrarGatos.dialogInformacionGato.jLabelRazaGato.setText(String.valueOf(datosGatoSeleccionado[4]));
-        ventanaPrincipal.panelMostrarGatos.dialogInformacionGato.jLabelEMSGato.setText(String.valueOf(datosGatoSeleccionado[5]));
+
+    private int obtenerIdGatoSeleccionado(JTable tablaGatos, int filaSeleccionada) {
+        Object IdGatoObject = tablaGatos.getValueAt(filaSeleccionada, 0);
+        return (IdGatoObject instanceof Integer)
+                ? (Integer) IdGatoObject
+                : Integer.parseInt(IdGatoObject.toString());
+    }
+
+    private void actualizarDialogInformacionGato(DialogInformacionGato dialogInformacionGato, Object[] datosGatoSeleccionado) {
+        dialogInformacionGato.jLabelIdGato.setText(String.valueOf(datosGatoSeleccionado[0]));
+        dialogInformacionGato.jLabelNombreGato.setText(String.valueOf(datosGatoSeleccionado[1]));
+        dialogInformacionGato.jLabelPesoGato.setText(String.valueOf(datosGatoSeleccionado[2]));
+        dialogInformacionGato.jLabelEdadGato.setText(String.valueOf(datosGatoSeleccionado[3]));
+        dialogInformacionGato.jLabelRazaGato.setText(String.valueOf(datosGatoSeleccionado[4]));
+        dialogInformacionGato.jLabelEMSGato.setText(String.valueOf(datosGatoSeleccionado[5]));
+
         String codigoEMS = (String) datosGatoSeleccionado[5];
         String[] atributosGato = codigoEMS.split("/");
-        String color = controlPrincipal.identificarColorCuerpoSegunEMS(new String[]{atributosGato[1]});
-        String patron = controlPrincipal.identificarPatronSegunEMS(new String[]{atributosGato[2]});
-        String colorOjos = controlPrincipal.identificarColorOjosSegunEMS(new String[]{atributosGato[3]});
-        String cola = controlPrincipal.identificarColaSegunEMS(new String[]{atributosGato[4]});
-        ventanaPrincipal.panelMostrarGatos.dialogInformacionGato.jLabelColorGato.setText(color);
-        ventanaPrincipal.panelMostrarGatos.dialogInformacionGato.jLabelPatronGato.setText(patron);
-        ventanaPrincipal.panelMostrarGatos.dialogInformacionGato.jLabelColorOjosGato.setText(colorOjos);
-        ventanaPrincipal.panelMostrarGatos.dialogInformacionGato.jLabelColaGato.setText(cola);
+        dialogInformacionGato.jLabelColorGato.setText(controlPrincipal.identificarColorCuerpoSegunEMS(new String[]{atributosGato[1]}));
+        dialogInformacionGato.jLabelPatronGato.setText(controlPrincipal.identificarPatronSegunEMS(new String[]{atributosGato[2]}));
+        dialogInformacionGato.jLabelColorOjosGato.setText(controlPrincipal.identificarColorOjosSegunEMS(new String[]{atributosGato[3]}));
+        dialogInformacionGato.jLabelColaGato.setText(controlPrincipal.identificarColaSegunEMS(new String[]{atributosGato[4]}));
 
-        //ventanaPrincipal.panelMostrarGatos.dialogInformacionGato.jLabelImagenGato.setIcon(new ImageIcon(System.getProperty("user.dir") + "/src/main/java/edu/progAvUD/parcialPrimerCorte/Imagenes/"+atributosGato[0]+".png"));
-        ventanaPrincipal.panelMostrarGatos.dialogInformacionGato.setVisible(true);
+        dialogInformacionGato.jLabelImagenGato.setIcon(new ImageIcon(System.getProperty("user.dir") + "/src/main/java/edu/progAvUD/parcialPrimerCorte/Imagenes/" + atributosGato[0] + ".png"));
     }
 
     public File pedirArchivoPropiedades() {

@@ -203,8 +203,8 @@ public class ControlPrincipal {
      *
      * @param datoBuscado
      */
-    public Object[] pedirConsultaGato(String datoBuscado) {
-        return controlGato.pedirConsultaGato(datoBuscado);
+    public Object[][] pedirConsultaGatos(String factorBusqueda,String datoBuscado) {
+        return controlGato.pedirConsultaGatos(factorBusqueda,datoBuscado);
     }
 
     /**
