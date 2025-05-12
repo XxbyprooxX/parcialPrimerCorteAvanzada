@@ -373,14 +373,23 @@ public class ControlGato {
      *
      * @param datoBuscado es el dato identificador
      */
-    public void pedirConsultaGato(String datoBuscado) {
+    public Object[] pedirConsultaGato(String datoBuscado) {
         GatoVO gato = new GatoVO();
+        Object[] datosGato = new Object[6];
         try {
-            gatoDao.consultarGato(datoBuscado, gato);
+            GatoVO gatoCompleto = gatoDao.consultarGato(datoBuscado, gato);
+            datosGato[0] = gatoCompleto.getId();
+            datosGato[1] = gatoCompleto.getNombre();
+            datosGato[2] = gatoCompleto.getPeso();
+            datosGato[3] = gatoCompleto.getEdad();
+            datosGato[4] = gatoCompleto.getNombreRaza();
+            datosGato[5] = gatoCompleto.getCodigoEMS();
+            return datosGato;
         } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLException pedirConsultaGato");
             ex.printStackTrace();
         }
+        return null;
     }
 
     /**

@@ -203,8 +203,8 @@ public class ControlPrincipal {
      *
      * @param datoBuscado
      */
-    public void pedirConsultaGato(String datoBuscado) {
-        controlGato.pedirConsultaGato(datoBuscado);
+    public Object[] pedirConsultaGato(String datoBuscado) {
+        return controlGato.pedirConsultaGato(datoBuscado);
     }
 
     /**
@@ -308,6 +308,7 @@ public class ControlPrincipal {
     }
 
     public String pedirNombreArchivo() {
+        controlGrafico.mostrarMensajeExito("Porfavor escriba como desea guardar el archivo");
         return controlGrafico.pedirNombreArchivo();
     }
 }
