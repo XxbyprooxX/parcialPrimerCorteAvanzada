@@ -59,6 +59,7 @@ public class ControlGrafico implements ActionListener {
 
         ventanaPrincipal.panelModificarGato.jButtonAtras.addActionListener(this);
         ventanaPrincipal.panelModificarGato.jButtonMasInfo.addActionListener(this);
+        ventanaPrincipal.panelModificarGato.dialogModificarGato.jButtonRealizarCambios.addActionListener(this);
 
         ventanaPrincipal.panelEliminarGato.jButtonAtras.addActionListener(this);
         ventanaPrincipal.panelEliminarGato.jButtonIrAEliminar.addActionListener(this);
@@ -196,8 +197,19 @@ public class ControlGrafico implements ActionListener {
         if (e.getSource() == ventanaPrincipal.panelModificarGato.jButtonAtras) {
             ventanaPrincipal.mostrarPanel(ventanaPrincipal.panelOpcionesCRUD);
         }
-        if (e.getSource() == ventanaPrincipal.panelModificarGato.jButtonMasInfo) { 
-            ventanaPrincipal.panelModificarGato.dialogModificarGato.setVisible(true);
+        if (e.getSource() == ventanaPrincipal.panelModificarGato.jButtonMasInfo) {
+            mostrarDatosGatoDialogModificar();
+        }
+        if (e.getSource() == ventanaPrincipal.panelModificarGato.dialogModificarGato.jButtonRealizarCambios) {
+            if(modificarDatosGato()){
+                mostrarMensajeExito("Se han hecho los cambios");
+                ventanaPrincipal.panelModificarGato.dialogModificarGato.setVisible(false);
+                cargarDatosTablaPanelModificarGatos();
+            } else{
+                mostrarMensajeError("El campo del nombre esta vacio");
+            }
+            
+            
         }
         // Action Listener de PanelEliminarGato
         if (e.getSource() == ventanaPrincipal.panelEliminarGato.jButtonAtras) {
@@ -209,13 +221,12 @@ public class ControlGrafico implements ActionListener {
         if (e.getSource() == ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jButtonEliminarGato) {
             int filaSeleccionada = ventanaPrincipal.panelEliminarGato.jTable1.getSelectedRow();
 
-            Object IdGatoObject = ventanaPrincipal.panelEliminarGato.jTable1.getValueAt(filaSeleccionada, 0);
-            int idGatoSeleccionado = (IdGatoObject instanceof Integer)
-                    ? (Integer) IdGatoObject
-                    : Integer.parseInt(IdGatoObject.toString());
+            int idGatoSeleccionado = obtenerIdGatoSeleccionado(ventanaPrincipal.panelEliminarGato.jTable1, filaSeleccionada);
+
             controlPrincipal.eliminarGato(idGatoSeleccionado);
             ventanaPrincipal.mostrarMensajeExito("Se ha eliminado el gato seleccionado");
             ventanaPrincipal.panelEliminarGato.dialogEliminarGato.setVisible(false);
+            cargarDatosTablaPanelEliminarGatos();
 
         }
     }
@@ -255,6 +266,45 @@ public class ControlGrafico implements ActionListener {
         ventanaPrincipal.panelConsultarGato.modeloTablaGatos.setRowCount(0);
         for (Object[] fila : datosGatos) {
             ventanaPrincipal.panelConsultarGato.modeloTablaGatos.addRow(fila);
+        }
+    }
+
+    public void mostrarDatosGatoDialogModificar() {
+        int filaSeleccionada = ventanaPrincipal.panelModificarGato.jTable1.getSelectedRow();
+
+        if (filaSeleccionada != -1) { // Verificar que se haya seleccionado una fila
+            Object IdGatoObject = ventanaPrincipal.panelModificarGato.jTable1.getValueAt(filaSeleccionada, 0);
+            int idGatoSeleccionado = (IdGatoObject instanceof Integer)
+                    ? (Integer) IdGatoObject
+                    : Integer.parseInt(IdGatoObject.toString());
+            Object[] datosGatoSeleccionado = controlPrincipal.pedirConsultaGato(idGatoSeleccionado);
+            ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelIdGato.setText(String.valueOf(datosGatoSeleccionado[0]));
+            ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelNombreGato.setText(String.valueOf(datosGatoSeleccionado[1]));
+            ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelPesoGato.setText(String.valueOf(datosGatoSeleccionado[2]));
+            ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelEdadGato.setText(String.valueOf(datosGatoSeleccionado[3]));
+            ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelRazaGato.setText(String.valueOf(datosGatoSeleccionado[4]));
+            ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelEMSGato.setText(String.valueOf(datosGatoSeleccionado[5]));
+            String codigoEMS = (String) datosGatoSeleccionado[5];
+            String[] atributosGato = codigoEMS.split("/");
+            String color = controlPrincipal.identificarColorCuerpoSegunEMS(new String[]{atributosGato[1]});
+            String patron = controlPrincipal.identificarPatronSegunEMS(new String[]{atributosGato[2]});
+            String colorOjos = controlPrincipal.identificarColorOjosSegunEMS(new String[]{atributosGato[3]});
+            String cola = controlPrincipal.identificarColaSegunEMS(new String[]{atributosGato[4]});
+            ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelColorGato.setText(color);
+            ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelPatronGato.setText(patron);
+            ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelColorOjosGato.setText(colorOjos);
+            ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelColaGato.setText(cola);
+
+            ventanaPrincipal.panelModificarGato.dialogModificarGato.jTextFieldNombre.setText(String.valueOf(datosGatoSeleccionado[1]));
+            double peso = Double.parseDouble(datosGatoSeleccionado[2].toString());
+            int edad = Integer.parseInt(datosGatoSeleccionado[3].toString());
+            ventanaPrincipal.panelModificarGato.dialogModificarGato.jSpinnerPeso.setValue(peso);
+            ventanaPrincipal.panelModificarGato.dialogModificarGato.jSpinnerEdad.setValue(edad);
+
+            ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelImagenGato.setIcon(new ImageIcon(System.getProperty("user.dir") + "/src/main/java/edu/progAvUD/parcialPrimerCorte/Imagenes/" + atributosGato[0] + ".png"));
+            ventanaPrincipal.panelModificarGato.dialogModificarGato.setVisible(true);
+        } else {
+            ventanaPrincipal.mostrarMensajeError("No se ha seleccionado ninguna fila de la tabla.");
         }
     }
 
@@ -337,6 +387,36 @@ public class ControlGrafico implements ActionListener {
         dialogInformacionGato.jLabelColaGato.setText(controlPrincipal.identificarColaSegunEMS(new String[]{atributosGato[4]}));
 
         dialogInformacionGato.jLabelImagenGato.setIcon(new ImageIcon(System.getProperty("user.dir") + "/src/main/java/edu/progAvUD/parcialPrimerCorte/Imagenes/" + atributosGato[0] + ".png"));
+    }
+
+    private boolean modificarDatosGato() {
+        int filaSeleccionada = ventanaPrincipal.panelModificarGato.jTable1.getSelectedRow();
+
+        int idGatoSeleccionado = obtenerIdGatoSeleccionado(ventanaPrincipal.panelModificarGato.jTable1, filaSeleccionada);
+
+        String nombreActual = ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelNombreGato.getText();
+        String pesoActual = ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelPesoGato.getText();
+        String edadActual = ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelEdadGato.getText();
+        String nombreCambio = ventanaPrincipal.panelModificarGato.dialogModificarGato.jTextFieldNombre.getText();
+        Double pesoDouble = (Double) ventanaPrincipal.panelModificarGato.dialogModificarGato.jSpinnerPeso.getValue();
+        double pesoRedondeado = Math.round(pesoDouble * 100.0) / 100.0;
+        String pesoCambio = pesoRedondeado + "";
+        int edadInt = (int) ventanaPrincipal.panelModificarGato.dialogModificarGato.jSpinnerEdad.getValue();
+        String edadCambio = edadInt + "";
+
+        if (nombreCambio.isBlank()) {
+            return false;
+        }
+        if (!nombreActual.equals(nombreCambio)) {
+            controlPrincipal.modificarGato(idGatoSeleccionado, "nombre", nombreCambio);
+        }
+        if (!pesoActual.equals(pesoCambio)) {
+            controlPrincipal.modificarGato(idGatoSeleccionado, "peso", pesoCambio);
+        }
+        if (!edadActual.equals(edadCambio)) {
+            controlPrincipal.modificarGato(idGatoSeleccionado, "edad", edadCambio);
+        }
+        return true;
     }
 
     public File pedirArchivoPropiedades() {

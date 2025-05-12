@@ -431,6 +431,15 @@ public class ControlGato {
             ex.printStackTrace();
         }
     }
+    
+    public void modificarGato(int id, String factorACambiar, String valorModificado){
+        try{
+            gatoDao.modificarGato(id, factorACambiar, valorModificado);
+        } catch(SQLException ex){
+            controlPrincipal.mostrarMensajeError("SQLException modificarGato");
+            ex.printStackTrace();
+        }
+    }
 
     /**
      * Este metodo comprueba si el dato si es un double o un int

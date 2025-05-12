@@ -157,14 +157,14 @@ public class GatoDAO {
      * @return true si se ejecuta correctamente.
      * @throws SQLException Si ocurre un error al ejecutar la eliminación.
      */
-    public boolean eliminarGato(int id) throws SQLException {
+    public void eliminarGato(int id) throws SQLException {
         String consulta = "DELETE FROM gatos where id='" + id + "'";
         connection = ConexionBD.getConnection();
         statement = connection.createStatement();
         statement.executeUpdate(consulta);
         statement.close();
         ConexionBD.desconectar();
-        return true;
+        
     }
 
     /**
@@ -176,13 +176,13 @@ public class GatoDAO {
      * @return true si la actualización fue exitosa.
      * @throws SQLException Si ocurre un error al ejecutar la modificación.
      */
-    public boolean modificarGato(int id, String atributoModificado, String valorModificado) throws SQLException {
-        String consulta = "UPDATE gatos SET " + atributoModificado + " = " + valorModificado + " WHERE id = '" + id + "'";
+    public void modificarGato(int id, String factorACambiar, String valorModificado) throws SQLException {
+        String consulta = "UPDATE gatos SET " + factorACambiar + " = '" + valorModificado + "' WHERE id = '" + id + "'";
         connection = ConexionBD.getConnection();
         statement = connection.createStatement();
         statement.executeUpdate(consulta);
         statement.close();
         ConexionBD.desconectar();
-        return true;
+        
     }
 }
