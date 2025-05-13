@@ -1,12 +1,13 @@
 package edu.progAvUD.parcialPrimerCorte.control;
 
-import edu.progAvUD.parcialPrimerCorte.modelo.ConexionArchivoAleatorio;
-import edu.progAvUD.parcialPrimerCorte.modelo.ConexionBD;
-import edu.progAvUD.parcialPrimerCorte.modelo.ConexionPropiedades;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
+
+import edu.progAvUD.parcialPrimerCorte.modelo.ConexionArchivoAleatorio;
+import edu.progAvUD.parcialPrimerCorte.modelo.ConexionBD;
+import edu.progAvUD.parcialPrimerCorte.modelo.ConexionPropiedades;
 
 /**
  * Se encarga de hacer de tunel comunicador, crear y precargar documentos
@@ -120,6 +121,9 @@ public class ControlPrincipal {
         do {
             String nombreBase = pedirNombreArchivo();
             if (nombreBase == null || nombreBase.trim().isEmpty()) {
+                System.exit(0);
+            }
+            if (nombreBase.trim().isEmpty()) {
                 controlGrafico.mostrarMensajeError("Debe ingresar un nombre de archivo válido.");
                 continue;
             }

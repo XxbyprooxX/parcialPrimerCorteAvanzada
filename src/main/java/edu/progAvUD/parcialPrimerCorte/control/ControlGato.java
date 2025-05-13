@@ -505,8 +505,22 @@ public class ControlGato {
      * Crea la serializacion para poder escribir el documento
      */
     public void crearSerializacion() {
+        String nombreArchivo = null;
+        boolean cancelado = false;
+        do {
+            nombreArchivo = controlPrincipal.pedirNombreArchivo();
+            if (nombreArchivo == null || nombreArchivo.trim().isEmpty()) {
+                cancelado = true;
+                break;
+            }
+            break;
+        } while (true);
+
+        if (cancelado) {
+            return;
+        }
+
         boolean flag = true;
-        String nombreArchivo = controlPrincipal.pedirNombreArchivo() + ".bin";
         Serializacion serializacion = null;
         do {
             try {
@@ -514,8 +528,9 @@ public class ControlGato {
                 File carpetaSeleccionada = controlPrincipal.crearArchivoSerializado();
                 if (carpetaSeleccionada == null || !carpetaSeleccionada.isDirectory()) {
                     controlPrincipal.mostrarMensajeError("Debe seleccionar una carpeta válida.");
+                    continue;
                 }
-                File archivo = new File(carpetaSeleccionada, nombreArchivo);
+                File archivo = new File(carpetaSeleccionada, nombreArchivo + ".bin");
                 serializacion = new Serializacion(archivo);
                 if (serializacion != null) {
                     flag = false;
