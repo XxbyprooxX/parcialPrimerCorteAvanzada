@@ -89,22 +89,25 @@ public class ControlPrincipal {
                     }
                     String raza = propiedadesGatos.getProperty("gato" + i + ".raza");
                     String color = propiedadesGatos.getProperty("gato" + i + ".color");
+                    String cantidadBlanco = propiedadesGatos.getProperty("gato" + i + ".cantidadBlanco");
                     String patron = propiedadesGatos.getProperty("gato" + i + ".patron");
+                    String puntosColor = propiedadesGatos.getProperty("gato" + i + ".puntosColor");
                     String colorOjos = propiedadesGatos.getProperty("gato" + i + ".colorOjos");
                     String cola = propiedadesGatos.getProperty("gato" + i + ".cola");
-                    controlGato.crearGato(i, nombre, peso, edad, raza, color, patron, colorOjos, cola);
+                    controlGato.crearGato(i, nombre, peso, edad, raza, color, cantidadBlanco, patron, puntosColor, cola, colorOjos);
                 }
                 flag = false;
                 controlGrafico.mostrarMensajeExito("Se han creado correctamente los gatos");
             } catch (IOException ex) {
                 controlGrafico.mostrarMensajeError("No se pudo cargar el archivo propiedades de los gatos");
-                flag = true;
+                System.exit(0);
             } catch (NumberFormatException ex) {
                 controlGrafico.mostrarMensajeError("El texto no es un valor valido");
-                flag = true;
+                System.exit(0);
             } catch (Exception ex) {
                 controlGrafico.mostrarMensajeError("Algun dato del gato no corresponde");
-                flag = true;
+                ex.printStackTrace();
+                System.exit(0);
             }
         } while (flag);
     }
@@ -195,7 +198,7 @@ public class ControlPrincipal {
      * @param id identificador
      */
     public Object[] pedirConsultaGato(int id) {
-        return controlGato.pedirConsultaGato(id);
+            return controlGato.pedirConsultaGato(id);
     }
 
     /**
@@ -219,8 +222,8 @@ public class ControlPrincipal {
      * @param colorOjos del gato
      * @param cola del gato
      */
-    public void crearInsercionGato(String nombre, String peso, String edad, String raza, String color, String patron, String colorOjos, String cola) {
-        controlGato.crearInsercionGato(nombre, peso, edad, raza, color, patron, colorOjos, cola);
+    public void crearInsercionGato(String nombre, String peso, String edad, String raza, String color, String cantidadBlanco, String patron, String puntosColor, String cola, String colorOjos) {
+        controlGato.crearInsercionGato(nombre, peso, edad, raza, color, cantidadBlanco, patron, puntosColor, cola, colorOjos);
     }
 
     /**
@@ -305,6 +308,14 @@ public class ControlPrincipal {
 
     public String identificarColorOjosSegunEMS(String[] divisionColorOjos) {
         return controlGato.identificarColorOjosSegunEMS(divisionColorOjos);
+    }
+    
+    public String identificarCantidadBlancosSegunEMS(String[] divisionCantidadBlancos){
+        return controlGato.identificarCantidadBlancoSegunEMS(divisionCantidadBlancos);
+    }
+    
+    public String identificarPuntosColorSegunEMS(String[] divisionPuntosColor){
+        return controlGato.identificarPuntosColorSegunEMS(divisionPuntosColor);
     }
 
     public void crearSerializacion() {

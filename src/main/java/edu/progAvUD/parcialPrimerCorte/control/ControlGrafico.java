@@ -1,16 +1,18 @@
 package edu.progAvUD.parcialPrimerCorte.control;
 
-import edu.progAvUD.parcialPrimerCorte.vista.DialogInformacionGato;
-import edu.progAvUD.parcialPrimerCorte.vista.PanelConsultarGato;
-import edu.progAvUD.parcialPrimerCorte.vista.PanelMostrarGatos;
-import edu.progAvUD.parcialPrimerCorte.vista.VentanaPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+
+import edu.progAvUD.parcialPrimerCorte.vista.DialogInformacionGato;
+import edu.progAvUD.parcialPrimerCorte.vista.PanelConsultarGato;
+import edu.progAvUD.parcialPrimerCorte.vista.PanelMostrarGatos;
+import edu.progAvUD.parcialPrimerCorte.vista.VentanaPrincipal;
 
 /**
  *
@@ -129,8 +131,9 @@ public class ControlGrafico implements ActionListener {
             String patron = (String) ventanaPrincipal.panelInsertarGato.jComboBoxPatronGato.getSelectedItem();
             String colorOjos = (String) ventanaPrincipal.panelInsertarGato.jComboBoxColorOjosGato.getSelectedItem();
             String cola = (String) ventanaPrincipal.panelInsertarGato.jComboBoxColaGato.getSelectedItem();
-
-            controlPrincipal.crearInsercionGato(nombre, peso, edad, raza, color, patron, colorOjos, cola);
+            String cantidadBlanco = (String) ventanaPrincipal.panelInsertarGato.jComboBoxCantidadBlanco.getSelectedItem();
+            String puntosColor = (String) ventanaPrincipal.panelInsertarGato.jComboBoxPuntosColor.getSelectedItem();
+            controlPrincipal.crearInsercionGato(nombre, peso, edad, raza, color, cantidadBlanco, patron, puntosColor, cola, colorOjos);
         }
         if (e.getSource() == ventanaPrincipal.panelInsertarGato.jButtonLimpiarCampos) {
             ventanaPrincipal.panelInsertarGato.limpiarCampos();
@@ -201,15 +204,14 @@ public class ControlGrafico implements ActionListener {
             mostrarDatosGatoDialogModificar();
         }
         if (e.getSource() == ventanaPrincipal.panelModificarGato.dialogModificarGato.jButtonRealizarCambios) {
-            if(modificarDatosGato()){
+            if (modificarDatosGato()) {
                 mostrarMensajeExito("Se han hecho los cambios");
                 ventanaPrincipal.panelModificarGato.dialogModificarGato.setVisible(false);
                 cargarDatosTablaPanelModificarGatos();
-            } else{
+            } else {
                 mostrarMensajeError("El campo del nombre esta vacio");
             }
-            
-            
+
         }
         // Action Listener de PanelEliminarGato
         if (e.getSource() == ventanaPrincipal.panelEliminarGato.jButtonAtras) {
@@ -287,13 +289,17 @@ public class ControlGrafico implements ActionListener {
             String codigoEMS = (String) datosGatoSeleccionado[5];
             String[] atributosGato = codigoEMS.split("/");
             String color = controlPrincipal.identificarColorCuerpoSegunEMS(new String[]{atributosGato[1]});
-            String patron = controlPrincipal.identificarPatronSegunEMS(new String[]{atributosGato[2]});
-            String colorOjos = controlPrincipal.identificarColorOjosSegunEMS(new String[]{atributosGato[3]});
-            String cola = controlPrincipal.identificarColaSegunEMS(new String[]{atributosGato[4]});
+            String cantidadBlanco = controlPrincipal.identificarCantidadBlancosSegunEMS(new String[]{atributosGato[2]});
+            String patron = controlPrincipal.identificarPatronSegunEMS(new String[]{atributosGato[3]});
+            String puntosColor = controlPrincipal.identificarPuntosColorSegunEMS(new String[]{atributosGato[4]});
+            String cola = controlPrincipal.identificarColaSegunEMS(new String[]{atributosGato[5]});
+            String colorOjos = controlPrincipal.identificarColorOjosSegunEMS(new String[]{atributosGato[6]});
             ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelColorGato.setText(color);
             ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelPatronGato.setText(patron);
             ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelColorOjosGato.setText(colorOjos);
             ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelColaGato.setText(cola);
+            ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelCantidadBlanco.setText(cantidadBlanco);
+            ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelPuntosColor.setText(puntosColor);
 
             ventanaPrincipal.panelModificarGato.dialogModificarGato.jTextFieldNombre.setText(String.valueOf(datosGatoSeleccionado[1]));
             double peso = Double.parseDouble(datosGatoSeleccionado[2].toString());
@@ -326,13 +332,17 @@ public class ControlGrafico implements ActionListener {
             String codigoEMS = (String) datosGatoSeleccionado[5];
             String[] atributosGato = codigoEMS.split("/");
             String color = controlPrincipal.identificarColorCuerpoSegunEMS(new String[]{atributosGato[1]});
-            String patron = controlPrincipal.identificarPatronSegunEMS(new String[]{atributosGato[2]});
-            String colorOjos = controlPrincipal.identificarColorOjosSegunEMS(new String[]{atributosGato[3]});
-            String cola = controlPrincipal.identificarColaSegunEMS(new String[]{atributosGato[4]});
+            String cantidadBlanco = controlPrincipal.identificarCantidadBlancosSegunEMS(new String[]{atributosGato[2]});
+            String patron = controlPrincipal.identificarPatronSegunEMS(new String[]{atributosGato[3]});
+            String puntosColor = controlPrincipal.identificarPuntosColorSegunEMS(new String[]{atributosGato[4]});
+            String cola = controlPrincipal.identificarColaSegunEMS(new String[]{atributosGato[5]});
+            String colorOjos = controlPrincipal.identificarColorOjosSegunEMS(new String[]{atributosGato[6]});
             ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelColorGato.setText(color);
             ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelPatronGato.setText(patron);
             ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelColorOjosGato.setText(colorOjos);
             ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelColaGato.setText(cola);
+            ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelCantidadBlanco.setText(cantidadBlanco);
+            ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelPuntosColor.setText(puntosColor);
 
             ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelImagenGato.setIcon(new ImageIcon(System.getProperty("user.dir") + "/src/main/java/edu/progAvUD/parcialPrimerCorte/Imagenes/" + atributosGato[0] + ".png"));
             ventanaPrincipal.panelEliminarGato.dialogEliminarGato.setVisible(true);
@@ -382,9 +392,12 @@ public class ControlGrafico implements ActionListener {
         String codigoEMS = (String) datosGatoSeleccionado[5];
         String[] atributosGato = codigoEMS.split("/");
         dialogInformacionGato.jLabelColorGato.setText(controlPrincipal.identificarColorCuerpoSegunEMS(new String[]{atributosGato[1]}));
-        dialogInformacionGato.jLabelPatronGato.setText(controlPrincipal.identificarPatronSegunEMS(new String[]{atributosGato[2]}));
-        dialogInformacionGato.jLabelColorOjosGato.setText(controlPrincipal.identificarColorOjosSegunEMS(new String[]{atributosGato[3]}));
-        dialogInformacionGato.jLabelColaGato.setText(controlPrincipal.identificarColaSegunEMS(new String[]{atributosGato[4]}));
+        dialogInformacionGato.jLabelCantidadBlanco.setText(controlPrincipal.identificarCantidadBlancosSegunEMS(new String[]{atributosGato[2]}));
+        dialogInformacionGato.jLabelPatronGato.setText(controlPrincipal.identificarPatronSegunEMS(new String[]{atributosGato[3]}));
+        dialogInformacionGato.jLabelPuntosColor.setText(controlPrincipal.identificarPuntosColorSegunEMS(new String[]{atributosGato[4]}));
+        System.out.println(controlPrincipal.identificarPuntosColorSegunEMS(new String[]{atributosGato[4]}));
+        dialogInformacionGato.jLabelColaGato.setText(controlPrincipal.identificarColaSegunEMS(new String[]{atributosGato[5]}));
+        dialogInformacionGato.jLabelColorOjosGato.setText(controlPrincipal.identificarColorOjosSegunEMS(new String[]{atributosGato[6]}));
 
         dialogInformacionGato.jLabelImagenGato.setIcon(new ImageIcon(System.getProperty("user.dir") + "/src/main/java/edu/progAvUD/parcialPrimerCorte/Imagenes/" + atributosGato[0] + ".png"));
     }

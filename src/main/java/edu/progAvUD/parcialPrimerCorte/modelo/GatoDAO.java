@@ -60,7 +60,6 @@ public class GatoDAO {
      * de una entrada textual).
      *
      * @param datoBuscado ID del gato en formato String.
-     * @param gato Objeto a llenar con los datos del gato encontrado.
      * @return GatoVO con los datos consultados.
      * @throws SQLException Si ocurre un error al ejecutar la consulta.
      */

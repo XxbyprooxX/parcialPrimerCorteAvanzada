@@ -3,8 +3,8 @@ package edu.progAvUD.parcialPrimerCorte.modelo;
 import java.io.Serializable;
 
 /**
- * Clase que representa un objeto de tipo Gato.
- * Implementa Serializable para permitir su serialización.
+ * Clase que representa un objeto de tipo Gato. Implementa Serializable para
+ * permitir su serialización.
  */
 public class GatoVO implements Serializable {
 
@@ -17,36 +17,41 @@ public class GatoVO implements Serializable {
     // Atributos que sí serán serializados
     private String codigoEMS;
     private String nombreRaza;
+
     private transient String colorCuerpo;
+    private transient String cantidadBlanco;
     private transient String patron;
-    private transient String colorOjos;
+    private transient String puntosColor;
     private transient String cola;
+    private transient String colorOjos;
 
     /**
-     * Constructor con todos los atributos (menos el ID).
-     * Se utiliza al crear un nuevo gato con datos específicos.
+     * Constructor con todos los atributos (menos el ID). Se utiliza al crear un
+     * nuevo gato con datos específicos.
      */
-    public GatoVO(String nombre, String peso, String edad, String codigoEMS, String nombreRaza, String colorCuerpo, String patron, String colorOjos, String cola) {
+    public GatoVO(int id, String nombre, String peso, String edad, String codigoEMS, String nombreRaza, String colorCuerpo, String cantidadBlanco, String patron, String puntosColor, String cola, String colorOjos) {
+        this.id = id;
         this.nombre = nombre;
         this.peso = peso;
         this.edad = edad;
         this.codigoEMS = codigoEMS;
         this.nombreRaza = nombreRaza;
         this.colorCuerpo = colorCuerpo;
+        this.cantidadBlanco = cantidadBlanco;
         this.patron = patron;
-        this.colorOjos = colorOjos;
+        this.puntosColor = puntosColor;
         this.cola = cola;
+        this.colorOjos = colorOjos;
     }
 
     /**
-     * Constructor vacío.
-     * Útil cuando se quiere construir el objeto paso a paso con setters.
+     * Constructor vacío. Útil cuando se quiere construir el objeto paso a paso
+     * con setters.
      */
     public GatoVO() {
     }
 
     // Métodos getter y setter para acceder y modificar los atributos
-
     public int getId() {
         return id;
     }
@@ -125,6 +130,22 @@ public class GatoVO implements Serializable {
 
     public void setCola(String cola) {
         this.cola = cola;
+    }
+
+    public String getCantidadBlanco() {
+        return cantidadBlanco;
+    }
+
+    public void setCantidadBlanco(String cantidadBlanco) {
+        this.cantidadBlanco = cantidadBlanco;
+    }
+
+    public String getPuntosColor() {
+        return puntosColor;
+    }
+
+    public void setPuntosColor(String puntosColor) {
+        this.puntosColor = puntosColor;
     }
 
 }

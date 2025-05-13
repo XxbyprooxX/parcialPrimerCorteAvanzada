@@ -1,5 +1,6 @@
 package edu.progAvUD.parcialPrimerCorte.control;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -8,7 +9,6 @@ import java.util.ArrayList;
 import edu.progAvUD.parcialPrimerCorte.modelo.GatoDAO;
 import edu.progAvUD.parcialPrimerCorte.modelo.GatoVO;
 import edu.progAvUD.parcialPrimerCorte.modelo.Serializacion;
-import java.io.File;
 
 /**
  * Este conctrol se se encarga de manejar el gato y su de hablar con la conexion
@@ -45,7 +45,7 @@ public class ControlGato {
      * @param colorOjos del gato
      * @param cola del gato
      */
-    public void crearGato(int id, String nombre, String peso, String edad, String raza, String color, String patron, String colorOjos, String cola) {
+    public void crearGato(int id, String nombre, String peso, String edad, String raza, String color, String cantidadBlanco, String patron, String puntosColor, String cola, String colorOjos) {
         Object[] opcionesRaza = {
             "ABY-Abyssinian",
             "AMB-American Burmese",
@@ -152,6 +152,14 @@ public class ControlGato {
             "w-white",
             "n-seal",
             "x-unrecognized"};
+        Object[] opcionesCantidadBlanco = {
+            "01-van",
+            "02-harlequin",
+            "03-bicolour",
+            "04-mitted",
+            "05-snowshoe",
+            "09-medaillon"
+        };
         Object[] opcionesPatron = {
             "11-shaded",
             "12-shell",
@@ -162,6 +170,12 @@ public class ControlGato {
             "24-spotted",
             "25-ticked",
             "26-grizzled ticked"
+        };
+        Object[] opcionesPuntosColor = {
+            "31-sepia", 
+            "32-mink", 
+            "33-himalayan / siames",
+            "33-no sepia / no mink"
         };
         Object[] opcionesColorOjos = {
             "61-blue",
@@ -203,6 +217,12 @@ public class ControlGato {
         if (cola.isBlank()) {
             cola = seleccionarOpcionFaltante("cola del gato " + id, opcionesCola);
         }
+        if (cantidadBlanco.isBlank()) {
+            cantidadBlanco = seleccionarOpcionFaltante("cantidad blanco del gato " + id, opcionesCantidadBlanco);
+        }
+        if (puntosColor.isBlank()) {
+            puntosColor = seleccionarOpcionFaltante("puntos de color del gato " + id, opcionesPuntosColor);
+        }
 
         String[] divisionRaza = raza.split("-");
         divisionRaza = identificarRazaSegunEMS(divisionRaza).split("-");
@@ -214,9 +234,13 @@ public class ControlGato {
         divisionColorOjos = identificarColorOjosSegunEMS(divisionColorOjos).split("-");
         String[] divisionCola = cola.split("-");
         divisionCola = identificarColaSegunEMS(divisionCola).split("-");
+        String[] divisionPuntosColor = puntosColor.split("-");
+        divisionPuntosColor = identificarPuntosColorSegunEMS(divisionPuntosColor).split("-");
+        String[] divisionCantidadBlanco = cantidadBlanco.split("-");
+        divisionCantidadBlanco = identificarCantidadBlancoSegunEMS(divisionCantidadBlanco).split("-");
 
-        String codigoEMS = divisionRaza[0] + "/" + divisionColor[0] + "/" + divisionPatron[0] + "/" + divisionColorOjos[0] + "/" + divisionCola[0];
-        GatoVO gato = new GatoVO(nombre, peso, edad, codigoEMS, raza, color, patron, colorOjos, cola);
+        String codigoEMS = divisionRaza[0] + "/" + divisionColor[0] + "/" + divisionCantidadBlanco[0] + "/" + divisionPatron[0] + "/" + divisionPuntosColor[0]+  "/" + divisionCola[0] + "/" + divisionColorOjos[0];
+        GatoVO gato = new GatoVO(id, nombre, peso, edad, codigoEMS, raza, color, cantidadBlanco, patron, puntosColor, cola, colorOjos);
 
         if (consultarCantidadGatos() == 0) {
             insertarGato(gato);
@@ -367,9 +391,9 @@ public class ControlGato {
         }
         return null;
     }
-    
-    public Object[][] pedirConsultaGatos(String factorBusqueda,String datoBuscado) {
-        try{
+
+    public Object[][] pedirConsultaGatos(String factorBusqueda, String datoBuscado) {
+        try {
             ArrayList<GatoVO> gatos = gatoDao.consultarGatos(factorBusqueda, datoBuscado);
             Object[][] arrGatos = new Object[gatos.size()][3];
             for (int i = 0; i < gatos.size(); i++) {
@@ -378,14 +402,14 @@ public class ControlGato {
                 arrGatos[i][1] = g.getNombre();
                 arrGatos[i][2] = g.getCodigoEMS();
             }
-            return arrGatos;  
-        }catch(SQLException ex){
+            return arrGatos;
+        } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLException pedirConsultaGatos");
             ex.printStackTrace();
         }
         return null;
     }
-    
+
     /**
      * Este metodo se encarga de insertar un gato a la tabla
      *
@@ -413,8 +437,8 @@ public class ControlGato {
      * @param colorOjos del gato
      * @param cola del gato
      */
-    public void crearInsercionGato(String nombre, String peso, String edad, String raza, String color, String patron, String colorOjos, String cola) {
-        crearGato(0, nombre, peso, edad, raza, color, patron, colorOjos, cola);
+    public void crearInsercionGato(String nombre, String peso, String edad, String raza, String color, String cantidadBlanco, String patron, String puntosColor, String cola, String colorOjos) {
+        crearGato(0, nombre, peso, edad, raza, color, cantidadBlanco, patron, puntosColor, cola, colorOjos);
         controlPrincipal.mostrarMensajeExito("Se ha insertado correctamente el usuario");
     }
 
@@ -431,11 +455,11 @@ public class ControlGato {
             ex.printStackTrace();
         }
     }
-    
-    public void modificarGato(int id, String factorACambiar, String valorModificado){
-        try{
+
+    public void modificarGato(int id, String factorACambiar, String valorModificado) {
+        try {
             gatoDao.modificarGato(id, factorACambiar, valorModificado);
-        } catch(SQLException ex){
+        } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLException modificarGato");
             ex.printStackTrace();
         }
@@ -819,6 +843,46 @@ public class ControlGato {
         return null;
     }
 
+    public String identificarCantidadBlancoSegunEMS(String[] divisionCantidadBlanco) {
+        for (String cantidadBlanco : divisionCantidadBlanco) {
+            if (cantidadBlanco.equals("01") || cantidadBlanco.equalsIgnoreCase("van")) {
+                return "01-van";
+            } else if (cantidadBlanco.equals("02") || cantidadBlanco.equalsIgnoreCase("harlequin")) {
+                return "02-harlequin";
+            } else if (cantidadBlanco.equals("03") || cantidadBlanco.equalsIgnoreCase("bicolour")) {
+                return "03-bicolour";
+            } else if (cantidadBlanco.equals("04") || cantidadBlanco.equalsIgnoreCase("mitted")) {
+                return "04-mitted";
+            } else if (cantidadBlanco.equals("05") || cantidadBlanco.equalsIgnoreCase("snowshoe")) {
+                return "05-snowshoe";
+            } else if (cantidadBlanco.equals("09") || cantidadBlanco.equalsIgnoreCase("medaillon")) {
+                return "09-medaillon";
+            }
+        }
+        return null;
+    }
+
+    public String identificarPuntosColorSegunEMS(String[] divisionPuntosColor) {
+        for (String puntosColor : divisionPuntosColor) {
+            if (puntosColor.equals("31") || puntosColor.equalsIgnoreCase("sepia")) {
+                return "31-sepia";
+            } else if (puntosColor.equals("32") || puntosColor.equalsIgnoreCase("mink")) {
+                return "32-mink";
+            } else if (puntosColor.equals("33")
+                    || puntosColor.equalsIgnoreCase("himalayan")
+                    || puntosColor.equalsIgnoreCase("siames")
+                    || puntosColor.equalsIgnoreCase("himalayan / siames")) {
+                return "33-himalayan / siames";
+            } else if (puntosColor.equalsIgnoreCase("no sepia")
+                    || puntosColor.equalsIgnoreCase("no mink")
+                    || puntosColor.equalsIgnoreCase("no sepia / no mink")) {
+                return "33-no sepia / no mink";
+            }
+        }
+        System.out.println("Dato blanco");
+        return null;
+    }
+
     /**
      * Completa la raza segun los puesto por la persona
      *
@@ -843,7 +907,6 @@ public class ControlGato {
                 return ("67-dark blue (SIA)");
             }
         }
-        controlPrincipal.mostrarMensajeError("El color digitado no existe o el campo se encuentra vacio");
         return null;
     }
 
