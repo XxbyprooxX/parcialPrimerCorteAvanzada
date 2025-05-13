@@ -56,9 +56,10 @@ public class GatoDAO {
     }
 
     /**
-     * Consulta un gato por ID representado como String. (Útil si el ID proviene
-     * de una entrada textual).
+     * Consulta un gato por ID representado como String.(Útil si el ID proviene
+ de una entrada textual).
      *
+     * @param factorBusqueda el parametro de busqueda
      * @param datoBuscado ID del gato en formato String.
      * @return GatoVO con los datos consultados.
      * @throws SQLException Si ocurre un error al ejecutar la consulta.
@@ -153,7 +154,6 @@ public class GatoDAO {
      * Elimina un gato de la base de datos según su ID.
      *
      * @param id Identificador del gato.
-     * @return true si se ejecuta correctamente.
      * @throws SQLException Si ocurre un error al ejecutar la eliminación.
      */
     public void eliminarGato(int id) throws SQLException {
@@ -169,10 +169,8 @@ public class GatoDAO {
     /**
      * Modifica un atributo específico de un gato en la base de datos.
      *
-     * @param id ID del gato a modificar.
-     * @param atributoModificado Nombre del campo a modificar.
+     * @param factorACambiar es el dato que se busca cambiar
      * @param valorModificado Nuevo valor que se quiere asignar.
-     * @return true si la actualización fue exitosa.
      * @throws SQLException Si ocurre un error al ejecutar la modificación.
      */
     public void modificarGato(int id, String factorACambiar, String valorModificado) throws SQLException {

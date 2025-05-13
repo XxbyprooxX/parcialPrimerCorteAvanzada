@@ -107,7 +107,6 @@ public class ControlPrincipal {
                 System.exit(0);
             } catch (Exception ex) {
                 controlGrafico.mostrarMensajeError("Algun dato del gato no corresponde");
-                ex.printStackTrace();
                 System.exit(0);
             }
         } while (flag);
@@ -121,6 +120,7 @@ public class ControlPrincipal {
         do {
             String nombreBase = pedirNombreArchivo();
             if (nombreBase == null || nombreBase.trim().isEmpty()) {
+                mostrarMensajeError("Se ha cerrado el programa sin crear el archivo aleatorio");
                 System.exit(0);
             }
             if (nombreBase.trim().isEmpty()) {
@@ -171,6 +171,14 @@ public class ControlPrincipal {
         }
     }
 
+    /**
+     * Recorre la lista completa de gatos y escribe cada registro en un archivo
+     * aleatorio. Después muestra un mensaje de confirmación y termina la
+     * aplicación.
+     *
+     * @param archivoAleatorio instancia de ConexionArchivoAleatorio para
+     * escribir en el archivo.
+     */
     public void pedirBaseDatosYEscribirAleatorio(ConexionArchivoAleatorio archivoAleatorio) {
         Object[][] gatoInfo = darListaGatosObjectArchivoAleatorio();
         for (int i = 0; i < gatoInfo.length; i++) {
@@ -180,65 +188,88 @@ public class ControlPrincipal {
             String datosGato = id + "," + nombre + "," + codigoEMS;
             escrituraArchivoAleatorio(id, datosGato, archivoAleatorio);
         }
+        // Aunque se crea correctamente el archivo, se usa mostrarMensajeError para indicar finalización
+        mostrarMensajeError("Se ha creado el archivo aleatorio");
         System.exit(0);
     }
 
     /**
-     * Pide la lista de los gatos para enviarla
+     * Obtiene la lista de gatos formateada para interfaz de tabla.
      *
-     * @return la lista de gatos
+     * @return matriz Object[][] con datos básicos de cada gato (ID, Nombre,
+     * Código EMS).
      */
     public Object[][] darListaGatosObject() {
         return controlGato.darListaGatosObject();
     }
 
+    /**
+     * Obtiene la lista de gatos con detalles extendidos para archivo aleatorio.
+     *
+     * @return matriz Object[][] con datos extendidos de cada gato (ID, Nombre,
+     * Peso, Edad, Raza, EMS).
+     */
     public Object[][] darListaGatosObjectArchivoAleatorio() {
         return controlGato.darListaGatosObjectArchivoAleatorio();
     }
 
     /**
-     * Ese parametro consula al gato segun su id
+     * Delegación para consultar un gato por su ID.
      *
-     * @param id identificador
+     * @param id identificador único del gato.
+     * @return arreglo Object[] con los datos del gato, o null si no existe.
      */
     public Object[] pedirConsultaGato(int id) {
-            return controlGato.pedirConsultaGato(id);
+        return controlGato.pedirConsultaGato(id);
     }
 
     /**
-     * Ese parametro consula al gato segun un dato especifico
+     * Delegación para buscar gatos según un criterio específico.
      *
-     * @param datoBuscado
+     * @param factorBusqueda nombre del campo para filtrar (e.g., "nombre").
+     * @param datoBuscado valor a filtrar.
+     * @return matriz Object[][] con los gatos que cumplen el criterio.
      */
     public Object[][] pedirConsultaGatos(String factorBusqueda, String datoBuscado) {
         return controlGato.pedirConsultaGatos(factorBusqueda, datoBuscado);
     }
 
     /**
-     * Permite insertar un nuevo gato a la base de datos
+     * Inserta un nuevo gato en la base de datos usando el controlador de gatos.
      *
-     * @param nombre del gato
-     * @param peso del gato
-     * @param edad del gato
-     * @param raza del gato
-     * @param color del gato
-     * @param patron del gato
-     * @param colorOjos del gato
-     * @param cola del gato
+     * @param nombre nombre del gato.
+     * @param peso peso del gato.
+     * @param edad edad del gato.
+     * @param raza raza del gato.
+     * @param color color del cuerpo.
+     * @param cantidadBlanco proporción de blanco.
+     * @param patron patrón del pelaje.
+     * @param puntosColor puntos de color.
+     * @param cola tipo de cola.
+     * @param colorOjos color de ojos.
      */
-    public void crearInsercionGato(String nombre, String peso, String edad, String raza, String color, String cantidadBlanco, String patron, String puntosColor, String cola, String colorOjos) {
+    public void crearInsercionGato(String nombre, String peso, String edad, String raza, String color,
+            String cantidadBlanco, String patron, String puntosColor,
+            String cola, String colorOjos) {
         controlGato.crearInsercionGato(nombre, peso, edad, raza, color, cantidadBlanco, patron, puntosColor, cola, colorOjos);
     }
 
     /**
-     * Permite eliminar a un gato segun la id
+     * Elimina un gato de la base de datos delegando al controlador de gatos.
      *
-     * @param id parametro identificador
+     * @param id identificador único del gato a eliminar.
      */
     public void eliminarGato(int id) {
         controlGato.eliminarGato(id);
     }
 
+    /**
+     * Modifica un campo específico de un gato existente.
+     *
+     * @param id identificador del gato a modificar.
+     * @param factorACambiar nombre del atributo a actualizar.
+     * @param valorModificado nuevo valor que se asignará.
+     */
     public void modificarGato(int id, String factorACambiar, String valorModificado) {
         controlGato.modificarGato(id, factorACambiar, valorModificado);
     }
@@ -294,38 +325,103 @@ public class ControlPrincipal {
         return controlGrafico.mostrarJOptionEscribirDatoFaltante(datoFaltante);
     }
 
+    /**
+     * Identifica la raza del gato según el código EMS proporcionado.
+     *
+     * @param divisionRaza Arreglo de cadenas que representa partes del código
+     * EMS relacionadas con la raza.
+     * @return Una cadena que representa la raza identificada del gato.
+     */
     public String identificarRazaSegunEMS(String[] divisionRaza) {
         return controlGato.identificarRazaSegunEMS(divisionRaza);
     }
 
+    /**
+     * Identifica el color del cuerpo del gato según el código EMS
+     * proporcionado.
+     *
+     * @param divisionColor Arreglo de cadenas que representa partes del código
+     * EMS relacionadas con el color del cuerpo.
+     * @return Una cadena que representa el color del cuerpo del gato.
+     */
     public String identificarColorCuerpoSegunEMS(String[] divisionColor) {
         return controlGato.identificarColorCuerpoSegunEMS(divisionColor);
     }
 
+    /**
+     * Identifica el tipo de cola del gato según el código EMS proporcionado.
+     *
+     * @param divisionCola Arreglo de cadenas que representa partes del código
+     * EMS relacionadas con la cola.
+     * @return Una cadena que representa el tipo de cola del gato.
+     */
     public String identificarColaSegunEMS(String[] divisionCola) {
         return controlGato.identificarColaSegunEMS(divisionCola);
     }
 
+    /**
+     * Identifica el patrón del pelaje del gato según el código EMS
+     * proporcionado.
+     *
+     * @param divisionPatron Arreglo de cadenas que representa partes del código
+     * EMS relacionadas con el patrón.
+     * @return Una cadena que representa el patrón del pelaje del gato.
+     */
     public String identificarPatronSegunEMS(String[] divisionPatron) {
         return controlGato.identificarPatronSegunEMS(divisionPatron);
     }
 
+    /**
+     * Identifica el color de los ojos del gato según el código EMS
+     * proporcionado.
+     *
+     * @param divisionColorOjos Arreglo de cadenas que representa partes del
+     * código EMS relacionadas con el color de los ojos.
+     * @return Una cadena que representa el color de los ojos del gato.
+     */
     public String identificarColorOjosSegunEMS(String[] divisionColorOjos) {
         return controlGato.identificarColorOjosSegunEMS(divisionColorOjos);
     }
-    
-    public String identificarCantidadBlancosSegunEMS(String[] divisionCantidadBlancos){
+
+    /**
+     * Identifica la cantidad de manchas blancas del gato según el código EMS
+     * proporcionado.
+     *
+     * @param divisionCantidadBlancos Arreglo de cadenas que representa partes
+     * del código EMS relacionadas con las manchas blancas.
+     * @return Una cadena que representa la cantidad de manchas blancas del
+     * gato.
+     */
+    public String identificarCantidadBlancosSegunEMS(String[] divisionCantidadBlancos) {
         return controlGato.identificarCantidadBlancoSegunEMS(divisionCantidadBlancos);
     }
-    
-    public String identificarPuntosColorSegunEMS(String[] divisionPuntosColor){
+
+    /**
+     * Identifica los puntos de color en el cuerpo del gato según el código EMS
+     * proporcionado.
+     *
+     * @param divisionPuntosColor Arreglo de cadenas que representa partes del
+     * código EMS relacionadas con los puntos de color.
+     * @return Una cadena que representa los puntos de color del gato.
+     */
+    public String identificarPuntosColorSegunEMS(String[] divisionPuntosColor) {
         return controlGato.identificarPuntosColorSegunEMS(divisionPuntosColor);
     }
 
+    /**
+     * Inicia el proceso de serialización de los datos del gato, guardando su
+     * información en un archivo.
+     */
     public void crearSerializacion() {
         controlGato.crearSerializacion();
     }
 
+    /**
+     * Solicita al usuario el nombre con el que desea guardar el archivo de
+     * datos serializados.
+     *
+     * @return El nombre del archivo ingresado por el usuario.
+     */
     public String pedirNombreArchivo() {
         controlGrafico.mostrarMensajeExito("Porfavor escriba como desea guardar el archivo");
         return controlGrafico.pedirNombreArchivo();

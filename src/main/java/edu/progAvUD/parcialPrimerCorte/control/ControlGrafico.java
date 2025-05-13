@@ -15,6 +15,8 @@ import edu.progAvUD.parcialPrimerCorte.vista.PanelMostrarGatos;
 import edu.progAvUD.parcialPrimerCorte.vista.VentanaPrincipal;
 
 /**
+ * Esta clase de encarga de crear la ventana principal, ademas se encarga de
+ * manejar los action listener y comunicarse con el controlPrincipal
  *
  * @author Andres Felipe
  */
@@ -23,6 +25,14 @@ public class ControlGrafico implements ActionListener {
     private ControlPrincipal controlPrincipal;
     private VentanaPrincipal ventanaPrincipal;
 
+    /**
+     * Constructor de la clase ControlGrafico. Inicializa la ventana principal y
+     * registra todos los listeners necesarios para los componentes gráficos de
+     * la interfaz.
+     *
+     * @param controlPrincipal Referencia al controlador principal que conecta
+     * la lógica de negocio.
+     */
     public ControlGrafico(ControlPrincipal controlPrincipal) {
         this.controlPrincipal = controlPrincipal;
         this.ventanaPrincipal = new VentanaPrincipal(this);
@@ -68,6 +78,12 @@ public class ControlGrafico implements ActionListener {
         ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jButtonEliminarGato.addActionListener(this);
     }
 
+    /**
+     * Este se encarga de indicar que hacer en caso de que el usuario haga algo
+     * en alguna ventana
+     *
+     * @param e es el evento ocurrido
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == ventanaPrincipal.jMenuItemSalir) {
@@ -233,12 +249,20 @@ public class ControlGrafico implements ActionListener {
         }
     }
 
+    /**
+     * Verifica si los botones de propiedades de gatos y de base de datos están
+     * inactivos. Si ambos están deshabilitados, habilita el botón "Continuar".
+     */
     public void verificarBotonesInctivos() {
         if (!ventanaPrincipal.panelPrincipal.jButtonPropiedadesGatos.isEnabled() && !ventanaPrincipal.panelPrincipal.jButtonPropiedadesBD.isEnabled()) {
             ventanaPrincipal.panelPrincipal.jButtonContinuar.setEnabled(true);
         }
     }
 
+    /**
+     * Carga los datos de los gatos en la tabla del panel "Mostrar Gatos". Borra
+     * previamente el contenido de la tabla antes de insertar los nuevos datos.
+     */
     public void cargarDatosTablaPanelMostrarGatos() {
         Object[][] datosGatos = controlPrincipal.darListaGatosObject();
         ventanaPrincipal.panelMostrarGatos.modeloTablaGatos.setRowCount(0);
@@ -247,6 +271,11 @@ public class ControlGrafico implements ActionListener {
         }
     }
 
+    /**
+     * Carga los datos de los gatos en la tabla del panel "Eliminar Gatos".
+     * Borra previamente el contenido de la tabla antes de insertar los nuevos
+     * datos.
+     */
     public void cargarDatosTablaPanelEliminarGatos() {
         Object[][] datosGatos = controlPrincipal.darListaGatosObject();
         ventanaPrincipal.panelEliminarGato.modeloTablaGatos.setRowCount(0);
@@ -255,6 +284,11 @@ public class ControlGrafico implements ActionListener {
         }
     }
 
+    /**
+     * Carga los datos de los gatos en la tabla del panel "Modificar Gatos".
+     * Borra previamente el contenido de la tabla antes de insertar los nuevos
+     * datos.
+     */
     public void cargarDatosTablaPanelModificarGatos() {
         Object[][] datosGatos = controlPrincipal.darListaGatosObject();
         ventanaPrincipal.panelModificarGato.modeloTablaGatos.setRowCount(0);
@@ -263,6 +297,14 @@ public class ControlGrafico implements ActionListener {
         }
     }
 
+    /**
+     * Carga los datos de los gatos en la tabla del panel "Consultar Gatos" en
+     * base al factor de búsqueda y al dato proporcionado.
+     *
+     * @param factorBusqueda El criterio de búsqueda (por ejemplo, raza o código
+     * EMS).
+     * @param datoBuscado El valor a buscar según el factor seleccionado.
+     */
     public void cargarDatosTablaPanelConsultarGatos(String factorBusqueda, String datoBuscado) {
         Object[][] datosGatos = controlPrincipal.pedirConsultaGatos(factorBusqueda, datoBuscado);
         ventanaPrincipal.panelConsultarGato.modeloTablaGatos.setRowCount(0);
@@ -271,29 +313,40 @@ public class ControlGrafico implements ActionListener {
         }
     }
 
+    /**
+     * Muestra los datos completos del gato seleccionado en la tabla del panel
+     * "Modificar Gatos" dentro de un cuadro de diálogo con campos de texto,
+     * etiquetas e imagen del gato. Si no hay ninguna fila seleccionada, muestra
+     * un mensaje de error.
+     */
     public void mostrarDatosGatoDialogModificar() {
         int filaSeleccionada = ventanaPrincipal.panelModificarGato.jTable1.getSelectedRow();
 
-        if (filaSeleccionada != -1) { // Verificar que se haya seleccionado una fila
+        if (filaSeleccionada != -1) {
             Object IdGatoObject = ventanaPrincipal.panelModificarGato.jTable1.getValueAt(filaSeleccionada, 0);
             int idGatoSeleccionado = (IdGatoObject instanceof Integer)
                     ? (Integer) IdGatoObject
                     : Integer.parseInt(IdGatoObject.toString());
             Object[] datosGatoSeleccionado = controlPrincipal.pedirConsultaGato(idGatoSeleccionado);
+
             ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelIdGato.setText(String.valueOf(datosGatoSeleccionado[0]));
             ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelNombreGato.setText(String.valueOf(datosGatoSeleccionado[1]));
             ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelPesoGato.setText(String.valueOf(datosGatoSeleccionado[2]));
             ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelEdadGato.setText(String.valueOf(datosGatoSeleccionado[3]));
             ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelRazaGato.setText(String.valueOf(datosGatoSeleccionado[4]));
             ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelEMSGato.setText(String.valueOf(datosGatoSeleccionado[5]));
+
             String codigoEMS = (String) datosGatoSeleccionado[5];
             String[] atributosGato = codigoEMS.split("/");
+
+            // Interpretar cada atributo EMS y mostrarlo
             String color = controlPrincipal.identificarColorCuerpoSegunEMS(new String[]{atributosGato[1]});
             String cantidadBlanco = controlPrincipal.identificarCantidadBlancosSegunEMS(new String[]{atributosGato[2]});
             String patron = controlPrincipal.identificarPatronSegunEMS(new String[]{atributosGato[3]});
             String puntosColor = controlPrincipal.identificarPuntosColorSegunEMS(new String[]{atributosGato[4]});
             String cola = controlPrincipal.identificarColaSegunEMS(new String[]{atributosGato[5]});
             String colorOjos = controlPrincipal.identificarColorOjosSegunEMS(new String[]{atributosGato[6]});
+
             ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelColorGato.setText(color);
             ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelPatronGato.setText(patron);
             ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelColorOjosGato.setText(colorOjos);
@@ -301,42 +354,63 @@ public class ControlGrafico implements ActionListener {
             ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelCantidadBlanco.setText(cantidadBlanco);
             ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelPuntosColor.setText(puntosColor);
 
+            // Cargar datos editables
             ventanaPrincipal.panelModificarGato.dialogModificarGato.jTextFieldNombre.setText(String.valueOf(datosGatoSeleccionado[1]));
             double peso = Double.parseDouble(datosGatoSeleccionado[2].toString());
             int edad = Integer.parseInt(datosGatoSeleccionado[3].toString());
             ventanaPrincipal.panelModificarGato.dialogModificarGato.jSpinnerPeso.setValue(peso);
             ventanaPrincipal.panelModificarGato.dialogModificarGato.jSpinnerEdad.setValue(edad);
 
-            ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelImagenGato.setIcon(new ImageIcon(System.getProperty("user.dir") + "/src/main/java/edu/progAvUD/parcialPrimerCorte/Imagenes/" + atributosGato[0] + ".png"));
+            // Mostrar imagen del gato
+            ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelImagenGato.setIcon(
+                    new ImageIcon(System.getProperty("user.dir") + "/src/main/java/edu/progAvUD/parcialPrimerCorte/Imagenes/" + atributosGato[0] + ".png")
+            );
+
             ventanaPrincipal.panelModificarGato.dialogModificarGato.setVisible(true);
         } else {
             ventanaPrincipal.mostrarMensajeError("No se ha seleccionado ninguna fila de la tabla.");
         }
     }
 
+    /**
+     * Muestra los datos del gato seleccionado en el panel de eliminación dentro
+     * del diálogo de confirmación de eliminación.
+     */
     public void mostrarDatosGatoDialogEliminar() {
         int filaSeleccionada = ventanaPrincipal.panelEliminarGato.jTable1.getSelectedRow();
 
-        if (filaSeleccionada != -1) { // Verificar que se haya seleccionado una fila
+        // Verifica si se ha seleccionado una fila en la tabla
+        if (filaSeleccionada != -1) {
+            // Obtiene el ID del gato seleccionado (puede ser Integer o String)
             Object IdGatoObject = ventanaPrincipal.panelEliminarGato.jTable1.getValueAt(filaSeleccionada, 0);
             int idGatoSeleccionado = (IdGatoObject instanceof Integer)
                     ? (Integer) IdGatoObject
                     : Integer.parseInt(IdGatoObject.toString());
+
+            // Solicita los datos del gato al controlador principal
             Object[] datosGatoSeleccionado = controlPrincipal.pedirConsultaGato(idGatoSeleccionado);
+
+            // Muestra los datos básicos del gato en el diálogo
             ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelIdGato.setText(String.valueOf(datosGatoSeleccionado[0]));
             ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelNombreGato.setText(String.valueOf(datosGatoSeleccionado[1]));
             ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelPesoGato.setText(String.valueOf(datosGatoSeleccionado[2]));
             ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelEdadGato.setText(String.valueOf(datosGatoSeleccionado[3]));
             ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelRazaGato.setText(String.valueOf(datosGatoSeleccionado[4]));
             ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelEMSGato.setText(String.valueOf(datosGatoSeleccionado[5]));
+
+            // Procesa el código EMS para mostrar características adicionales del gato
             String codigoEMS = (String) datosGatoSeleccionado[5];
             String[] atributosGato = codigoEMS.split("/");
+
+            // Se identifican y muestran las características específicas a partir del código EMS
             String color = controlPrincipal.identificarColorCuerpoSegunEMS(new String[]{atributosGato[1]});
             String cantidadBlanco = controlPrincipal.identificarCantidadBlancosSegunEMS(new String[]{atributosGato[2]});
             String patron = controlPrincipal.identificarPatronSegunEMS(new String[]{atributosGato[3]});
             String puntosColor = controlPrincipal.identificarPuntosColorSegunEMS(new String[]{atributosGato[4]});
             String cola = controlPrincipal.identificarColaSegunEMS(new String[]{atributosGato[5]});
             String colorOjos = controlPrincipal.identificarColorOjosSegunEMS(new String[]{atributosGato[6]});
+
+            // Asigna los valores procesados al diálogo
             ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelColorGato.setText(color);
             ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelPatronGato.setText(patron);
             ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelColorOjosGato.setText(colorOjos);
@@ -344,26 +418,40 @@ public class ControlGrafico implements ActionListener {
             ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelCantidadBlanco.setText(cantidadBlanco);
             ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelPuntosColor.setText(puntosColor);
 
-            ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelImagenGato.setIcon(new ImageIcon(System.getProperty("user.dir") + "/src/main/java/edu/progAvUD/parcialPrimerCorte/Imagenes/" + atributosGato[0] + ".png"));
+            // Carga y muestra la imagen correspondiente al gato
+            ventanaPrincipal.panelEliminarGato.dialogEliminarGato.jLabelImagenGato.setIcon(
+                    new ImageIcon(System.getProperty("user.dir")
+                            + "/src/main/java/edu/progAvUD/parcialPrimerCorte/Imagenes/"
+                            + atributosGato[0] + ".png"));
+
+            // Muestra el diálogo
             ventanaPrincipal.panelEliminarGato.dialogEliminarGato.setVisible(true);
         } else {
+            // Si no se seleccionó ninguna fila, muestra un mensaje de error
             ventanaPrincipal.mostrarMensajeError("No se ha seleccionado ninguna fila de la tabla.");
         }
     }
 
+    /**
+     * Muestra los datos de un gato seleccionado en un diálogo genérico
+     * (información). El panel puede ser de consulta o de visualización general.
+     */
     public void mostrarDatosGatoDialog(DialogInformacionGato dialogInformacionGato, JPanel panel) {
         JTable tablaGatos = null;
 
+        // Determina de qué panel proviene la tabla
         if (panel instanceof PanelMostrarGatos) {
             tablaGatos = ventanaPrincipal.panelMostrarGatos.jTable1;
         } else if (panel instanceof PanelConsultarGato) {
             tablaGatos = ventanaPrincipal.panelConsultarGato.jTableGatos;
         }
 
+        // Si se encontró la tabla, se continúa
         if (tablaGatos != null) {
             int filaSeleccionada = tablaGatos.getSelectedRow();
 
-            if (filaSeleccionada != -1) { // Verificar que se haya seleccionado una fila
+            // Verifica que se haya seleccionado una fila
+            if (filaSeleccionada != -1) {
                 int idGatoSeleccionado = obtenerIdGatoSeleccionado(tablaGatos, filaSeleccionada);
                 Object[] datosGatoSeleccionado = controlPrincipal.pedirConsultaGato(idGatoSeleccionado);
                 actualizarDialogInformacionGato(dialogInformacionGato, datosGatoSeleccionado);
@@ -374,6 +462,10 @@ public class ControlGrafico implements ActionListener {
         }
     }
 
+    /**
+     * Extrae el ID del gato desde la tabla, independientemente de si es Integer
+     * o String.
+     */
     private int obtenerIdGatoSeleccionado(JTable tablaGatos, int filaSeleccionada) {
         Object IdGatoObject = tablaGatos.getValueAt(filaSeleccionada, 0);
         return (IdGatoObject instanceof Integer)
@@ -381,6 +473,10 @@ public class ControlGrafico implements ActionListener {
                 : Integer.parseInt(IdGatoObject.toString());
     }
 
+    /**
+     * Actualiza los campos del diálogo con la información del gato (datos y
+     * características EMS).
+     */
     private void actualizarDialogInformacionGato(DialogInformacionGato dialogInformacionGato, Object[] datosGatoSeleccionado) {
         dialogInformacionGato.jLabelIdGato.setText(String.valueOf(datosGatoSeleccionado[0]));
         dialogInformacionGato.jLabelNombreGato.setText(String.valueOf(datosGatoSeleccionado[1]));
@@ -389,37 +485,50 @@ public class ControlGrafico implements ActionListener {
         dialogInformacionGato.jLabelRazaGato.setText(String.valueOf(datosGatoSeleccionado[4]));
         dialogInformacionGato.jLabelEMSGato.setText(String.valueOf(datosGatoSeleccionado[5]));
 
+        // Procesa el código EMS para mostrar las características específicas
         String codigoEMS = (String) datosGatoSeleccionado[5];
         String[] atributosGato = codigoEMS.split("/");
+
+        // Actualiza los campos gráficos con los valores derivados del código EMS
         dialogInformacionGato.jLabelColorGato.setText(controlPrincipal.identificarColorCuerpoSegunEMS(new String[]{atributosGato[1]}));
         dialogInformacionGato.jLabelCantidadBlanco.setText(controlPrincipal.identificarCantidadBlancosSegunEMS(new String[]{atributosGato[2]}));
         dialogInformacionGato.jLabelPatronGato.setText(controlPrincipal.identificarPatronSegunEMS(new String[]{atributosGato[3]}));
         dialogInformacionGato.jLabelPuntosColor.setText(controlPrincipal.identificarPuntosColorSegunEMS(new String[]{atributosGato[4]}));
-        System.out.println(controlPrincipal.identificarPuntosColorSegunEMS(new String[]{atributosGato[4]}));
         dialogInformacionGato.jLabelColaGato.setText(controlPrincipal.identificarColaSegunEMS(new String[]{atributosGato[5]}));
         dialogInformacionGato.jLabelColorOjosGato.setText(controlPrincipal.identificarColorOjosSegunEMS(new String[]{atributosGato[6]}));
 
-        dialogInformacionGato.jLabelImagenGato.setIcon(new ImageIcon(System.getProperty("user.dir") + "/src/main/java/edu/progAvUD/parcialPrimerCorte/Imagenes/" + atributosGato[0] + ".png"));
+        // Muestra la imagen correspondiente al gato
+        dialogInformacionGato.jLabelImagenGato.setIcon(new ImageIcon(System.getProperty("user.dir")
+                + "/src/main/java/edu/progAvUD/parcialPrimerCorte/Imagenes/" + atributosGato[0] + ".png"));
     }
 
+    /**
+     * Modifica los datos de nombre, peso y edad del gato si fueron cambiados.
+     */
     private boolean modificarDatosGato() {
         int filaSeleccionada = ventanaPrincipal.panelModificarGato.jTable1.getSelectedRow();
 
         int idGatoSeleccionado = obtenerIdGatoSeleccionado(ventanaPrincipal.panelModificarGato.jTable1, filaSeleccionada);
 
+        // Se obtienen los valores actuales
         String nombreActual = ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelNombreGato.getText();
         String pesoActual = ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelPesoGato.getText();
         String edadActual = ventanaPrincipal.panelModificarGato.dialogModificarGato.jLabelEdadGato.getText();
+
+        // Se obtienen los valores nuevos
         String nombreCambio = ventanaPrincipal.panelModificarGato.dialogModificarGato.jTextFieldNombre.getText();
         Double pesoDouble = (Double) ventanaPrincipal.panelModificarGato.dialogModificarGato.jSpinnerPeso.getValue();
-        double pesoRedondeado = Math.round(pesoDouble * 100.0) / 100.0;
+        double pesoRedondeado = Math.round(pesoDouble * 100.0) / 100.0; // redondea a 2 decimales
         String pesoCambio = pesoRedondeado + "";
         int edadInt = (int) ventanaPrincipal.panelModificarGato.dialogModificarGato.jSpinnerEdad.getValue();
         String edadCambio = edadInt + "";
 
+        // Si el nuevo nombre está vacío, no se permite continuar
         if (nombreCambio.isBlank()) {
             return false;
         }
+
+        // Compara los valores y actualiza solo los que han cambiado
         if (!nombreActual.equals(nombreCambio)) {
             controlPrincipal.modificarGato(idGatoSeleccionado, "nombre", nombreCambio);
         }
@@ -432,31 +541,80 @@ public class ControlGrafico implements ActionListener {
         return true;
     }
 
+    /**
+     * Solicita al usuario que seleccione un archivo de propiedades. Este
+     * archivo puede contener configuraciones necesarias para el programa.
+     *
+     * @return el archivo seleccionado por el usuario.
+     */
     public File pedirArchivoPropiedades() {
         return ventanaPrincipal.pedirArchivoPropiedades();
     }
 
+    /**
+     * Muestra un mensaje de error al usuario, generalmente mediante un cuadro
+     * de diálogo.
+     *
+     * @param mensaje el mensaje de error que se desea mostrar.
+     */
     public void mostrarMensajeError(String mensaje) {
         ventanaPrincipal.mostrarMensajeError(mensaje);
     }
 
+    /**
+     * Muestra un mensaje de éxito al usuario, generalmente cuando una acción se
+     * realiza correctamente.
+     *
+     * @param mensaje el mensaje de éxito que se desea mostrar.
+     */
     public void mostrarMensajeExito(String mensaje) {
         ventanaPrincipal.mostrarMensajeExito(mensaje);
     }
 
+    /**
+     * Muestra un cuadro de diálogo para que el usuario seleccione una opción
+     * cuando falta un dato obligatorio.
+     *
+     * @param datoFaltante descripción del dato faltante.
+     * @param opciones lista de opciones disponibles para elegir.
+     * @return la opción seleccionada por el usuario.
+     */
     public Object mostrarJOptionSeleccionarDatoFaltante(String datoFaltante, Object[] opciones) {
         return ventanaPrincipal.mostrarJOptionSeleccionarDatoFaltante(datoFaltante, opciones);
     }
 
+    /**
+     * Muestra un cuadro de diálogo para que el usuario escriba un dato que
+     * falta.
+     *
+     * @param datoFaltante descripción del dato que debe ingresar el usuario.
+     * @return el texto ingresado por el usuario.
+     */
     public String mostrarJOptionEscribirDatoFaltante(String datoFaltante) {
         return ventanaPrincipal.mostrarJOptionEscribirDatoFaltante(datoFaltante);
     }
 
+    /**
+     * Solicita al usuario que seleccione un archivo aleatorio desde un
+     * directorio. Puede lanzar una excepción si el usuario cancela o ocurre un
+     * error.
+     *
+     * @return el archivo seleccionado por el usuario.
+     * @throws NullPointerException si no se selecciona ningún archivo.
+     * @throws IOException si ocurre un error al acceder al archivo.
+     */
     public File pedirArchivoAleatorio() throws NullPointerException, IOException {
         return ventanaPrincipal.pedirDirectorioArchivoAleatorio();
     }
 
+    /**
+     * Solicita al usuario que proporcione un nombre para un archivo. Se usa
+     * normalmente al guardar un nuevo archivo.
+     *
+     * @return el nombre ingresado por el usuario.
+     */
     public String pedirNombreArchivo() {
         return ventanaPrincipal.pedirNombreArchivo();
     }
+
 }

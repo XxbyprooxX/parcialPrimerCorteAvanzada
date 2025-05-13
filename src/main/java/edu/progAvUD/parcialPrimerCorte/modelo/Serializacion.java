@@ -9,14 +9,14 @@ import java.io.ObjectOutputStream;
 /**
  * Clase encargada de serializar objetos GatoVO y guardarlos en un archivo.
  * Utiliza flujos de salida para escribir objetos en un archivo binario.
- * 
+ *
  * @author Andres Felipe
  */
 public class Serializacion {
 
     // Flujo para escribir bytes en un archivo
     private FileOutputStream fileOutSerializacion;
-    
+
     // Flujo para escribir objetos serializables en un archivo
     private ObjectOutputStream salidaSerializacion;
 
@@ -41,7 +41,7 @@ public class Serializacion {
     public void escribirArchivoSerializado(GatoVO gato) throws IOException {
         salidaSerializacion.writeObject(gato);
     }
-    
+
     /**
      * Método que cierra el flujo de salida para la serialización.
      *
@@ -52,21 +52,46 @@ public class Serializacion {
     }
 
     // Métodos getter y setter para acceder a los flujos de salida
-
+    /**
+     * Devuelve el flujo de salida de archivo que se utiliza para escribir datos
+     * serializados.
+     *
+     * @return FileOutputStream apuntando al archivo de destino para la
+     * serialización.
+     */
     public FileOutputStream getFileOutSerializacion() {
         return fileOutSerializacion;
     }
 
+    /**
+     * Establece o actualiza el flujo de salida de archivo para la
+     * serialización.
+     *
+     * @param fileOutSerializacion flujo de tipo FileOutputStream donde se
+     * escribirán los bytes resultantes de la serialización.
+     */
     public void setFileOutSerializacion(FileOutputStream fileOutSerializacion) {
         this.fileOutSerializacion = fileOutSerializacion;
     }
 
+    /**
+     * Obtiene el flujo de objetos usado para encapsular y escribir objetos
+     * serializados.
+     *
+     * @return ObjectOutputStream que envuelve el FileOutputStream subyacente,
+     * permitiendo serializar instancias de objetos Java.
+     */
     public ObjectOutputStream getSalidaSerializacion() {
         return salidaSerializacion;
     }
 
+    /**
+     * Configura el flujo de objetos para la serialización de instancias Java.
+     *
+     * @param salidaSerializacion ObjectOutputStream encargado de convertir y
+     * escribir los objetos en el flujo de bytes.
+     */
     public void setSalidaSerializacion(ObjectOutputStream salidaSerializacion) {
         this.salidaSerializacion = salidaSerializacion;
     }
-
 }

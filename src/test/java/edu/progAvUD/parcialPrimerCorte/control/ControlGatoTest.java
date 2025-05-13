@@ -10,76 +10,105 @@ import static org.mockito.Mockito.when;
 
 /**
  * Clase de pruebas para la clase ControlGato.
- * Se verifica que los métodos de identificación de características según el código EMS funcionen correctamente.
+ *
+ * Se verifica que los métodos de identificación de características según el
+ * código EMS funcionen correctamente.
  */
 class ControlGatoTest {
 
     private ControlGato controlGato;
     private ControlPrincipal controlPrincipalMock;
 
+    /**
+     * Método que se ejecuta antes de cada prueba. - Crea un mock de
+     * ControlPrincipal para no depender de la implementación real. - Instancia
+     * ControlGato pasando el mock.
+     */
     @BeforeEach
     void setUp() {
-        // Se crea un mock de ControlPrincipal para evitar dependencias reales en las pruebas
         controlPrincipalMock = Mockito.mock(ControlPrincipal.class);
-        // Se instancia ControlGato usando el mock anterior
         controlGato = new ControlGato(controlPrincipalMock);
     }
 
+    /**
+     * Prueba el método identificarRazaSegunEMS: 1. Cuando se pasa un código EMS
+     * válido ("BRI"), devuelve "BRI-British Shorthair". 2. Cuando se pasa el
+     * nombre en lugar del código ("Persian"), devuelve "PER-Persian". 3. Con un
+     * valor no reconocido ("RazaInexistente"), devuelve null.
+     */
     @Test
     void testIdentificarRazaSegunEMS() {
-        // Prueba con código EMS: se espera una salida combinada del código y el nombre de raza
+        // Caso 1: código EMS válido -> combinación código-nombre
         String resultado = controlGato.identificarRazaSegunEMS(new String[]{"BRI"});
         assertEquals("BRI-British Shorthair", resultado);
-        
-        // Prueba con el nombre de raza en lugar del código EMS
+
+        // Caso 2: nombre de raza -> retorna código EMS correspondiente y nombre
         resultado = controlGato.identificarRazaSegunEMS(new String[]{"Persian"});
         assertEquals("PER-Persian", resultado);
-        
-        // Prueba con una entrada inválida (no reconocida)
+
+        // Caso 3: entrada inválida -> retorna null
         resultado = controlGato.identificarRazaSegunEMS(new String[]{"RazaInexistente"});
-        assertNull(resultado); // Se espera un null al no encontrar coincidencias
+        assertNull(resultado);
     }
 
+    /**
+     * Prueba el método identificarColorCuerpoSegunEMS: 1. Con código EMS ("a"),
+     * espera "a-blue". 2. Con nombre de color ("red"), espera "d-red".
+     */
     @Test
     void testIdentificarColorCuerpoSegunEMS() {
-        // Prueba con código EMS del color
+        // Código EMS del color -> retorna código más nombre en inglés
         String resultado = controlGato.identificarColorCuerpoSegunEMS(new String[]{"a"});
         assertEquals("a-blue", resultado);
-        
-        // Prueba con nombre de color, debe retornar el código EMS correspondiente
+
+        // Nombre de color -> retorna código EMS correspondiente y nombre
         resultado = controlGato.identificarColorCuerpoSegunEMS(new String[]{"red"});
         assertEquals("d-red", resultado);
     }
 
+    /**
+     * Prueba el método identificarPatronSegunEMS: 1. Con código EMS ("21"),
+     * espera "21-tabby / lynx". 2. Con nombre de patrón ("spotted"), espera
+     * "24-spotted".
+     */
     @Test
     void testIdentificarPatronSegunEMS() {
-        // Prueba con código EMS del patrón
+        // Código EMS del patrón -> retorna descripción combinada
         String resultado = controlGato.identificarPatronSegunEMS(new String[]{"21"});
         assertEquals("21-tabby / lynx", resultado);
-        
-        // Prueba con nombre de patrón
+
+        // Nombre de patrón -> retorna código EMS y nombre dado
         resultado = controlGato.identificarPatronSegunEMS(new String[]{"spotted"});
         assertEquals("24-spotted", resultado);
     }
 
+    /**
+     * Prueba el método identificarColorOjosSegunEMS: 1. Con código EMS ("61"),
+     * espera "61-blue". 2. Con nombre de color ("green"), espera "64-green".
+     */
     @Test
     void testIdentificarColorOjosSegunEMS() {
-        // Prueba con código EMS del color de ojos
+        // Código EMS del color de ojos -> retorna código y nombre en inglés
         String resultado = controlGato.identificarColorOjosSegunEMS(new String[]{"61"});
         assertEquals("61-blue", resultado);
-        
-        // Prueba con nombre de color
+
+        // Nombre de color de ojos -> retorna código EMS correspondiente y nombre
         resultado = controlGato.identificarColorOjosSegunEMS(new String[]{"green"});
         assertEquals("64-green", resultado);
     }
 
+    /**
+     * Prueba el método identificarColaSegunEMS: 1. Con código EMS ("51"),
+     * espera "51-rumpy". 2. Con nombre de tipo de cola ("stumpy"), espera
+     * "53-stumpy".
+     */
     @Test
     void testIdentificarColaSegunEMS() {
-        // Prueba con código EMS del tipo de cola
+        // Código EMS del tipo de cola -> retorna código y descripción
         String resultado = controlGato.identificarColaSegunEMS(new String[]{"51"});
         assertEquals("51-rumpy", resultado);
-        
-        // Prueba con nombre del tipo de cola
+
+        // Nombre de tipo de cola -> retorna código EMS correspondiente y nombre
         resultado = controlGato.identificarColaSegunEMS(new String[]{"stumpy"});
         assertEquals("53-stumpy", resultado);
     }

@@ -41,7 +41,9 @@ public class ControlGato {
      * @param edad del gato
      * @param raza del gato
      * @param color del gato
+     * @param cantidadBlanco
      * @param patron del gato
+     * @param puntosColor
      * @param colorOjos del gato
      * @param cola del gato
      */
@@ -172,8 +174,8 @@ public class ControlGato {
             "26-grizzled ticked"
         };
         Object[] opcionesPuntosColor = {
-            "31-sepia", 
-            "32-mink", 
+            "31-sepia",
+            "32-mink",
             "33-himalayan / siames",
             "33-no sepia / no mink"
         };
@@ -239,7 +241,7 @@ public class ControlGato {
         String[] divisionCantidadBlanco = cantidadBlanco.split("-");
         divisionCantidadBlanco = identificarCantidadBlancoSegunEMS(divisionCantidadBlanco).split("-");
 
-        String codigoEMS = divisionRaza[0] + "/" + divisionColor[0] + "/" + divisionCantidadBlanco[0] + "/" + divisionPatron[0] + "/" + divisionPuntosColor[0]+  "/" + divisionCola[0] + "/" + divisionColorOjos[0];
+        String codigoEMS = divisionRaza[0] + "/" + divisionColor[0] + "/" + divisionCantidadBlanco[0] + "/" + divisionPatron[0] + "/" + divisionPuntosColor[0] + "/" + divisionCola[0] + "/" + divisionColorOjos[0];
         GatoVO gato = new GatoVO(id, nombre, peso, edad, codigoEMS, raza, color, cantidadBlanco, patron, puntosColor, cola, colorOjos);
 
         if (consultarCantidadGatos() == 0) {
@@ -315,7 +317,6 @@ public class ControlGato {
             return gatoDao.consultarCantidadGatos();
         } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLException ConsultarCantidadGatos");
-            ex.printStackTrace();
         }
         return -1;
     }
@@ -330,16 +331,17 @@ public class ControlGato {
             return gatoDao.darListaGatos();
         } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLException darListaGatos");
-            ex.printStackTrace();
         }
         return null;
     }
 
     /**
-     * Vuelve los gatos de la base de datos a un String para mostrar en una
-     * tabla
+     * Convierte la lista de objetos GatoVO obtenida de la base de datos en una
+     * matriz de objetos para mostrar en una tabla. Cada fila contiene ID,
+     * Nombre y Código EMS.
      *
-     * @return devuelte la tabla en strings
+     * @return matriz Object[][] con los datos de cada gato en columnas: [0]=ID,
+     * [1]=Nombre, [2]=Código EMS.
      */
     public Object[][] darListaGatosObject() {
         ArrayList<GatoVO> gatos = darListaGatos();
@@ -353,6 +355,14 @@ public class ControlGato {
         return arrGatos;
     }
 
+    /**
+     * Convierte la lista de objetos GatoVO en una matriz de objetos para
+     * mostrar en una tabla de archivo aleatorio. Cada fila contiene ID, Nombre,
+     * Peso, Edad, Raza y Código EMS.
+     *
+     * @return matriz Object[][] con columnas: [0]=ID, [1]=Nombre, [2]=Peso,
+     * [3]=Edad, [4]=Nombre de raza, [5]=Código EMS.
+     */
     public Object[][] darListaGatosObjectArchivoAleatorio() {
         ArrayList<GatoVO> gatos = darListaGatos();
         Object[][] arrGatos = new Object[gatos.size()][6];
@@ -369,9 +379,11 @@ public class ControlGato {
     }
 
     /**
-     * Consulta un gato por la id
+     * Consulta un gato por su ID y prepara sus datos para mostrar.
      *
-     * @param id es el parametro unico identificador
+     * @param id identificador único del gato a buscar.
+     * @return arreglo Object[] con ID, Nombre, Peso, Edad, Raza y Código EMS, o
+     * null si ocurre un error de SQL.
      */
     public Object[] pedirConsultaGato(int id) {
         GatoVO gato = new GatoVO();
@@ -387,11 +399,19 @@ public class ControlGato {
             return datosGato;
         } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLException pedirConsultaGato");
-            ex.printStackTrace();
         }
         return null;
     }
 
+    /**
+     * Consulta gatos según un criterio y valor de búsqueda, devolviendo sus
+     * datos para mostrar en tabla.
+     *
+     * @param factorBusqueda campo por el cual filtrar (ej. "nombre").
+     * @param datoBuscado valor a buscar en el campo especificado.
+     * @return matriz Object[][] con columnas: [0]=ID, [1]=Nombre, [2]=Código
+     * EMS, o null si ocurre un error de SQL.
+     */
     public Object[][] pedirConsultaGatos(String factorBusqueda, String datoBuscado) {
         try {
             ArrayList<GatoVO> gatos = gatoDao.consultarGatos(factorBusqueda, datoBuscado);
@@ -405,72 +425,78 @@ public class ControlGato {
             return arrGatos;
         } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLException pedirConsultaGatos");
-            ex.printStackTrace();
         }
         return null;
     }
 
     /**
-     * Este metodo se encarga de insertar un gato a la tabla
+     * Inserta un nuevo gato en la base de datos.
      *
-     * @param gato
+     * @param gato objeto GatoVO con los datos a insertar.
      */
     public void insertarGato(GatoVO gato) {
         try {
             gatoDao.insertarGato(gato);
         } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLException insertarGato");
-            ex.printStackTrace();
         }
     }
 
     /**
-     * Se encarga de comunicar la creacion del gato con la insercion de este a
-     * la base de datos
+     * Crea un nuevo gato con los parámetros dados y muestra un mensaje de
+     * éxito.
      *
-     * @param nombre del gato
-     * @param peso del gato
-     * @param edad del gato
-     * @param raza del gato
-     * @param color del gato
-     * @param patron del gato
-     * @param colorOjos del gato
-     * @param cola del gato
+     * @param nombre nombre del gato.
+     * @param peso peso del gato.
+     * @param edad edad del gato.
+     * @param raza nombre de la raza.
+     * @param color color del cuerpo.
+     * @param cantidadBlanco proporción de blanco en el pelaje.
+     * @param patron patrón del pelaje.
+     * @param puntosColor puntos de color en el pelaje.
+     * @param cola tipo de cola.
+     * @param colorOjos color de ojos.
      */
     public void crearInsercionGato(String nombre, String peso, String edad, String raza, String color, String cantidadBlanco, String patron, String puntosColor, String cola, String colorOjos) {
         crearGato(0, nombre, peso, edad, raza, color, cantidadBlanco, patron, puntosColor, cola, colorOjos);
-        controlPrincipal.mostrarMensajeExito("Se ha insertado correctamente el usuario");
+        controlPrincipal.mostrarMensajeExito("Se ha insertado correctamente el gato");
     }
 
     /**
-     * Se encarga de eliminar al gato de la base de datos
+     * Elimina un gato de la base de datos mediante su ID.
      *
-     * @param id parametro unico identificador
+     * @param id identificador único del gato a eliminar.
      */
     public void eliminarGato(int id) {
         try {
             gatoDao.eliminarGato(id);
         } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLException eliminarGato");
-            ex.printStackTrace();
         }
     }
 
+    /**
+     * Modifica un campo de un gato existente.
+     *
+     * @param id ID del gato a modificar.
+     * @param factorACambiar nombre del campo a actualizar.
+     * @param valorModificado nuevo valor para el campo.
+     */
     public void modificarGato(int id, String factorACambiar, String valorModificado) {
         try {
             gatoDao.modificarGato(id, factorACambiar, valorModificado);
         } catch (SQLException ex) {
             controlPrincipal.mostrarMensajeError("SQLException modificarGato");
-            ex.printStackTrace();
         }
     }
 
     /**
-     * Este metodo comprueba si el dato si es un double o un int
+     * Solicita al usuario un dato faltante y valida si es numérico según el
+     * tipo (peso o edad). Reintenta en caso de error.
      *
-     * @param mensaje para pedir el dato faltante
-     * @param tipo es para saber que parametro se va a parsear
-     * @return el valor
+     * @param mensaje texto para solicitar el dato.
+     * @param tipo indica si debe parsear a double ("peso") o int ("edad").
+     * @return cadena con el valor ingresado ya validado.
      */
     private String obtenerDatoFaltante(String mensaje, String tipo) {
         String dato = controlPrincipal.mostrarJOptionEscribirDatoFaltante(mensaje);
@@ -858,6 +884,16 @@ public class ControlGato {
         return null;
     }
 
+    /**
+     * Identifica la cantidad de blanco en el pelaje según el estándar EMS.
+     * Recorre el arreglo de tokens y compara cada uno con los códigos o nombres
+     * válidos.
+     *
+     * @param divisionCantidadBlanco arreglo de cadenas que contiene el código o
+     * nombre de la cantidad de blanco (por ejemplo, "01" o "van").
+     * @return cadena formateada "código-nombre" (por ejemplo, "02-harlequin"),
+     * o null si no se encuentra coincidencia.
+     */
     public String identificarCantidadBlancoSegunEMS(String[] divisionCantidadBlanco) {
         for (String cantidadBlanco : divisionCantidadBlanco) {
             if (cantidadBlanco.equals("01") || cantidadBlanco.equalsIgnoreCase("van")) {
@@ -874,9 +910,18 @@ public class ControlGato {
                 return "09-medaillon";
             }
         }
-        return null;
+        return null; // No se encontró un valor válido
     }
 
+    /**
+     * Identifica los puntos de color en el pelaje según EMS. Itera sobre el
+     * arreglo de tokens y retorna el primer código/nombre válido.
+     *
+     * @param divisionPuntosColor arreglo de cadenas con el código o nombre de
+     * los puntos de color (por ejemplo, "31" o "sepia").
+     * @return cadena en formato "código-nombre" (ej. "33-himalayan / siames"),
+     * o null si no hay coincidencia.
+     */
     public String identificarPuntosColorSegunEMS(String[] divisionPuntosColor) {
         for (String puntosColor : divisionPuntosColor) {
             if (puntosColor.equals("31") || puntosColor.equalsIgnoreCase("sepia")) {
@@ -894,8 +939,7 @@ public class ControlGato {
                 return "33-no sepia / no mink";
             }
         }
-        System.out.println("Dato blanco");
-        return null;
+        return null; // Ningún token coincide con un código EMS válido
     }
 
     /**
