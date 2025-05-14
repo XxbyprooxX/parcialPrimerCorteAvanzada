@@ -74,12 +74,23 @@ public class PanelConsultarGato extends javax.swing.JPanel {
         jLabelTextoRaza = new javax.swing.JLabel();
         jLabelTextoCodigoEMS = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(8, 8, 6));
+
+        jButtonAtras.setBackground(new java.awt.Color(0, 102, 102));
+        jButtonAtras.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonAtras.setForeground(new java.awt.Color(255, 255, 255));
         jButtonAtras.setText("Atras");
 
+        jRadioButtonRaza.setBackground(new java.awt.Color(8, 8, 6));
         buttonGroupTipoConsulta.add(jRadioButtonRaza);
+        jRadioButtonRaza.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jRadioButtonRaza.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButtonRaza.setText("Nombre de Raza");
 
+        jRadioButtonCodigoEMS.setBackground(new java.awt.Color(8, 8, 6));
         buttonGroupTipoConsulta.add(jRadioButtonCodigoEMS);
+        jRadioButtonCodigoEMS.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jRadioButtonCodigoEMS.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButtonCodigoEMS.setText("Codigo EMS");
 
         jComboBoxRaza.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ABY-Abyssinian", "AMB-American Burmese", "ACL-American Curl Longhair", "ACS-American Curl Shorthair", "ASH-American Shorthair", "AWH-American Wirehair", "ANA-Anatoli", "APL-Aphrodite’s Giant Longhair", "APS-Aphrodite’s Giant Shorthair", "ARM-Arabian Mau", "ASI-Asian", "AUM-Australian Mist", "BAL-Balinese", "BEN-Bengal", "BOM-Bombay", "BRA-Brazilian Shorthair", "BLH-British Longhair", "BRI-British Shorthair", "BUR-Burmese", "BML-Burmilla Longhair", "BMS-Burmilla Shorthair", "CAM-Cashmere", "KKH-Celtic Shorthair", "CEY-Ceylon", "CHA-Chartreux", "CHS-Chausie", "CRX-Cornish Rex", "CYM-Cymric", "DLH-Deutsch-Langhaar", "DRX-Devon Rex", "DSX-Don Sphynx", "MAU-Egyptian Mau", "EXO-Exotic Shorthair", "GRX-German Rex", "HAV-Havana", "SFL-Highland Fold", "PER-Himalayan / Colourpoint", "HHP-Household Pet", "JBL-Japanese Bobtail Longhair", "JBS-Japanese Bobtail Shorthair", "KAN-Kanaani", "KAL-Karelian Bobtail Longhair", "KAS-Karelian Bobtail Shorthair", "KAM-Khao Manee", "KOR-Korat", "KBL-Kurilian Bobtail Langhaar", "KBS-Kurilian Bobtail Shorthair", "LPL-LaPerm Longhair", "LPS-LaPerm Shorthair", "LYS-Lykoi", "MCO-Maine Coon", "MAN-Manx", "MBT-Mekong Bobtail", "MIL-Minuet Longhair", "MIS-Minuet Shorthair", "MNL-Munchkin Longhair", "MNS-Munchkin Shorthair", "NEB-Nebelung", "NFO-Norwegian Forest", "OCI-Ocicat", "OSL-Oriental Semilonghair", "OSH-Oriental Shorthair", "TLH-Original Longhair", "PER-Persian", "PBD-Peterbald", "RGM-Ragamuffin", "RAG-Ragdoll", "RUS-Russian Blue", "SBI-Sacred Birman", "SFS-Scottish Fold", "SRL-Selkirk Rex Longhair", "SRS-Selkirk Rex Shorthair", "SIA-Siamese", "SIB-Siberian cat / Neva Masquerade", "SIN-Singapura", "SNO-Snowshoe", "SOM-Somali", "SPH-Sphynx", "THA-Thai", "TIF-Tiffanie", "TON-Tonkinese", "TOB-Toy Bob", "TUA-Turkish Angora", "TUV-Turkish Van", "URL-Ural Rex Longhair", "URS-Ural Rex Shorthair", "YOR-York" }));
@@ -93,16 +104,31 @@ public class PanelConsultarGato extends javax.swing.JPanel {
         jTableGatos.setModel(modeloTablaGatos);
         jScrollPaneTablaGatos.setViewportView(jTableGatos);
 
+        jButtonConsultar.setBackground(new java.awt.Color(0, 102, 102));
+        jButtonConsultar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonConsultar.setForeground(new java.awt.Color(255, 255, 255));
         jButtonConsultar.setText("Consultar");
 
+        jButtonLimpiarCampos.setBackground(new java.awt.Color(0, 102, 102));
+        jButtonLimpiarCampos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonLimpiarCampos.setForeground(new java.awt.Color(255, 255, 255));
         jButtonLimpiarCampos.setText("Limpiar Campos");
 
+        jButtonInfoGato.setBackground(new java.awt.Color(0, 102, 102));
+        jButtonInfoGato.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonInfoGato.setForeground(new java.awt.Color(255, 255, 255));
         jButtonInfoGato.setText("Ver Informacion del Gato");
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Seleccione el parametro que decea utilizar para la consulta");
 
+        jLabelTextoRaza.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabelTextoRaza.setForeground(new java.awt.Color(255, 255, 255));
         jLabelTextoRaza.setText("Selecciona la Raza");
 
+        jLabelTextoCodigoEMS.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabelTextoCodigoEMS.setForeground(new java.awt.Color(255, 255, 255));
         jLabelTextoCodigoEMS.setText("Escriba el Codigo EMS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

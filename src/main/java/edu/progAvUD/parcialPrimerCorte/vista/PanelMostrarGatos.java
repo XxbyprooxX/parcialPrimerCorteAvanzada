@@ -53,6 +53,11 @@ public class PanelMostrarGatos extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jButtonMasInfo = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(8, 8, 6));
+
+        jButtonAtras.setBackground(new java.awt.Color(102, 0, 102));
+        jButtonAtras.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonAtras.setForeground(new java.awt.Color(255, 255, 255));
         jButtonAtras.setText("Atras");
 
         modeloTablaGatos= new DefaultTableModel(new Object[]{ "ID Gato", "Nombre Gato","CodigoEMS Gato"}, 0) {
@@ -64,6 +69,9 @@ public class PanelMostrarGatos extends javax.swing.JPanel {
         jTable1.setModel(modeloTablaGatos);
         jScrollPane1.setViewportView(jTable1);
 
+        jButtonMasInfo.setBackground(new java.awt.Color(102, 0, 102));
+        jButtonMasInfo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonMasInfo.setForeground(new java.awt.Color(255, 255, 255));
         jButtonMasInfo.setText("Mostrar Mas Informacion");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

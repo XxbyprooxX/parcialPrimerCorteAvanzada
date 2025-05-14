@@ -62,10 +62,11 @@ public class DialogEliminarGato extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
+        jButtonEliminarGato.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonEliminarGato.setText("Eliminar Gato");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(new java.awt.BorderLayout());
         jPanel1.add(jLabelImagenGato, java.awt.BorderLayout.CENTER);
 
@@ -119,18 +120,13 @@ public class DialogEliminarGato extends javax.swing.JDialog {
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabelPuntosColor))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelColaGato)
-                            .addComponent(jLabelPatronGato)
-                            .addComponent(jLabelColorGato)
-                            .addComponent(jLabelCantidadBlanco)
-                            .addComponent(jLabelColorOjosGato))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(jLabelColaGato)
+                    .addComponent(jLabelPatronGato)
+                    .addComponent(jLabelColorGato)
+                    .addComponent(jLabelCantidadBlanco)
+                    .addComponent(jLabelColorOjosGato)
+                    .addComponent(jLabelPuntosColor))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,7 +237,7 @@ public class DialogEliminarGato extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButtonEliminarGato)
@@ -267,8 +263,9 @@ public class DialogEliminarGato extends javax.swing.JDialog {
                                 .addGap(143, 143, 143))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(189, 189, 189)))
-                        .addGap(10, 10, 10))))
+                                .addGap(186, 186, 186)))
+                        .addGap(10, 10, 10)))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

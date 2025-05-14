@@ -68,10 +68,18 @@ public class PanelInsertarGato extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jComboBoxPuntosColor = new javax.swing.JComboBox<>();
 
+        setBackground(new java.awt.Color(8, 8, 6));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nombre del Gato");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Peso del Gato");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Edad del Gato");
 
         jSpinnerPesoGato.setModel(new javax.swing.SpinnerNumberModel(1.0d, 1.0d, null, 0.1d));
@@ -88,28 +96,53 @@ public class PanelInsertarGato extends javax.swing.JPanel {
 
         jComboBoxColaGato.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "51-rumpy", "52-rumpy riser", "53-stumpy", "54-longie" }));
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Raza del Gato");
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Color del Gato");
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Patron del Gato");
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Color Ojos del Gato");
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Cola del Gato");
 
+        jButtonLimpiarCampos.setBackground(new java.awt.Color(0, 204, 51));
+        jButtonLimpiarCampos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonLimpiarCampos.setForeground(new java.awt.Color(255, 255, 255));
         jButtonLimpiarCampos.setText("Limpiar Campos");
 
+        jButtonInsertarGato.setBackground(new java.awt.Color(0, 204, 51));
+        jButtonInsertarGato.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonInsertarGato.setForeground(new java.awt.Color(255, 255, 255));
         jButtonInsertarGato.setText("Insertar");
 
+        jButtonAtras.setBackground(new java.awt.Color(0, 204, 51));
+        jButtonAtras.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonAtras.setForeground(new java.awt.Color(255, 255, 255));
         jButtonAtras.setText("Atras");
 
-        jLabel9.setText("Ingrese los sigientes datos para insertar un Gato");
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Ingrese los sigientes datos para insertar un Gato:");
 
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Cantidad De Blanco");
 
         jComboBoxCantidadBlanco.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01-van ", "02-harlequin ", "03-bicolour ", "04-mitted ", "05-snowshoe ", "09-medaillon" }));
 
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Puntos de Color");
 
         jComboBoxPuntosColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "31-sepia", "32-mink", "33-himalayan / siames", "33-no sepia / no mink" }));
@@ -156,7 +189,7 @@ public class PanelInsertarGato extends javax.swing.JPanel {
                         .addComponent(jButtonLimpiarCampos)
                         .addGap(51, 51, 51)
                         .addComponent(jButtonInsertarGato)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

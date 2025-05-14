@@ -41,6 +41,11 @@ public class PanelEliminarGato extends javax.swing.JPanel {
         jButtonIrAEliminar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(8, 8, 6));
+
+        jButtonAtras.setBackground(new java.awt.Color(204, 0, 0));
+        jButtonAtras.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonAtras.setForeground(new java.awt.Color(255, 255, 255));
         jButtonAtras.setText("Atras");
 
         modeloTablaGatos= new DefaultTableModel(new Object[]{ "ID Gato", "Nombre Gato","CodigoEMS Gato"}, 0) {
@@ -52,18 +57,24 @@ public class PanelEliminarGato extends javax.swing.JPanel {
         jTable1.setModel(modeloTablaGatos);
         jScrollPane1.setViewportView(jTable1);
 
+        jButtonIrAEliminar.setBackground(new java.awt.Color(204, 0, 0));
+        jButtonIrAEliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonIrAEliminar.setForeground(new java.awt.Color(255, 255, 255));
         jButtonIrAEliminar.setText("Ir a Eliminar Gato");
 
-        jLabel1.setText("Seleccione el gato que desea eliminar");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Seleccione el gato que desea eliminar:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -71,7 +82,6 @@ public class PanelEliminarGato extends javax.swing.JPanel {
                                 .addGap(164, 164, 164))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jButtonAtras)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())

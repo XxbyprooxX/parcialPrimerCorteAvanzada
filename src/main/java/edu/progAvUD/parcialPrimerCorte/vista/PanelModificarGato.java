@@ -42,6 +42,11 @@ public class PanelModificarGato extends javax.swing.JPanel {
         jButtonMasInfo = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(8, 8, 6));
+
+        jButtonAtras.setBackground(new java.awt.Color(255, 102, 0));
+        jButtonAtras.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonAtras.setForeground(new java.awt.Color(255, 255, 255));
         jButtonAtras.setText("Atras");
 
         modeloTablaGatos= new DefaultTableModel(new Object[]{ "ID Gato", "Nombre Gato","CodigoEMS Gato"}, 0) {
@@ -53,8 +58,13 @@ public class PanelModificarGato extends javax.swing.JPanel {
         jTable1.setModel(modeloTablaGatos);
         jScrollPane1.setViewportView(jTable1);
 
+        jButtonMasInfo.setBackground(new java.awt.Color(255, 102, 0));
+        jButtonMasInfo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonMasInfo.setForeground(new java.awt.Color(255, 255, 255));
         jButtonMasInfo.setText("Ir a Modificar");
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Seleccione el gato que desea modificar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

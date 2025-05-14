@@ -67,6 +67,7 @@ public class DialogModificarGato extends javax.swing.JDialog {
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setPreferredSize(new java.awt.Dimension(280, 95));
 
@@ -136,9 +137,9 @@ public class DialogModificarGato extends javax.swing.JDialog {
 
         jLabel2.setText("Solo se pueden modificar los siguientes datos:");
 
+        jButtonRealizarCambios.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonRealizarCambios.setText("Realizar Cambios");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(new java.awt.BorderLayout());
         jPanel1.add(jLabelImagenGato, java.awt.BorderLayout.CENTER);
 
@@ -192,18 +193,13 @@ public class DialogModificarGato extends javax.swing.JDialog {
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabelPuntosColor))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelColaGato)
-                            .addComponent(jLabelPatronGato)
-                            .addComponent(jLabelColorGato)
-                            .addComponent(jLabelCantidadBlanco)
-                            .addComponent(jLabelColorOjosGato))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(jLabelColaGato)
+                    .addComponent(jLabelPatronGato)
+                    .addComponent(jLabelColorGato)
+                    .addComponent(jLabelCantidadBlanco)
+                    .addComponent(jLabelColorOjosGato)
+                    .addComponent(jLabelPuntosColor))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

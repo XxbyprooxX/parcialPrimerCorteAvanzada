@@ -34,18 +34,21 @@ public class PanelPrincipal extends javax.swing.JPanel {
         setForeground(new java.awt.Color(8, 8, 6));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setForeground(new java.awt.Color(255, 255, 102));
+        jLabel1.setForeground(new java.awt.Color(203, 171, 112));
         jLabel1.setText("Antes de iniciar el programa, seleccione las propiedades de los siguientes parametros");
 
-        jButtonPropiedadesBD.setBackground(new java.awt.Color(255, 255, 102));
+        jButtonPropiedadesBD.setBackground(new java.awt.Color(203, 171, 112));
+        jButtonPropiedadesBD.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonPropiedadesBD.setText("Propiedades Base de Datos");
         jButtonPropiedadesBD.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jButtonPropiedadesGatos.setBackground(new java.awt.Color(255, 255, 102));
+        jButtonPropiedadesGatos.setBackground(new java.awt.Color(203, 171, 112));
+        jButtonPropiedadesGatos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonPropiedadesGatos.setText("Propiedades Iniciales de Gatos");
         jButtonPropiedadesGatos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jButtonContinuar.setBackground(new java.awt.Color(255, 255, 102));
+        jButtonContinuar.setBackground(new java.awt.Color(203, 171, 112));
+        jButtonContinuar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonContinuar.setText("Continuar");
         jButtonContinuar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
@@ -55,7 +58,7 @@ public class PanelPrincipal extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -63,15 +66,16 @@ public class PanelPrincipal extends javax.swing.JPanel {
                         .addGap(22, 22, 22))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(157, 157, 157))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonPropiedadesGatos, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonPropiedadesBD, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(147, 147, 147))))
+                        .addGap(178, 178, 178))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(202, 202, 202)
-                .addComponent(jButtonContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(153, 153, 153)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jButtonPropiedadesGatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonPropiedadesBD, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(jButtonContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -81,7 +85,7 @@ public class PanelPrincipal extends javax.swing.JPanel {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonPropiedadesBD)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonPropiedadesGatos)
