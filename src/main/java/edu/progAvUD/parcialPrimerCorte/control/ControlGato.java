@@ -500,6 +500,10 @@ public class ControlGato {
      */
     private String obtenerDatoFaltante(String mensaje, String tipo) {
         String dato = controlPrincipal.mostrarJOptionEscribirDatoFaltante(mensaje);
+        if(dato.isBlank()){
+            controlPrincipal.mostrarMensajeError("No se ha escrito nada en el campo de " + tipo);
+            return obtenerDatoFaltante(mensaje, tipo);
+        }
         if (tipo.equals("peso") || tipo.equals("edad")) {
             try {
                 if (tipo.equals("peso")) {
