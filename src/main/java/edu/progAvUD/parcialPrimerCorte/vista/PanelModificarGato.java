@@ -13,20 +13,31 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PanelModificarGato extends javax.swing.JPanel {
 
-    public DialogModificarGato dialogModificarGato;
-    
     /**
-     * Creates new form PanelModificarGato
+     * Diálogo utilizado para mostrar y modificar los datos de un gato
+     * seleccionado. Se muestra como una ventana emergente cuando el usuario
+     * desea editar la información de un gato desde la tabla.
+     */
+    public DialogModificarGato dialogModificarGato;
+
+    /**
+     * Constructor del panel que permite modificar la información de los gatos.
+     *
+     * @param frame el marco principal de la aplicación, que actúa como padre
+     * del diálogo.
      */
     public PanelModificarGato(JFrame frame) {
-        this.dialogModificarGato = new DialogModificarGato(frame,"Datos gatos", true);
+        // Se crea el diálogo para modificar datos del gato, con el título "Datos gatos"
+        // y se establece como modal (bloquea la interacción con otras ventanas hasta cerrarse).
+        this.dialogModificarGato = new DialogModificarGato(frame, "Datos gatos", true);
+
+        // Se posiciona el diálogo en el centro del marco principal.
         dialogModificarGato.setLocationRelativeTo(frame);
+
+        // Se inicializan los componentes gráficos del panel.
         initComponents();
     }
-    
-    
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

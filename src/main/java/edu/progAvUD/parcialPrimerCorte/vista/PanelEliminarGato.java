@@ -13,19 +13,31 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PanelEliminarGato extends javax.swing.JPanel {
 
-    public DialogEliminarGato dialogEliminarGato;
-    
     /**
-     * Creates new form PanelEliminarGato
+     * Diálogo utilizado para mostrar los datos del gato a eliminar. Es una
+     * ventana emergente que aparece cuando el usuario selecciona un gato de la
+     * tabla y desea eliminarlo.
+     */
+    public DialogEliminarGato dialogEliminarGato;
+
+    /**
+     * Constructor del panel encargado de manejar la eliminación de gatos.
+     *
+     * @param frame el marco principal de la aplicación, usado como padre del
+     * diálogo.
      */
     public PanelEliminarGato(JFrame frame) {
-        this.dialogEliminarGato = new DialogEliminarGato(frame,"Eliminar Gato", true);
+        // Se crea e inicializa el diálogo de eliminación con el título "Eliminar Gato"
+        // y se le indica que es modal (bloquea otras ventanas hasta cerrarse).
+        this.dialogEliminarGato = new DialogEliminarGato(frame, "Eliminar Gato", true);
+
+        // Se posiciona el diálogo en el centro del marco principal.
         dialogEliminarGato.setLocationRelativeTo(frame);
+
+        // Se inicializan los componentes gráficos del panel.
         initComponents();
     }
-    
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

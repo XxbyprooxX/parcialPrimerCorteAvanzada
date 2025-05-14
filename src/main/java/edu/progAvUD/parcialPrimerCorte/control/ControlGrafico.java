@@ -434,7 +434,9 @@ public class ControlGrafico implements ActionListener {
 
     /**
      * Muestra los datos de un gato seleccionado en un diálogo genérico
-     * (información). El panel puede ser de consulta o de visualización general.
+     * (información).El panel puede ser de consulta o de visualización general.
+     * @param dialogInformacionGato es el dialog que muestra la info del gato
+     * @param panel donde se mostrara
      */
     public void mostrarDatosGatoDialog(DialogInformacionGato dialogInformacionGato, JPanel panel) {
         JTable tablaGatos = null;

@@ -169,6 +169,7 @@ public class GatoDAO {
     /**
      * Modifica un atributo específico de un gato en la base de datos.
      *
+     * @param id parametro identificador
      * @param factorACambiar es el dato que se busca cambiar
      * @param valorModificado Nuevo valor que se quiere asignar.
      * @throws SQLException Si ocurre un error al ejecutar la modificación.
