@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import edu.progAvUD.parcialPrimerCorte.control.ControlGrafico;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
 
 /**
  *
@@ -83,18 +85,52 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     public Object mostrarJOptionSeleccionarDatoFaltante(String datoFaltante, Object[] opciones) {
-        String mensaje = "Hace falta el dato de '" + datoFaltante + "'.\nSeleccione una opcion:";
-        Object seleccion = JOptionPane.showInputDialog(null,
-                mensaje, "Dato Faltante",
-                JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
-        return seleccion;
+        JComboBox<Object> comboBox = new JComboBox<>(opciones);
+        String mensaje = "Hace falta el dato de '" + datoFaltante + "'.\nSeleccione una opción:";
+
+        Object[] contenido = {mensaje, comboBox};
+        Object[] botones = {"Aceptar"};
+
+        JOptionPane optionPane = new JOptionPane(
+                contenido,
+                JOptionPane.QUESTION_MESSAGE,
+                JOptionPane.DEFAULT_OPTION,
+                null,
+                botones,
+                botones[0]
+        );
+
+        JDialog dialogo = optionPane.createDialog("Dato Faltante");
+        dialogo.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE); 
+        dialogo.setModal(true);
+        dialogo.setVisible(true);
+
+        
+        return comboBox.getSelectedItem();
     }
 
     public String mostrarJOptionEscribirDatoFaltante(String datoFaltante) {
-        String dato = JOptionPane.showInputDialog(null,
-                "Hace falta el dato de '" + datoFaltante + "'.\n Escriba el dato:", "Dato Faltante",
-                JOptionPane.QUESTION_MESSAGE);
-        return dato;
+        String mensaje = "Hace falta el dato de '" + datoFaltante + "'.\nEscriba el dato:";
+
+        JTextField textField = new JTextField();
+        Object[] contenido = {mensaje, textField};
+        Object[] botones = {"Aceptar"}; // Solo un botón
+
+        JOptionPane optionPane = new JOptionPane(
+                contenido,
+                JOptionPane.QUESTION_MESSAGE,
+                JOptionPane.DEFAULT_OPTION,
+                null,
+                botones,
+                botones[0]
+        );
+
+        JDialog dialog = optionPane.createDialog("Dato Faltante");
+        dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE); 
+        dialog.setModal(true);
+        dialog.setVisible(true);
+
+        return textField.getText(); 
     }
 
     public String pedirNombreArchivo() {
